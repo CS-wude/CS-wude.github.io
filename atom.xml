@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Absurd博客</title>
+  <title>Wude博客</title>
   
   
   <link href="/hexo/atom.xml" rel="self"/>
   
   <link href="https://www1350.github.io/hexo/"/>
   <updated>2022-03-10T16:01:59.690Z</updated>
-  <id>https://www1350.github.io/hexo/</id>
+  <id>https://CS-wude.github.io/</id>
   
   <author>
-    <name>Absurd</name>
+    <name>Wude</name>
     
   </author>
   
-  <generator uri="http://hexo.io/">Hexo</generator>
+  <generator uri="http://hexo.io/">Wude</generator>
   
   <entry>
     <title>函数式编程</title>

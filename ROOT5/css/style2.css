@@ -1,0 +1,61 @@
+html,body{
+	margin: 0px;
+	padding:0px;
+	/* background: #ebebeb; */
+}
+body{
+	background:url('../images/beijing3.png') no-repeat ;
+}
+.whole{
+	display:flex;
+	flex-direction:column;
+	width:800px;
+
+}
+.header-top{
+	width:100%;
+	height:50px;
+	margin-top: 25px;
+	position:fixed;
+	text-align: center;
+	font:36px/40px '微软雅黑';
+	color:#000;/* #4183C4 */
+	flex:1;
+}
+.content{
+	flex:1;
+	
+	margin:105px 240px 0 75px;
+	/* border:1px solid #ff0000; */
+	height:508px;
+}
+.left_zl{
+	position:relative;
+	float: left;
+	margin-left:20px;
+	width:275px;
+	height:508px;
+	/* border:1px solid #0000ff; */
+	/* margin-left: 165px; */
+}
+.left_zl img{
+	width:140px;
+	height:140px;
+	margin:20px 67px 0 55px;
+	border-radius:40%;
+}
+.left_zl p{
+	font:20px '微软雅黑';
+	text-indent: 2em;
+}
+.content-list{
+	margin-left:330px;	/* float: right; */
+}
+a{
+	text-decoration:none;
+	font:26px '微软雅黑';
+}
+a:hover{
+	color:#4183C4;
+
+}

@@ -1,13 +1,13 @@
 [
   {
-    "level": "一级层级",
+    "level": "有趣&实用的项目",
     "categories": [ 
       {
-        "category": "分类一",
+        "category": "轮子项目",
         "bookmarks": [
           {
-            "name": "书签1.1",
-            "url": "http://example.com/1.1"
+            "name": "java 手写实现渐进式 redis 缓存工具",
+            "url": "https://github.com/houbb/cache"
           },
           {
             "name": "书签1.2",

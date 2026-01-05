@@ -3,7 +3,7 @@ var _config = {
     owner           : 'CS-wude',           // github 用户名
     repo            : 'javaweb',// github 中对应项目名
     duoshuo_id      : 'CS-wude',            // 在第三方评论插件多说申请站点的子域名
-    access_token : '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',  // 在本地设置，不要提交到GitHub
+    access_token : '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',  // 在本地设置，不要提交到GitHub
     per_page        : '15'                    // 默认一页显示几篇文章
 }
 

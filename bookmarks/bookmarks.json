@@ -1,0 +1,125 @@
+[
+  {
+    "level": "一级层级",
+    "categories": [ 
+      {
+        "category": "分类一",
+        "bookmarks": [
+          {
+            "name": "书签1.1",
+            "url": "http://example.com/1.1"
+          },
+          {
+            "name": "书签1.2",
+            "url": "http://example.com/1.2"
+          }
+        ]
+      },
+      {
+        "category": "分类二",
+        "bookmarks": [
+          {
+            "name": "书签2.1",
+            "url": "http://example.com/1.1"
+          },
+          {
+            "name": "书签2.2",
+            "url": "http://example.com/1.2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": "二级层级",
+    "categories": [
+      {
+        "category": "分类二",
+        "bookmarks": [
+          {
+            "name": "书签2.1",
+            "url": "http://example.com/2.1"
+          }
+        ]
+      },
+      {
+        "category": "分类三",
+        "bookmarks": [
+          {
+            "name": "书签3.1",
+            "url": "http://example.com/3.1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": "二级层级",
+    "categories": [
+      {
+        "category": "分类二",
+        "bookmarks": [
+          {
+            "name": "书签2.1",
+            "url": "http://example.com/2.1"
+          }
+        ]
+      },
+      {
+        "category": "分类三",
+        "bookmarks": [
+          {
+            "name": "书签3.1",
+            "url": "http://example.com/3.1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": "二级层级",
+    "categories": [
+      {
+        "category": "分类二",
+        "bookmarks": [
+          {
+            "name": "书签2.1",
+            "url": "http://example.com/2.1"
+          }
+        ]
+      },
+      {
+        "category": "分类三",
+        "bookmarks": [
+          {
+            "name": "书签3.1",
+            "url": "http://example.com/3.1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "level": "二级层级",
+    "categories": [
+      {
+        "category": "分类二",
+        "bookmarks": [
+          {
+            "name": "书签2.1",
+            "url": "http://example.com/2.1"
+          }
+        ]
+      },
+      {
+        "category": "分类三",
+        "bookmarks": [
+          {
+            "name": "书签3.1",
+            "url": "http://example.com/3.1"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="wude技术博客 - 分享技术知识和经验">
+	<meta name="keywords" content="技术博客,web开发,编程">
+	<title>wude技术博客</title>
+	<link rel="stylesheet" href="css/GitHub2.css" type="text/css"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="css/style2.css">
+	<link rel="stylesheet" href="css/highlight.css">
+	<script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/director.min.js"></script>   
+	<script src="js/ractive.min.js"></script>    
+	<script src="js/marked.min.js"></script>    
+	<script src="config.js"></script>
+	<script src="js/highlight.min.js"></script>
+</head>
+<body>
+<!-- 新导航栏 -->
+<div class="navbar">
+	<a href="index.html" class="navbar-brand">
+		&lt;/&gt; <span>wude博客</span>
+	</a>
+	<div class="navbar-search">
+		<input type="text" name="q" id="seaKey" placeholder="搜索博客..." aria-label="搜索博客">
+		<button onclick='window.location.href="#search/"+document.getElementById("seaKey").value'>搜索</button>
+	</div>
+	<div class="navbar-links">
+		<a href="index.html" class="nav-link">🏠 首页</a>
+		<a href="https://github.com/CS-wude" class="nav-link">
+			<svg height="16" width="16" viewBox="0 0 16 16" style="vertical-align: text-bottom; fill: currentColor;">
+				<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+			</svg>
+			GitHub
+		</a>
+	</div>
+</div>
+
+<div class="page-container">
+    <!-- 左侧个人信息卡 -->
+    <div class="left-sidebar">
+        <div class="profile-card">
+            <img src="images/pugongying.jpg" alt="个人头像" class="profile-avatar">
+            <h2 class="profile-name">Wude</h2>
+            <p class="profile-title">全栈开发工程师</p>
+            
+            <p class="profile-desc">热爱编程和技术，专注Java开发，分享学习经验和成长历程。</p>
+            
+            <div class="profile-info">
+                <div class="profile-info-item">
+                    <i>📧</i>
+                    <a href="mailto:wudemail@foxmail.com">wudemail@foxmail.com</a>
+                </div>
+                <div class="profile-info-item">
+                    <i>🔗</i>
+                    <a href="https://github.com/CS-wude" target="_blank">github.com/CS-wude</a>
+                </div>
+                <div class="profile-info-item">
+                    <i>📱</i>
+                    <span>应用开发 | Java | 算法</span>
+                </div>
+            </div>
+            
+            <div class="profile-social">
+                <a href="#" class="social-icon" title="微信">📱</a>
+                <a href="#" class="social-icon" title="QQ">💬</a>
+                <a href="https://github.com/CS-wude" class="social-icon" title="GitHub">📂</a>
+            </div>
+        </div>
+        
+        <!-- 改回动态标签 -->
+        <div id="labels" class="tags-card"></div>
+    </div>
+
+    <!-- 中间内容区 -->
+    <div class="main-content">
+        <div class="whole">
+            <div id="container">
+                <center><img src="loading.gif" alt="loading" class="loading"></center>
+            </div>
+        </div>
+
+        <script type="text/ractive" id="listTpl">
+            <div class="content">
+                <div class="content-list">
+                    <div class="article-list">
+                        {{#posts}}
+                        <div class="article-item">
+                            <div class="article-title">
+                                <a href="#post/{{number}}">{{title}}</a>
+                            </div>
+                            <div class="article-date">{{formatTime(created_at)}}</div>
+                        </div>
+                        {{/posts}}
+                    </div>
+                    
+                    <div class="pagination">
+                        {{#prev}}<a href="#p{{page-1}}" class="prev">上一页</a>{{/prev}}
+                        {{#next}}<a href="#p{{page+1}}" class="next">下一页</a>{{/next}}
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/ractive" id="detailTpl">
+            {{#post}}
+            <div class="article">
+                <h1>{{title}}</h1>
+                <span class="create_at">发表于 {{formatTime(created_at)}}</span>
+                <div class="tags">
+                    {{#labels}}
+                    <span class="label" style="background-color: #{{color}};">
+                        <a href="#search/{{name}}" class="tag-link">{{name}}</a>
+                    </span>
+                    {{/labels}}
+                </div>
+                <div class="content">{{{markdown2HTML(body)}}}</div>
+                <div class="article-footer">
+                    <a href="#/" class="back-to-home">返回首页</a>
+                </div>
+            </div>
+            {{/post}}
+        </script>
+    </div>
+    
+    <!-- 右侧边栏，现在保持为空 -->
+    <div class="right-sidebar">
+        <!-- 此处内容已移除 -->
+    </div>
+</div>
+
+<!-- 重新添加标签模板 -->
+<script type="text/ractive" id="listLab">
+    <div class="tags-card-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 5px;">
+            <path d="M2 3h10l10 10-10 10H2V3zm4 4a1 1 0 100 2 1 1 0 000-2z" fill="currentColor"/>
+        </svg>
+        标签分类
+    </div>
+    <div class="tags-list">
+        {{#labels}}
+        <a href="https://github.com/CS-wude/javaweb/issues?q=is%3Aissue+is%3Aopen+label%3A{{name}}" class="tag-item" style="background-color: #{{color}}; color: #2b2833;">
+            <svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 3px; fill: currentColor;">
+                <path d="M2 3h10l10 10-10 10H2V3zm4 4a1 1 0 100 2 1 1 0 000-2z"/>
+            </svg>
+            {{name}}
+        </a>
+        {{/labels}}
+    </div>
+</script>
+
+<script src="app.js"></script>
+</body>
+</html>

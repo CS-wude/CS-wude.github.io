@@ -1,13 +1,15 @@
 Ractive.DEBUG = false;
 
 // ========================================
-// GitHub API Token 认证
+// GitHub API Token 认证（仅在有token时添加）
 // ========================================
-$.ajaxSetup({
-    headers: {
-        'Authorization': 'token ' + _config['access_token']
-    }
-});
+if (_config['access_token'] && _config['access_token'].length > 0) {
+    $.ajaxSetup({
+        headers: {
+            'Authorization': 'token ' + _config['access_token']
+        }
+    });
+}
 
 // ========================================
 // 路由变化时滚动到顶部

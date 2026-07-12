@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="description" content="WUDE 项目文档与内容索引。" />
+    <title>项目文档 — WUDE</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./docs.css" />
+  </head>
+  <body data-page="overview">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" id="mainNav" aria-label="主导航">
+        <a href="./index.html">首页</a><a href="./index.html#projects">作品</a><a class="is-current" href="./projects.html" aria-current="page">项目文档</a><a href="./updates.html">动态</a><a href="./about.html">关于</a>
+      </nav>
+    </header>
+
+    <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docsSidebar">
+        <div class="docs-sidebar-title"><span>内容索引</span><span>01—∞</span></div>
+        <details class="docs-group" open>
+          <summary>开始</summary>
+          <nav><a data-page="overview" href="./projects.html">项目文档</a><a data-page="about" href="./about.html">关于 WUDE</a></nav>
+        </details>
+        <details class="docs-group" open>
+          <summary>项目</summary>
+          <nav><a data-page="template" href="./project-template.html">项目详情页模板</a><a href="./projects.html#project-system">项目如何组织</a><a href="./projects.html#publishing">发布到 GitHub</a></nav>
+        </details>
+        <details class="docs-group" open>
+          <summary>记录</summary>
+          <nav><a data-page="notes" href="./notes.html">随笔与记录</a><a href="./updates.html">GitHub 动态</a><a href="./index.html#projects">返回作品首页</a></nav>
+        </details>
+      </aside>
+
+      <article class="doc-article">
+        <header class="article-header">
+          <p class="article-kicker">WUDE / Project archive</p>
+          <h1>项目文档</h1>
+          <p class="article-lead">这里不是项目卡片的重复，而是每件作品背后的完整记录：为什么做、怎么判断、最后得到什么。</p>
+          <div class="article-meta"><span>Last updated · 2026.07</span><span>Static pages</span></div>
+        </header>
+
+        <div class="article-figure archive-visual" aria-hidden="true">
+          <aside><strong>W.</strong><span></span><span></span><span></span><span></span></aside>
+          <div class="archive-grid"><span>Product systems</span><span>Open experiments</span><span>Tools & utilities</span><span>Notes & decisions</span></div>
+        </div>
+
+        <section class="doc-section" id="how-to-use">
+          <h2>这个目录怎么用</h2>
+          <p>首页负责让人快速看到作品，内容页负责把项目讲清楚。每个项目可以拥有一个独立页面，左侧目录承担站点级导航，右侧目录只导航当前文章。</p>
+          <div class="doc-callout">先写真实内容，再做视觉包装。一个项目只需要回答清楚背景、目标、过程、结果四件事。</div>
+        </section>
+
+        <section class="doc-section" id="project-system">
+          <h2>项目如何组织</h2>
+          <h3 id="project-overview">1. 项目概览</h3>
+          <p>用两三句话说明项目服务谁、解决什么问题，以及你在其中承担的职责。概览应该让不了解上下文的人也能快速进入状态。</p>
+          <h3 id="project-process">2. 过程与判断</h3>
+          <p>展示关键路径，不必记录每一步。更值得写的是：有哪些约束、为什么选择这个方案、放弃过哪些方向。</p>
+          <h3 id="project-result">3. 结果与后续</h3>
+          <p>结果可以是上线产品、开源仓库、数据变化，也可以是一次明确的失败和复盘。真实比完整更有价值。</p>
+        </section>
+
+        <section class="doc-section" id="categories">
+          <h2>内容分类</h2>
+          <table class="doc-table">
+            <thead><tr><th>分类</th><th>适合放什么</th><th>状态</th></tr></thead>
+            <tbody>
+              <tr><td>产品项目</td><td>完整产品、网站、应用与长期维护的工具</td><td>持续增加</td></tr>
+              <tr><td>开放实验</td><td>创意编码、原型、技术验证和短期探索</td><td>持续增加</td></tr>
+              <tr><td>随笔记录</td><td>设计判断、开发笔记和项目复盘</td><td>按需更新</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="doc-section" id="publishing">
+          <h2>发布到 GitHub Pages</h2>
+          <p>这些页面都是普通 HTML、CSS 和 JavaScript 文件，不依赖服务器。推送到 GitHub 仓库后，在 Pages 设置中选择 <code>main</code> 分支和根目录即可发布。</p>
+          <ol><li>把站点文件放入仓库根目录。</li><li>在仓库设置中打开 Pages。</li><li>选择从分支部署，并保存。</li><li>后续推送代码会自动更新网站。</li></ol>
+        </section>
+
+        <footer class="article-footer"><span>WUDE Project Archive</span><a href="./project-template.html">下一页：项目详情页模板 →</a></footer>
+      </article>
+
+      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
+    </div>
+    <div class="docs-backdrop"></div>
+    <script src="./site.js"></script><script src="./docs.js"></script>
+  </body>
+</html>

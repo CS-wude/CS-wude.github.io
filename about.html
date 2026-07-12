@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="description" content="关于 WUDE。" />
+    <title>关于 WUDE</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./docs.css" />
+  </head>
+  <body data-page="about">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./index.html#projects">作品</a><a href="./projects.html">项目文档</a><a href="./updates.html">动态</a><a class="is-current" href="./about.html" aria-current="page">关于</a></nav>
+    </header>
+    <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docsSidebar">
+        <div class="docs-sidebar-title"><span>内容索引</span><span>01—∞</span></div>
+        <details class="docs-group" open><summary>开始</summary><nav><a data-page="overview" href="./projects.html">项目文档</a><a data-page="about" href="./about.html">关于 WUDE</a></nav></details>
+        <details class="docs-group" open><summary>项目</summary><nav><a data-page="template" href="./project-template.html">项目详情页模板</a><a href="./projects.html#project-system">项目如何组织</a><a href="./projects.html#publishing">发布到 GitHub</a></nav></details>
+        <details class="docs-group" open><summary>记录</summary><nav><a data-page="notes" href="./notes.html">随笔与记录</a><a href="./updates.html">GitHub 动态</a><a href="./index.html#projects">返回作品首页</a></nav></details>
+      </aside>
+
+      <article class="doc-article">
+        <header class="article-header">
+          <p class="article-kicker">About / Profile</p><h1>关于 WUDE</h1>
+          <p class="article-lead">这一页留给你的经历、正在做的事情和长期关注的问题。内容不必像简历，重点是让别人理解你如何思考和创造。</p>
+          <div class="article-meta"><span>Independent maker</span><span>China</span><span>Open to ideas</span></div>
+        </header>
+
+        <div class="article-figure profile-visual" aria-hidden="true"><div class="profile-mark">W</div><div class="profile-notes"><span>Profile / 2026</span><strong>Make useful things, then explain them clearly.</strong></div></div>
+
+        <section class="doc-section" id="introduction"><h2>简单介绍</h2><p>这里可以写你的职业身份、经验方向和最擅长解决的问题。当前文字只是结构占位，后续替换成真实经历即可。</p></section>
+        <section class="doc-section" id="now"><h2>现在在做什么</h2><p>记录正在推进的项目、学习方向和开放合作的话题。它可以比传统履历更及时，也更接近你真实的工作状态。</p></section>
+        <section class="doc-section" id="principles"><h2>做事原则</h2><ul><li>先理解问题，再选择工具。</li><li>让复杂系统拥有清晰的表达。</li><li>保留过程记录，让判断可以被复用。</li><li>持续发布小而完整的作品。</li></ul></section>
+        <section class="doc-section" id="contact"><h2>联系方式</h2><p>可以通过邮箱联系我，也可以在 GitHub 查看公开项目与最近动态。</p><p><a class="text-link" href="mailto:wudemail@foxmail.com">wudemail@foxmail.com ↗</a></p><p><a class="text-link" href="https://github.com/CS-wude" target="_blank" rel="noreferrer">github.com/CS-wude ↗</a></p></section>
+
+        <footer class="article-footer"><a href="./projects.html">← 项目文档</a><a href="./notes.html">随笔与记录 →</a></footer>
+      </article>
+      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
+    </div>
+    <div class="docs-backdrop"></div>
+    <script src="./site.js"></script><script src="./docs.js"></script>
+  </body>
+</html>

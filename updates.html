@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f4ef" />
+    <meta
+      name="description"
+      content="WUDE 的公开动态、技术笔记与项目进展，由 GitHub Issues 持续更新。"
+    />
+    <title>动态 — WUDE</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./updates.css" />
+  </head>
+  <body data-page="updates">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="返回首页">
+        <span class="brand-mark">W</span>
+        <span>WUDE</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="打开菜单"
+        aria-controls="mainNav"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="主导航">
+        <a href="./index.html">首页</a>
+        <a href="./index.html#projects">作品</a>
+        <a href="./projects.html">项目文档</a>
+        <a class="is-current" href="./updates.html" aria-current="page">动态</a>
+        <a href="./about.html">关于</a>
+      </nav>
+    </header>
+
+    <main class="updates-page" id="top">
+      <section class="updates-masthead" aria-labelledby="updatesTitle">
+        <div class="updates-masthead__meta">
+          <p class="section-label">Public log / GitHub Issues</p>
+          <a
+            class="updates-repo-link"
+            href="https://github.com/CS-wude/javaweb/issues"
+            target="_blank"
+            rel="noreferrer"
+          >CS-wude / javaweb ↗</a>
+        </div>
+
+        <div class="updates-masthead__layout">
+          <h1 id="updatesTitle">动态</h1>
+          <div class="updates-masthead__copy">
+            <p>项目进展、技术笔记和阶段性判断。内容从公开 Issue 同步，保留真实的时间线与讨论入口。</p>
+            <div class="updates-sync" role="status" aria-live="polite">
+              <i aria-hidden="true"></i>
+              <span id="syncStatus">正在连接 GitHub</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="updates-workspace" aria-labelledby="feedHeading">
+        <div class="updates-toolbar">
+          <form class="updates-search" action="./updates.html" method="get" role="search">
+            <label for="updatesSearchInput">搜索动态</label>
+            <div class="updates-search__control">
+              <input
+                id="updatesSearchInput"
+                name="q"
+                type="search"
+                autocomplete="off"
+                maxlength="120"
+                placeholder="项目、技术或关键词"
+              />
+              <button type="submit">搜索</button>
+            </div>
+            <input id="updatesLabelInput" name="label" type="hidden" disabled />
+          </form>
+
+          <div class="updates-filter" id="updatesFilter" hidden>
+            <span id="updatesFilterText"></span>
+            <a href="./updates.html">清除</a>
+          </div>
+        </div>
+
+        <div class="updates-results-head">
+          <div>
+            <p class="section-label" id="feedKicker">Issue-powered journal</p>
+            <h2 id="feedHeading">最近更新</h2>
+          </div>
+          <p id="resultSummary" aria-live="polite">读取中</p>
+        </div>
+
+        <div class="updates-content" id="updatesContent" aria-busy="true">
+          <div class="updates-skeleton" aria-hidden="true">
+            <div><span></span><strong></strong><p></p></div>
+            <div><span></span><strong></strong><p></p></div>
+            <div><span></span><strong></strong><p></p></div>
+            <div><span></span><strong></strong><p></p></div>
+          </div>
+        </div>
+
+        <noscript>
+          <p class="updates-message">
+            当前浏览器没有启用 JavaScript。你仍可在
+            <a href="https://github.com/CS-wude/javaweb/issues">GitHub Issues</a>
+            查看全部动态。
+          </p>
+        </noscript>
+      </section>
+    </main>
+
+    <footer class="site-footer updates-footer">
+      <div>
+        <p class="section-label">Continue the conversation</p>
+        <h2>进展公开，判断也公开。</h2>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:wudemail@foxmail.com">Email ↗</a>
+        <a href="https://github.com/CS-wude" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> WUDE</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script src="./site.js"></script>
+    <script src="./data/updates-data.js"></script>
+    <script src="./updates.js"></script>
+  </body>
+</html>

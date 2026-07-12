@@ -1,0 +1,1 @@
+window.WUDE_UPDATES_SNAPSHOT = {"schemaVersion":1,"generatedAt":null,"source":{"owner":"CS-wude","repo":"javaweb","author":"CS-wude","issuesUrl":"https://github.com/CS-wude/javaweb/issues"},"openIssueCount":0,"issues":[]};

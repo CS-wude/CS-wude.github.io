@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="description" content="WUDE 随笔与项目记录。" />
+    <title>随笔与记录 — WUDE</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./docs.css" />
+  </head>
+  <body data-page="notes">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./index.html#projects">作品</a><a class="is-current" href="./projects.html">项目文档</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
+    </header>
+    <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docsSidebar">
+        <div class="docs-sidebar-title"><span>内容索引</span><span>01—∞</span></div>
+        <details class="docs-group" open><summary>开始</summary><nav><a data-page="overview" href="./projects.html">项目文档</a><a data-page="about" href="./about.html">关于 WUDE</a></nav></details>
+        <details class="docs-group" open><summary>项目</summary><nav><a data-page="template" href="./project-template.html">项目详情页模板</a><a href="./projects.html#project-system">项目如何组织</a><a href="./projects.html#publishing">发布到 GitHub</a></nav></details>
+        <details class="docs-group" open><summary>记录</summary><nav><a data-page="notes" href="./notes.html">随笔与记录</a><a href="./updates.html">GitHub 动态</a><a href="./index.html#projects">返回作品首页</a></nav></details>
+      </aside>
+
+      <article class="doc-article">
+        <header class="article-header">
+          <p class="article-kicker">Notes / Decisions</p><h1>随笔与记录</h1>
+          <p class="article-lead">不追求每天更新，只记录那些以后可能再次用到的判断、方法和项目过程。</p>
+          <div class="article-meta"><span>Notes</span><span>Development</span><span>Design</span></div>
+        </header>
+
+        <div class="article-figure notes-visual" aria-hidden="true"><article><span>Note 01</span><strong>从问题开始</strong></article><article><span>Note 02</span><strong>记录关键判断</strong></article><article><span>Note 03</span><strong>让经验可复用</strong></article></div>
+
+        <section class="doc-section" id="why-notes"><h2>为什么保留记录</h2><p>项目完成后，代码和界面会留下，但当时的判断很容易消失。记录能保存这些上下文，也让后来的人更容易理解项目。</p></section>
+        <section class="doc-section" id="categories"><h2>记录分类</h2><h3 id="build-notes">开发笔记</h3><p>记录环境、架构、性能、兼容性和部署过程中真正踩过的坑。</p><h3 id="design-notes">设计判断</h3><p>记录信息层级、交互取舍、视觉方向和用户反馈，不只展示最终画面。</p><h3 id="retrospective">项目复盘</h3><p>说明哪些判断有效、哪些假设错误，以及下一次会如何调整。</p></section>
+        <section class="doc-section" id="writing-style"><h2>写作方式</h2><p>每篇记录尽量围绕一个问题展开，标题直接，正文保留必要上下文。没有结论时，也可以诚实地写下当前状态。</p><div class="doc-callout">这不是内容平台，而是个人知识与项目经验的公开索引。</div></section>
+        <section class="doc-section" id="next"><h2>下一步</h2><p>后续可以为每篇文章创建独立 HTML 页面，并把链接加入左侧“记录”分组。静态页面数量增加不会影响 GitHub Pages 部署。</p></section>
+
+        <footer class="article-footer"><a href="./project-template.html">← 项目详情页模板</a><a href="./about.html">关于 WUDE →</a></footer>
+      </article>
+      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
+    </div>
+    <div class="docs-backdrop"></div>
+    <script src="./site.js"></script><script src="./docs.js"></script>
+  </body>
+</html>

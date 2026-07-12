@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="description" content="WUDE 项目详情页模板。" />
+    <title>项目详情页模板 — WUDE</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./docs.css" />
+  </head>
+  <body data-page="template">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./index.html#projects">作品</a><a class="is-current" href="./projects.html">项目文档</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
+    </header>
+    <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docsSidebar">
+        <div class="docs-sidebar-title"><span>内容索引</span><span>01—∞</span></div>
+        <details class="docs-group" open><summary>开始</summary><nav><a data-page="overview" href="./projects.html">项目文档</a><a data-page="about" href="./about.html">关于 WUDE</a></nav></details>
+        <details class="docs-group" open><summary>项目</summary><nav><a data-page="template" href="./project-template.html">项目详情页模板</a><a href="./projects.html#project-system">项目如何组织</a><a href="./projects.html#publishing">发布到 GitHub</a></nav></details>
+        <details class="docs-group" open><summary>记录</summary><nav><a data-page="notes" href="./notes.html">随笔与记录</a><a href="./updates.html">GitHub 动态</a><a href="./index.html#projects">返回作品首页</a></nav></details>
+      </aside>
+
+      <article class="doc-article">
+        <header class="article-header">
+          <p class="article-kicker">Case study / Template</p>
+          <h1>项目详情页模板</h1>
+          <p class="article-lead">这是未来每个项目可以复用的叙事结构。把演示文字替换为真实项目内容，就会成为一篇完整案例。</p>
+          <div class="article-meta"><span>Role · Your role</span><span>Year · 2026</span><span>Status · Demo</span></div>
+        </header>
+
+        <div class="article-figure case-visual" aria-hidden="true">
+          <div><span>01 / Context</span><strong>背景</strong></div><div><span>02 / Goal</span><strong>目标</strong></div><div><span>03 / Process</span><strong>过程</strong></div><div><span>04 / Result</span><strong>结果</strong></div>
+        </div>
+
+        <section class="doc-section" id="background"><h2>项目背景</h2><p>写清楚项目出现之前的状态、使用者正在面对的问题，以及项目为什么值得被做。避免只写技术栈，先交代真实情境。</p></section>
+        <section class="doc-section" id="goal"><h2>目标与约束</h2><p>列出项目希望达成的核心目标，同时说明时间、资源、兼容性或业务上的限制。约束能帮助读者理解后续的选择。</p><ul><li>核心目标：一句话描述要改变的事情。</li><li>关键用户：谁会直接使用这个结果。</li><li>现实约束：时间、成本、技术和协作条件。</li></ul></section>
+        <section class="doc-section" id="process"><h2>过程与关键判断</h2><h3 id="research">理解问题</h3><p>说明你如何收集信息、确认问题，而不是直接开始做界面或写代码。</p><h3 id="decision">做出选择</h3><p>展示最重要的一到三个判断：选择了什么、放弃了什么，以及判断依据。</p><div class="doc-callout">案例页最有价值的部分不是“做了很多”，而是“为什么这样做”。</div></section>
+        <section class="doc-section" id="result"><h2>结果与影响</h2><p>展示最终画面、链接、仓库和数据。还没有量化结果时，可以描述用户反馈、维护状态和下一步计划。</p></section>
+        <section class="doc-section" id="replace"><h2>替换这份模板</h2><p>复制本文件并重命名，例如 <code>my-project.html</code>，然后把左侧菜单新增一个链接。所有页面使用相对路径，因此部署到 GitHub Pages 子目录也能正常工作。</p></section>
+
+        <footer class="article-footer"><a href="./projects.html">← 上一页：项目文档</a><a href="./notes.html">下一页：随笔与记录 →</a></footer>
+      </article>
+      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
+    </div>
+    <div class="docs-backdrop"></div>
+    <script src="./site.js"></script><script src="./docs.js"></script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="description" content="一次智能运维项目里，我如何收紧 Agent 的工具调用边界。" />
+    <title>让 Agent 的工具调用收得住 — WUDE</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./docs.css" />
+  </head>
+  <body data-page="case-study">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a class="is-current" href="./projects.html" aria-current="page">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
+    </header>
+    <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docsSidebar">
+        <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
+        <details class="docs-group" open><summary>项目</summary><nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav></details>
+        <details class="docs-group" open><summary>手记</summary><nav><a data-page="notes" href="./notes.html">全部手记</a><a href="./notes.html#leading">带组之后</a><a href="./notes.html#ai-responsibility">AI 与判断</a></nav></details>
+        <details class="docs-group" open><summary>其他</summary><nav><a href="./updates.html">最近动态</a><a data-page="about" href="./about.html">关于我</a><a href="./index.html">返回首页</a></nav></details>
+      </aside>
+
+      <article class="doc-article">
+        <header class="article-header">
+          <p class="article-kicker">Project note / AI Agent</p>
+          <h1>让 Agent 的工具调用收得住</h1>
+          <p class="article-lead">做智能运维助手时，我很快发现：让模型调用工具不难，难的是让每次调用都有范围、有状态，失败以后还能解释。这个页面只写我从那段工作里留下来的工程判断。</p>
+          <div class="article-meta"><span>Backend & Agent engineering</span><span>2025</span><span>Engineering note</span></div>
+        </header>
+
+        <figure class="article-figure screenshot-figure">
+          <a href="./assets/projects/sre-copilot-console.png" target="_blank" rel="noreferrer" aria-label="查看 SRE Copilot 界面原图">
+            <img src="./assets/projects/sre-copilot-console.png" alt="SRE Copilot 调查界面，展示 Kubernetes 时间线、日志和支持证据" />
+          </a>
+          <figcaption><span>SRE Copilot / Investigation timeline</span><span>查看原图 ↗</span></figcaption>
+        </figure>
+
+        <section class="doc-section" id="starting-point">
+          <h2>起点不是做一个会聊天的页面</h2>
+          <p>用户问的是“为什么这个服务刚才变慢了”，答案却不在对话历史里。它可能藏在一段指标、一批日志、某个 Pod 的事件，或者一次刚发生的发布里。模型如果拿不到这些事实，再顺畅的回答也只是猜。</p>
+          <p>所以一开始我就把对话放在次要位置。主线是：问题进来以后，系统怎样拆成几步，每一步去哪里取证，取回来的东西又怎样留给下一步。</p>
+        </section>
+
+        <section class="doc-section" id="tool-boundary">
+          <h2>先把工具边界收紧</h2>
+          <p>Agent 很容易给人一种“什么都能做”的错觉。实际接上集群后，越通用的工具越危险，也越容易查出一大堆没有用的数据。我最后倾向于让每个工具只完成一件明确的事。</p>
+          <ul>
+            <li>集群、命名空间和资源范围必须显式传入，不能让模型自己猜。</li>
+            <li>时间窗口设默认值和上限，避免一句“最近有问题吗”扫完整个历史。</li>
+            <li>工具输入与输出都结构化，错误也作为结果返回，而不是消失在日志里。</li>
+            <li>查询类工具和变更类动作分开，后者必须经过额外确认并留下审计记录。</li>
+          </ul>
+          <div class="doc-callout">模型负责决定下一步问什么，工具负责保证这一步只能在允许的范围里发生。</div>
+        </section>
+
+        <section class="doc-section" id="execution-loop">
+          <h2>执行循环要能停下来</h2>
+          <h3 id="state-events">用事件保存状态</h3>
+          <p>一次排查可能经历多轮思考和工具调用。我没有把它当成一整段字符串，而是拆成计划、调用、返回、总结等事件。这样前端能流式展示，后端也知道中断发生在哪一步。</p>
+          <h3 id="limits">给循环加上限</h3>
+          <p>Agent 不会天然知道什么时候该放弃。工具次数、上下文长度和单次执行时间都需要边界。达到边界后，与其继续凑答案，不如明确告诉用户还缺什么证据。</p>
+          <h3 id="conversation-memory">长对话只留下有用的部分</h3>
+          <p>日志原文和工具返回很快就会挤满上下文。我会保留结论、资源标识和时间范围，把已经使用过的大段原文压成摘要。这样做不是为了让模型记得更多，而是让它少重复查同一件事。</p>
+        </section>
+
+        <section class="doc-section" id="failure-path">
+          <h2>失败路径比成功演示重要</h2>
+          <p>模型会超时，监控接口会返回空数据，集群权限也可能临时变化。这些情况如果只抛一个统一错误，用户看到的就是“Agent 卡住了”。我更希望页面能说清楚：哪一步失败、已经拿到什么、还能不能换一条路继续。</p>
+          <p>模型服务和工具服务因此被分开处理。前者可以切换或降级，后者则保留自己的超时和健康状态。即使最终没有得出根因，已完成的排查步骤也不应该丢掉。</p>
+        </section>
+
+        <section class="doc-section" id="looking-back">
+          <h2>现在回头看</h2>
+          <p>这个项目让我确定了一件事：Agent 的价值不在于“像人一样操作所有东西”，而在于把原本散落的查询步骤组织起来，同时诚实地标出它不知道的部分。</p>
+          <p>如果再做一遍，我会更早统一事件协议，并把执行记录设计成可回放的数据。那会让调试、评估和复盘都简单很多，也能更快区分是模型判断错了，还是工具给错了事实。</p>
+        </section>
+
+        <footer class="article-footer"><a href="./projects.html">← 项目索引</a><a href="./notes.html">下一页：手记 →</a></footer>
+      </article>
+      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
+    </div>
+    <div class="docs-backdrop"></div>
+    <script src="./site.js"></script><script src="./docs.js"></script>
+  </body>
+</html>

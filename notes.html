@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f3f4ef" />
-    <meta name="description" content="WUDE 随笔与项目记录。" />
-    <title>随笔与记录 — WUDE</title>
+    <meta name="description" content="WUDE 关于后端、AI、带组和工程交付的手记。" />
+    <title>手记 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./docs.css" />
   </head>
@@ -13,32 +13,95 @@
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
       <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
-      <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./index.html#projects">作品</a><a class="is-current" href="./projects.html">项目文档</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
+      <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a class="is-current" href="./notes.html" aria-current="page">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
     </header>
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
     <div class="docs-layout">
       <aside class="docs-sidebar" id="docsSidebar">
-        <div class="docs-sidebar-title"><span>内容索引</span><span>01—∞</span></div>
-        <details class="docs-group" open><summary>开始</summary><nav><a data-page="overview" href="./projects.html">项目文档</a><a data-page="about" href="./about.html">关于 WUDE</a></nav></details>
-        <details class="docs-group" open><summary>项目</summary><nav><a data-page="template" href="./project-template.html">项目详情页模板</a><a href="./projects.html#project-system">项目如何组织</a><a href="./projects.html#publishing">发布到 GitHub</a></nav></details>
-        <details class="docs-group" open><summary>记录</summary><nav><a data-page="notes" href="./notes.html">随笔与记录</a><a href="./updates.html">GitHub 动态</a><a href="./index.html#projects">返回作品首页</a></nav></details>
+        <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
+        <details class="docs-group" open><summary>项目</summary><nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav></details>
+        <details class="docs-group" open><summary>手记</summary><nav><a data-page="notes" href="./notes.html">全部手记</a><a href="./notes.html#leading">带组之后</a><a href="./notes.html#ai-responsibility">AI 与判断</a></nav></details>
+        <details class="docs-group" open><summary>其他</summary><nav><a href="./updates.html">最近动态</a><a data-page="about" href="./about.html">关于我</a><a href="./index.html">返回首页</a></nav></details>
       </aside>
 
       <article class="doc-article">
         <header class="article-header">
-          <p class="article-kicker">Notes / Decisions</p><h1>随笔与记录</h1>
-          <p class="article-lead">不追求每天更新，只记录那些以后可能再次用到的判断、方法和项目过程。</p>
-          <div class="article-meta"><span>Notes</span><span>Development</span><span>Design</span></div>
+          <p class="article-kicker">Notes / From the workbench</p><h1>手记</h1>
+          <p class="article-lead">技术之外，也记一些带组以后才慢慢想明白的事：怎样把问题交给合适的人，怎样给反馈，什么时候该亲自下场，以及用了 AI 之后哪些判断反而更不能省。</p>
+          <div class="article-meta"><span>Engineering</span><span>Team</span><span>AI</span></div>
         </header>
 
-        <div class="article-figure notes-visual" aria-hidden="true"><article><span>Note 01</span><strong>从问题开始</strong></article><article><span>Note 02</span><strong>记录关键判断</strong></article><article><span>Note 03</span><strong>让经验可复用</strong></article></div>
+        <div class="article-figure notes-visual" aria-hidden="true"><article><span>Note 01</span><strong>组长不是超级程序员</strong></article><article><span>Note 02</span><strong>1on1 不开成周报</strong></article><article><span>Note 03</span><strong>AI 不代签责任</strong></article></div>
 
-        <section class="doc-section" id="why-notes"><h2>为什么保留记录</h2><p>项目完成后，代码和界面会留下，但当时的判断很容易消失。记录能保存这些上下文，也让后来的人更容易理解项目。</p></section>
-        <section class="doc-section" id="categories"><h2>记录分类</h2><h3 id="build-notes">开发笔记</h3><p>记录环境、架构、性能、兼容性和部署过程中真正踩过的坑。</p><h3 id="design-notes">设计判断</h3><p>记录信息层级、交互取舍、视觉方向和用户反馈，不只展示最终画面。</p><h3 id="retrospective">项目复盘</h3><p>说明哪些判断有效、哪些假设错误，以及下一次会如何调整。</p></section>
-        <section class="doc-section" id="writing-style"><h2>写作方式</h2><p>每篇记录尽量围绕一个问题展开，标题直接，正文保留必要上下文。没有结论时，也可以诚实地写下当前状态。</p><div class="doc-callout">这不是内容平台，而是个人知识与项目经验的公开索引。</div></section>
-        <section class="doc-section" id="next"><h2>下一步</h2><p>后续可以为每篇文章创建独立 HTML 页面，并把链接加入左侧“记录”分组。静态页面数量增加不会影响 GitHub Pages 部署。</p></section>
+        <section class="doc-section" id="reading-note">
+          <h2>从《自洽的程序员》说起</h2>
+          <p>最近读辣条加辣的《自洽的程序员》，最能对上我经历的不是某个职场技巧，而是几件很朴素的事：别被“程序员应该怎样”推着走，先下场拿反馈，卡住时把求助变成高质量协作，沟通也不是写代码之外的附加工作。</p>
+          <p>作为程序员时，我习惯用自己的产出来衡量一天；开始带开发小组以后，评价标准变了。自己多写一个模块不一定是最优解，让信息流动、让成员能独立做判断、让团队少在同一个坑里重复消耗，往往更重要。</p>
+        </section>
 
-        <footer class="article-footer"><a href="./project-template.html">← 项目详情页模板</a><a href="./about.html">关于 WUDE →</a></footer>
+        <section class="doc-section note-entry" id="leading">
+          <p class="note-date">2026.07 · 带组手记</p>
+          <h2>组长不是队里最忙的程序员</h2>
+          <p>刚开始带人时，最容易证明自己的方式就是接走最难的任务、回答所有问题、替每个方案兜底。短期看进度很快，时间一长，所有复杂问题都会排队等组长，组长成了团队里吞吐量最低的单点。</p>
+          <p>我后来更愿意先交代目标、上下文和不能碰的约束，再让任务负责人拿出第一版判断。遇到阻塞时，求助要带上复现、已经试过的方案和当前猜测；我负责补信息、拆风险和确认方向，不急着把键盘接过来。</p>
+          <p>组长的技术价值不是永远写得最快，而是让团队在没有自己盯着的时候，仍然能做出大体一致的工程判断。</p>
+        </section>
+
+        <section class="doc-section note-entry" id="one-on-one">
+          <p class="note-date">2026.07 · 团队沟通</p>
+          <h2>1on1 不应该开成小型周报</h2>
+          <p>任务进度应该在看板和日常同步里解决。如果 1on1 还是逐条问“做完了吗”，这段时间很快就会变成另一场汇报，真正影响工作的困惑反而没人说。</p>
+          <p>我更关心三类内容：最近哪件事一直在消耗注意力；做技术判断时缺什么信息；下一阶段想独立接住什么。组长也要带着具体反馈来，讲清楚观察到的行为和影响，而不是只给一句“做得不错”或“还要提升”。</p>
+          <p>一次有效的 1on1 不需要聊得很宏大，结束时有一个双方都认同的行动项就够了。它最大的价值，是让问题在变成意外之前就被看见。</p>
+        </section>
+
+        <section class="doc-section note-entry" id="code-review">
+          <p class="note-date">2026.06 · Code review</p>
+          <h2>代码评审是在校准判断，不是在寻找错误</h2>
+          <p>如果评审只剩命名、空格和个人写法，成员很快会把它理解成审美检查。格式问题应该交给工具，人的注意力要留给数据边界、并发行为、异常语义、测试入口和以后修改这段代码的成本。</p>
+          <p>我会尽量区分“必须修改”“建议”和“我没看懂的问题”。前者要讲风险，建议要说明取舍，问题则允许作者反过来纠正我的理解。评审不是组长盖章，而是把隐含的判断标准摊开，让下一次类似问题不必从头争论。</p>
+        </section>
+
+        <section class="doc-section note-entry" id="ai-responsibility">
+          <p class="note-date">2026.06 · AI 编程</p>
+          <h2>AI 可以代写代码，不能代签责任</h2>
+          <p>《自洽的程序员》里关于 AI 的章节提到，程序员的竞争力不在于记住多少 API，而在于理解问题、设计方案和判断取舍。我很认同这一点。AI 把样板代码写得越快，开发者越应该把时间放到约束、验证和系统影响上。</p>
+          <p>带组时，我更愿意把 AI 生成的内容当成一份来路不明但速度很快的 PR：先确认它理解的任务，再检查依赖和安全边界，用测试证明关键行为，最后由提交代码的人解释为什么这样改。不能解释的代码，即使能跑，也不应该直接合进去。</p>
+          <div class="doc-callout">AI 降低了写出代码的成本，也提高了代码评审和技术判断的门槛。</div>
+        </section>
+
+        <section class="doc-section note-entry" id="failure-path">
+          <p class="note-date">2026.07 · 工程习惯</p>
+          <h2>失败路径先画出来</h2>
+          <p>以前写功能，我也会先顺着正常流程一路往下。后来碰到的异步任务和外部依赖多了，才发现正常流程往往只占代码的一小半。真正让人加班的是：消息重复了怎么办，回调晚到了怎么办，任务跑到一半进程重启又怎么办。</p>
+          <p>现在遇到跨服务链路，我会先画状态，而不是先画接口。每个状态能从哪里进、允许往哪里走、重复请求是否安全、谁负责把卡住的任务捞回来。正常路径通常会自己长出来，失败路径如果不提前命名，最后只会散在一堆 <code>catch</code> 里。</p>
+          <div class="doc-callout">一次成功只能证明代码跑过；失败之后还能继续，才说明这条链路被设计过。</div>
+        </section>
+
+        <section class="doc-section note-entry" id="streaming">
+          <p class="note-date">2026.06 · SSE</p>
+          <h2>流式输出不只是把字吐得更快</h2>
+          <p>第一次接模型流式接口时，很容易把任务理解成“读一段，发一段”。真正放到业务里，还要回答很多不起眼的问题：客户端断开后上游请求要不要停，代理会不会缓存，心跳多久发一次，最后一条事件怎样告诉前端这次是真的结束了。</p>
+          <p>我后来更愿意把 SSE 当成一条有生命周期的连接。开始、增量、工具调用、错误和完成都应该有明确事件，而不是让前端从文本里猜状态。这样页面刷新或网络抖动时，至少知道丢的是内容，还是整个任务。</p>
+        </section>
+
+        <section class="doc-section note-entry" id="model-boundary">
+          <p class="note-date">2026.05 · 模型接入</p>
+          <h2>模型服务应该是可替换的依赖</h2>
+          <p>不同模型接口看起来都很像：请求、消息、流式返回。真正麻烦的是错误码、工具调用格式、用量统计和超时方式都不一样。如果业务代码直接认识每一家供应方，后面每加一个模型都会把分支带进核心流程。</p>
+          <p>我倾向于让业务只看到统一的消息、事件和错误类型，供应方差异留在适配层。这个抽象不用一开始就覆盖所有能力，但至少要保证模型不可用时，系统知道该切换、降级，还是直接停止。</p>
+        </section>
+
+        <section class="doc-section note-entry" id="delivery">
+          <p class="note-date">2026.04 · 交付</p>
+          <h2>部署脚本也是项目的一部分</h2>
+          <p>一个服务如果只有原作者能在自己电脑上启动，它还没有真正完成。镜像怎么构建、配置从哪里进、依赖是否健康、升级失败如何回滚，这些内容不应该留在聊天记录和个人记忆里。</p>
+          <p>我不追求把流水线做得很花。能重复构建、能在发布前检查、能看到版本、能退回上一版，已经解决了大多数团队交付里的不确定。剩下的优化，等流程真的成为瓶颈再做。</p>
+        </section>
+
+        <section class="doc-section" id="why-here"><h2>为什么留在这里</h2><p>很多判断离开当时的代码就会显得很普通，但过几个月再遇到类似问题时，最有用的往往正是那句“当时为什么没有这么做”。我把它们写下来，主要是给未来的自己留一个入口。</p></section>
+
+        <footer class="article-footer"><a href="./agent-tooling.html">← Agent 工具链复盘</a><a href="./about.html">关于我 →</a></footer>
       </article>
       <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
     </div>

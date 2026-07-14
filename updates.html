@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f3f4ef" />
     <meta
       name="description"
-      content="WUDE 的公开动态、技术笔记与项目进展，由 GitHub Issues 持续更新。"
+      content="WUDE 工作台边上的短记录、问题和临时结论。"
     />
     <title>动态 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
@@ -32,8 +32,8 @@
 
       <nav class="main-nav" id="mainNav" aria-label="主导航">
         <a href="./index.html">首页</a>
-        <a href="./index.html#projects">作品</a>
-        <a href="./projects.html">项目文档</a>
+        <a href="./projects.html">项目</a>
+        <a href="./notes.html">手记</a>
         <a class="is-current" href="./updates.html" aria-current="page">动态</a>
         <a href="./about.html">关于</a>
       </nav>
@@ -42,22 +42,22 @@
     <main class="updates-page" id="top">
       <section class="updates-masthead" aria-labelledby="updatesTitle">
         <div class="updates-masthead__meta">
-          <p class="section-label">Public log / GitHub Issues</p>
+          <p class="section-label">Workbench log / ongoing</p>
           <a
             class="updates-repo-link"
             href="https://github.com/CS-wude/javaweb/issues"
             target="_blank"
             rel="noreferrer"
-          >CS-wude / javaweb ↗</a>
+          >原始记录 ↗</a>
         </div>
 
         <div class="updates-masthead__layout">
           <h1 id="updatesTitle">动态</h1>
           <div class="updates-masthead__copy">
-            <p>项目进展、技术笔记和阶段性判断。内容从公开 Issue 同步，保留真实的时间线与讨论入口。</p>
+            <p>有些东西还不值得写成长文：一次排查、一个刚想明白的取舍，或者一段正在变化的实现。我先把它们丢在这里。</p>
             <div class="updates-sync" role="status" aria-live="polite">
               <i aria-hidden="true"></i>
-              <span id="syncStatus">正在连接 GitHub</span>
+              <span id="syncStatus">正在翻记录</span>
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
       <section class="updates-workspace" aria-labelledby="feedHeading">
         <div class="updates-toolbar">
           <form class="updates-search" action="./updates.html" method="get" role="search">
-            <label for="updatesSearchInput">搜索动态</label>
+            <label for="updatesSearchInput">搜一下</label>
             <div class="updates-search__control">
               <input
                 id="updatesSearchInput"
@@ -74,7 +74,7 @@
                 type="search"
                 autocomplete="off"
                 maxlength="120"
-                placeholder="项目、技术或关键词"
+                placeholder="关键词或标签"
               />
               <button type="submit">搜索</button>
             </div>
@@ -89,7 +89,7 @@
 
         <div class="updates-results-head">
           <div>
-            <p class="section-label" id="feedKicker">Issue-powered journal</p>
+            <p class="section-label" id="feedKicker">From the workbench</p>
             <h2 id="feedHeading">最近更新</h2>
           </div>
           <p id="resultSummary" aria-live="polite">读取中</p>
@@ -106,9 +106,9 @@
 
         <noscript>
           <p class="updates-message">
-            当前浏览器没有启用 JavaScript。你仍可在
+            这个页面暂时没有正常加载。也可以直接去
             <a href="https://github.com/CS-wude/javaweb/issues">GitHub Issues</a>
-            查看全部动态。
+            翻原始记录。
           </p>
         </noscript>
       </section>
@@ -116,8 +116,8 @@
 
     <footer class="site-footer updates-footer">
       <div>
-        <p class="section-label">Continue the conversation</p>
-        <h2>进展公开，判断也公开。</h2>
+        <p class="section-label">Loose ends</p>
+        <h2>有结论的写下来，没想明白的也先留着。</h2>
       </div>
       <div class="footer-links">
         <a href="mailto:wudemail@foxmail.com">Email ↗</a>

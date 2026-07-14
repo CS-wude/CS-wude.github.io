@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f3f4ef" />
-    <meta name="description" content="WUDE 项目文档与内容索引。" />
-    <title>项目文档 — WUDE</title>
+    <meta name="description" content="WUDE 做过的系统，以及我在其中负责解决的问题。" />
+    <title>项目 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./docs.css" />
   </head>
@@ -14,76 +14,94 @@
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
       <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="主导航">
-        <a href="./index.html">首页</a><a href="./index.html#projects">作品</a><a class="is-current" href="./projects.html" aria-current="page">项目文档</a><a href="./updates.html">动态</a><a href="./about.html">关于</a>
+        <a href="./index.html">首页</a><a class="is-current" href="./projects.html" aria-current="page">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a>
       </nav>
     </header>
 
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
     <div class="docs-layout">
       <aside class="docs-sidebar" id="docsSidebar">
-        <div class="docs-sidebar-title"><span>内容索引</span><span>01—∞</span></div>
-        <details class="docs-group" open>
-          <summary>开始</summary>
-          <nav><a data-page="overview" href="./projects.html">项目文档</a><a data-page="about" href="./about.html">关于 WUDE</a></nav>
-        </details>
+        <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
         <details class="docs-group" open>
           <summary>项目</summary>
-          <nav><a data-page="template" href="./project-template.html">项目详情页模板</a><a href="./projects.html#project-system">项目如何组织</a><a href="./projects.html#publishing">发布到 GitHub</a></nav>
+          <nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav>
         </details>
         <details class="docs-group" open>
-          <summary>记录</summary>
-          <nav><a data-page="notes" href="./notes.html">随笔与记录</a><a href="./updates.html">GitHub 动态</a><a href="./index.html#projects">返回作品首页</a></nav>
+          <summary>手记</summary>
+          <nav><a data-page="notes" href="./notes.html">全部手记</a><a href="./notes.html#leading">带组之后</a><a href="./notes.html#ai-responsibility">AI 与判断</a></nav>
+        </details>
+        <details class="docs-group" open>
+          <summary>其他</summary>
+          <nav><a href="./updates.html">最近动态</a><a data-page="about" href="./about.html">关于我</a><a href="./index.html">返回首页</a></nav>
         </details>
       </aside>
 
       <article class="doc-article">
         <header class="article-header">
-          <p class="article-kicker">WUDE / Project archive</p>
-          <h1>项目文档</h1>
-          <p class="article-lead">这里不是项目卡片的重复，而是每件作品背后的完整记录：为什么做、怎么判断、最后得到什么。</p>
-          <div class="article-meta"><span>Last updated · 2026.07</span><span>Static pages</span></div>
+          <p class="article-kicker">Projects / Selected work</p>
+          <h1>做过的几类系统</h1>
+          <p class="article-lead">这些项目都不是一张架构图能说完的。我更愿意写清楚自己接住了哪一段：哪里最容易失控，我做了什么，最后留下了哪些还算可靠的东西。</p>
+          <div class="article-meta"><span>Backend</span><span>AI application</span><span>Platform engineering</span></div>
         </header>
 
         <div class="article-figure archive-visual" aria-hidden="true">
           <aside><strong>W.</strong><span></span><span></span><span></span><span></span></aside>
-          <div class="archive-grid"><span>Product systems</span><span>Open experiments</span><span>Tools & utilities</span><span>Notes & decisions</span></div>
+          <div class="archive-grid"><span>AI 应用落地</span><span>知识检索</span><span>Agent 工具链</span><span>任务调度</span></div>
         </div>
 
-        <section class="doc-section" id="how-to-use">
-          <h2>这个目录怎么用</h2>
-          <p>首页负责让人快速看到作品，内容页负责把项目讲清楚。每个项目可以拥有一个独立页面，左侧目录承担站点级导航，右侧目录只导航当前文章。</p>
-          <div class="doc-callout">先写真实内容，再做视觉包装。一个项目只需要回答清楚背景、目标、过程、结果四件事。</div>
+        <section class="doc-section" id="my-part">
+          <h2>我通常接哪一段</h2>
+          <p>我主要写 Java 后端，也会把模型、前端和部署串起来。比起从零做一个单页原型，我更常接手那些跨了好几个模块、失败后又很难解释的链路：长任务、流式连接、工具调用、支付回调、模型服务和发布过程。</p>
+          <p>所以这里不把项目写成“我独立完成了全部”。我会把团队成果和我负责的部分分开，只讲自己实际处理过的问题。</p>
+          <div class="doc-callout">我判断一个功能做没做完，通常不是看它第一次有没有跑通，而是看第二次失败时，我们知不知道该从哪里回来。</div>
         </section>
 
-        <section class="doc-section" id="project-system">
-          <h2>项目如何组织</h2>
-          <h3 id="project-overview">1. 项目概览</h3>
-          <p>用两三句话说明项目服务谁、解决什么问题，以及你在其中承担的职责。概览应该让不了解上下文的人也能快速进入状态。</p>
-          <h3 id="project-process">2. 过程与判断</h3>
-          <p>展示关键路径，不必记录每一步。更值得写的是：有哪些约束、为什么选择这个方案、放弃过哪些方向。</p>
-          <h3 id="project-result">3. 结果与后续</h3>
-          <p>结果可以是上线产品、开源仓库、数据变化，也可以是一次明确的失败和复盘。真实比完整更有价值。</p>
+        <section class="doc-section" id="selected-projects">
+          <h2>四个项目，四种麻烦</h2>
+          <div class="project-index">
+            <article class="project-index__item">
+              <div class="project-index__heading"><span>01 / 2026</span><h3 id="care-platform">大白 AI 心理健康平台</h3></div>
+              <p>产品把 AI 咨询、心理画像、风险预警和快速筛查放在同一套服务里。真正难处理的是对话、测评、咨询与交易共享用户状态，却又各自有异步回调和超时。我参与了统一接入层、AI 会话、测评与交易链路，也补了数据扩展和交付流程。</p>
+              <div class="project-index__tags"><span>Spring Cloud</span><span>SSE</span><span>MongoDB</span><span>CI/CD</span></div>
+            </article>
+            <article class="project-index__item">
+              <div class="project-index__heading"><span>02 / 2025—2026</span><h3 id="knowledge-platform">工业合规知识平台</h3></div>
+              <p>项目主线是让内部文档变成可检索、可追踪、可重建的知识。我负责过文档加工、异步向量化、混合检索和本地模型接入。相比“回答得像不像”，我更关心答案能不能回到原文，以及一份坏文档会不会堵住整条流水线。</p>
+              <div class="project-index__tags"><span>RAG</span><span>Redis Stream</span><span>Vector Search</span><span>Local LLM</span></div>
+            </article>
+            <article class="project-index__item">
+              <div class="project-index__heading"><span>03 / 2025</span><h3 id="sre-agent">智能 SRE 运维助手</h3></div>
+              <p>这个项目让我开始认真对待 Agent 的边界。模型可以规划排查步骤，但工具必须知道自己查哪个集群、哪段时间、多少数据，也必须允许人随时中断。我主要搭了执行循环、工具接入和流式反馈这几层。</p>
+              <div class="project-index__tags"><span>AI Agent</span><span>MCP</span><span>Prometheus</span><span>Kubernetes</span></div>
+            </article>
+            <article class="project-index__item">
+              <div class="project-index__heading"><span>04 / 2025—2026</span><h3 id="aigc-scheduler">生成式内容调度平台</h3></div>
+              <p>批量任务把模型调用变成了一个调度问题：导入的数据不总是干净，队列会积压，供应方会超时，用户还想随时看到进度。我处理了任务标准化、分级队列、模型网关和实时状态推送。</p>
+              <div class="project-index__tags"><span>NestJS</span><span>Redis Stream</span><span>WebSocket</span><span>Docker</span></div>
+            </article>
+          </div>
         </section>
 
-        <section class="doc-section" id="categories">
-          <h2>内容分类</h2>
+        <section class="doc-section" id="recurring-problems">
+          <h2>反复遇到的问题</h2>
           <table class="doc-table">
-            <thead><tr><th>分类</th><th>适合放什么</th><th>状态</th></tr></thead>
+            <thead><tr><th>现场</th><th>我会先做什么</th></tr></thead>
             <tbody>
-              <tr><td>产品项目</td><td>完整产品、网站、应用与长期维护的工具</td><td>持续增加</td></tr>
-              <tr><td>开放实验</td><td>创意编码、原型、技术验证和短期探索</td><td>持续增加</td></tr>
-              <tr><td>随笔记录</td><td>设计判断、开发笔记和项目复盘</td><td>按需更新</td></tr>
+              <tr><td>长任务堵住接口</td><td>拆出任务状态，入队执行，先把重试和取消定义清楚。</td></tr>
+              <tr><td>外部服务不稳定</td><td>明确超时、熔断和降级，不让一次依赖故障拖垮主流程。</td></tr>
+              <tr><td>工具调用范围太大</td><td>先收紧输入、权限和作用域，再谈 Agent 能做多少。</td></tr>
+              <tr><td>发布只能靠记忆</td><td>把构建、配置、检查和回滚写进流水线，让下一次发布不靠运气。</td></tr>
             </tbody>
           </table>
         </section>
 
-        <section class="doc-section" id="publishing">
-          <h2>发布到 GitHub Pages</h2>
-          <p>这些页面都是普通 HTML、CSS 和 JavaScript 文件，不依赖服务器。推送到 GitHub 仓库后，在 Pages 设置中选择 <code>main</code> 分支和根目录即可发布。</p>
-          <ol><li>把站点文件放入仓库根目录。</li><li>在仓库设置中打开 Pages。</li><li>选择从分支部署，并保存。</li><li>后续推送代码会自动更新网站。</li></ol>
+        <section class="doc-section" id="definition-of-done">
+          <h2>我对“做完”的判断</h2>
+          <p>接口通了、页面能点、演示没有报错，这些只能算第一阶段。一个系统真正能交出去，还要能解释自己的状态，能在依赖抖动时保护主链路，也能让另一个人按同样的方式构建和发布。</p>
+          <p>所以我常把时间花在不太适合截图的地方：事件结构、幂等键、任务检查点、日志上下文、健康检查和回滚入口。它们很少出现在功能列表里，却决定了项目三个月后还好不好改。</p>
         </section>
 
-        <footer class="article-footer"><span>WUDE Project Archive</span><a href="./project-template.html">下一页：项目详情页模板 →</a></footer>
+        <footer class="article-footer"><span>WUDE / PROJECTS</span><a href="./agent-tooling.html">下一篇：Agent 工具链复盘 →</a></footer>
       </article>
 
       <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>

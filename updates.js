@@ -65,7 +65,7 @@ const excerptFromIssue = (issue) => {
     .replace(/\s+/g, " ")
     .trim();
 
-  if (!text) return "这条更新暂时没有正文摘要。";
+  if (!text) return "这条先留个标题，正文还没整理。";
   return text.length > 180 ? `${text.slice(0, 180).trim()}…` : text;
 };
 
@@ -249,8 +249,8 @@ const renderLoading = (label) => {
 
 const syncMessage = (snapshot) =>
   snapshot.generatedAt
-    ? `快照更新于 ${formatDateTime(snapshot.generatedAt)}`
-    : "等待首次 Actions 同步";
+    ? `整理于 ${formatDateTime(snapshot.generatedAt)}`
+    : "这里还没有记录";
 
 const renderFilters = () => {
   searchInput.value = state.query;
@@ -293,7 +293,7 @@ const renderList = (snapshot) => {
   const hasPrevious = state.page > 1;
   const hasNext = state.page < totalPages;
 
-  feedKicker.textContent = state.label ? `Label / ${state.label}` : "Issue-powered journal";
+  feedKicker.textContent = state.label ? `Tagged / ${state.label}` : "From the workbench";
   feedHeading.textContent = state.query ? "搜索结果" : state.label ? `#${state.label}` : "最近更新";
   resultSummary.textContent = `${total} 条 · 第 ${state.page} 页`;
   syncStatus.textContent = syncMessage(snapshot);
@@ -301,22 +301,22 @@ const renderList = (snapshot) => {
   if (!issues.length) {
     const pending = !snapshot.generatedAt;
     const pageHint = pending
-      ? "动态快照尚未生成。"
+      ? "这里还没有第一条记录。"
       : state.page > 1
-        ? "这一页没有可显示的动态。"
-        : "暂时没有匹配的公开动态。";
+        ? "已经翻到底了。"
+        : "没找到相关记录。";
     const message = pending
-      ? "首次部署完成同步后，公开 Issue 会自动出现在这里。"
-      : "可以清除筛选，或直接前往 GitHub 查看仓库中的公开记录。";
+      ? "等我写下第一条，它会出现在这里。"
+      : "换个词试试，或者回到最近更新。";
 
     content.innerHTML = `
       <div class="updates-message">
-        <p class="section-label">${pending ? "Snapshot pending" : "No updates found"}</p>
+        <p class="section-label">${pending ? "Nothing yet" : "No match"}</p>
         <h3>${pageHint}</h3>
         <p>${message}</p>
         <div class="updates-message__actions">
           ${pending ? "" : '<a href="./updates.html">查看最近更新</a>'}
-          <a href="${issuesUrl}" target="_blank" rel="noreferrer">打开 GitHub Issues ↗</a>
+          <a href="${issuesUrl}" target="_blank" rel="noreferrer">去原始记录 ↗</a>
         </div>
       </div>`;
     content.setAttribute("aria-busy", "false");
@@ -348,7 +348,7 @@ const renderList = (snapshot) => {
   const pagination = hasPrevious || hasNext
     ? `<nav class="updates-pagination" aria-label="动态分页">
         ${hasPrevious ? `<a href="${escapeHTML(pageUrl({ page: state.page - 1, issue: 0 }))}">← 较新</a>` : "<span></span>"}
-        <span>Page ${state.page} / ${totalPages}</span>
+        <span>${state.page} / ${totalPages}</span>
         ${hasNext ? `<a href="${escapeHTML(pageUrl({ page: state.page + 1, issue: 0 }))}">更早 →</a>` : "<span></span>"}
       </nav>`
     : "";
@@ -472,10 +472,10 @@ const renderDetail = (issue, snapshot) => {
   const backUrl = pageUrl({ issue: 0 });
   const body = issue.body_html
     ? sanitizeGitHubHtml(issue.body_html)
-    : `<p class="update-detail__plain">${escapeHTML(issue.body || "这条动态暂时没有正文。")}</p>`;
+    : `<p class="update-detail__plain">${escapeHTML(issue.body || "这条先留个标题，正文还没整理。")}</p>`;
 
-  feedKicker.textContent = `Issue / #${issue.number}`;
-  feedHeading.textContent = "动态详情";
+  feedKicker.textContent = `Note / #${issue.number}`;
+  feedHeading.textContent = "这一条";
   resultSummary.textContent = formatDate(issue.created_at);
   syncStatus.textContent = syncMessage(snapshot);
   document.title = `${issue.title} — 动态 · WUDE`;
@@ -484,14 +484,14 @@ const renderDetail = (issue, snapshot) => {
     <article class="update-detail">
       <div class="update-detail__toolbar">
         <a href="${escapeHTML(backUrl)}">← 返回动态</a>
-        <a href="${escapeHTML(issue.html_url)}" target="_blank" rel="noreferrer">在 GitHub 讨论 ↗</a>
+        <a href="${escapeHTML(issue.html_url)}" target="_blank" rel="noreferrer">看原始记录 ↗</a>
       </div>
       <header class="update-detail__header">
         <p>#${escapeHTML(issue.number)} · ${escapeHTML(issue.user.login)}</p>
         <h1>${escapeHTML(issue.title)}</h1>
         <div class="update-detail__meta">
           <time datetime="${escapeHTML(issue.created_at)}">发布于 ${formatDateTime(issue.created_at)}</time>
-          <span>${issue.state === "closed" ? "已关闭" : "公开中"}</span>
+          <span>${issue.state === "closed" ? "已收尾" : "还在继续"}</span>
           <span>${issue.comments} 条讨论</span>
         </div>
         <div class="update-labels" aria-label="标签">${labelMarkup(issue.labels)}</div>
@@ -499,7 +499,7 @@ const renderDetail = (issue, snapshot) => {
       <div class="update-detail__body markdown-body">${body}</div>
       <footer class="update-detail__footer">
         <a href="${escapeHTML(backUrl)}">← 返回动态</a>
-        <a href="${escapeHTML(issue.html_url)}" target="_blank" rel="noreferrer">继续阅读与讨论 ↗</a>
+        <a href="${escapeHTML(issue.html_url)}" target="_blank" rel="noreferrer">去 GitHub 留言 ↗</a>
       </footer>
     </article>`;
   content.setAttribute("aria-busy", "false");
@@ -507,25 +507,25 @@ const renderDetail = (issue, snapshot) => {
 
 const errorMessage = (error) => {
   if (error instanceof SnapshotError && error.status === 404) {
-    return "动态快照文件尚未部署。请先运行 GitHub Pages 工作流。";
+    return "这里还没有可读的记录。";
   }
   if (error instanceof SnapshotError) {
-    return "动态快照暂时不可用，上一版已部署内容不会受到影响。";
+    return "记录暂时没拿到，稍后再来看看。";
   }
-  return "动态快照暂时无法读取，请稍后重试。";
+  return "刚才没有翻出来，可以再试一次。";
 };
 
 const renderError = (error) => {
-  syncStatus.textContent = "快照不可用";
-  resultSummary.textContent = "暂不可用";
+  syncStatus.textContent = "暂时没拿到";
+  resultSummary.textContent = "等会再试";
   content.innerHTML = `
     <div class="updates-message updates-message--error">
-      <p class="section-label">Snapshot unavailable</p>
-      <h3>动态没有加载完成</h3>
+      <p class="section-label">Lost the thread</p>
+      <h3>这页刚才没翻出来</h3>
       <p>${escapeHTML(errorMessage(error))}</p>
       <div class="updates-message__actions">
         <button type="button" data-action="retry">重试</button>
-        <a href="${issuesUrl}" target="_blank" rel="noreferrer">打开 GitHub Issues ↗</a>
+        <a href="${issuesUrl}" target="_blank" rel="noreferrer">去原始记录 ↗</a>
       </div>
     </div>`;
   content.setAttribute("aria-busy", "false");
@@ -533,14 +533,14 @@ const renderError = (error) => {
 
 const load = async ({ force = false } = {}) => {
   renderFilters();
-  renderLoading(state.issue ? "读取详情中" : state.query ? "搜索中" : "读取快照中");
+  renderLoading(state.issue ? "正在找这条记录" : state.query ? "正在搜索" : "正在翻记录");
 
   try {
     const snapshot = await fetchSnapshot({ force });
 
     if (state.issue) {
-      feedKicker.textContent = `Issue / #${state.issue}`;
-      feedHeading.textContent = "动态详情";
+      feedKicker.textContent = `Note / #${state.issue}`;
+      feedHeading.textContent = "这一条";
       const issue = snapshot.issues.find((entry) => entry.number === state.issue);
       if (!issue) throw new SnapshotError("Issue is not present in the snapshot", 404);
       renderDetail(issue, snapshot);

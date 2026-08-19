@@ -9,7 +9,7 @@ export const setMenuState = (
   mainNav?.classList.toggle("is-open", isOpen);
   menuToggle?.setAttribute("aria-expanded", String(isOpen));
   menuToggle?.setAttribute("aria-label", isOpen ? "关闭菜单" : "打开菜单");
-  root.body?.classList.toggle("menu-open", isOpen);
+  root.body?.classList.toggle("site-menu-open", isOpen);
   if (restoreFocus) menuToggle?.focus();
 };
 
@@ -64,7 +64,7 @@ export const initSiteShell = (
     }
   });
 
-  const desktopQuery = view.matchMedia?.("(min-width: 761px)");
+  const desktopQuery = view.matchMedia?.("(min-width: 881px)");
   desktopQuery?.addEventListener?.("change", (event) => {
     if (event.matches) setMenuState(false, { root });
   });

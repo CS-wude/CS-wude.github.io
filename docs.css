@@ -567,8 +567,9 @@
   .docs-sidebar-toggle {
     position: sticky;
     top: 76px;
-    z-index: 30;
+    z-index: 46;
     width: max-content;
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -581,6 +582,10 @@
     cursor: pointer;
     font-size: 12px;
     font-weight: 800;
+  }
+
+  body.docs-menu-open .docs-sidebar-toggle {
+    position: fixed;
   }
 
   .doc-article {

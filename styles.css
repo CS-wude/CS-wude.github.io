@@ -22,7 +22,7 @@ html {
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
   overflow-x: hidden;
   background: var(--paper);
   color: var(--ink);
@@ -36,7 +36,8 @@ footer {
   max-width: 100%;
 }
 
-body.menu-open {
+body.site-menu-open,
+body.docs-menu-open {
   overflow: hidden;
 }
 
@@ -83,6 +84,7 @@ code {
 }
 
 .brand {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 11px;
@@ -506,8 +508,8 @@ code {
   top: 16px;
   right: 18px;
   z-index: 2;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1207,6 +1209,8 @@ code {
     position: sticky;
     height: 66px;
     padding: 0 20px;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .menu-toggle {
@@ -1226,6 +1230,7 @@ code {
   .main-nav {
     position: fixed;
     inset: 0;
+    z-index: 55;
     display: none;
     flex-direction: column;
     align-items: flex-start;

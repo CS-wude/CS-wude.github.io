@@ -5,6 +5,47 @@ import test from "node:test";
 const loadProjects = () => import("../data/projects.js");
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
+const createClassList = () => {
+  const values = new Set();
+  return {
+    contains: (name) => values.has(name),
+    toggle: (name, force) => {
+      if (force) values.add(name);
+      else values.delete(name);
+    },
+  };
+};
+
+const createElement = () => {
+  const attributes = new Map();
+  const listeners = new Map();
+  const element = {
+    classList: createClassList(),
+    focused: false,
+    textContent: "",
+    addEventListener: (type, listener) => listeners.set(type, listener),
+    dispatch: (type, event = {}) => listeners.get(type)?.(event),
+    focus: () => {
+      element.focused = true;
+    },
+    getAttribute: (name) => attributes.get(name) ?? null,
+    setAttribute: (name, value) => attributes.set(name, String(value)),
+  };
+  return element;
+};
+
+const createRoot = (selectors = {}) => {
+  const listeners = new Map();
+  return {
+    body: { classList: createClassList(), dataset: {} },
+    documentElement: { classList: createClassList() },
+    addEventListener: (type, listener) => listeners.set(type, listener),
+    dispatch: (type, event = {}) => listeners.get(type)?.(event),
+    querySelector: (selector) => selectors[selector] ?? null,
+    querySelectorAll: () => [],
+  };
+};
+
 const publicTextFiles = async () => {
   const root = new URL("../", import.meta.url);
   const output = [];
@@ -90,6 +131,7 @@ test("global CSS protects focus, small screens, motion preferences, and page wid
   const css = await read("styles.css");
 
   assert.match(css, /overflow-x:\s*clip/);
+  assert.doesNotMatch(css, /body\s*\{[^}]*min-width:\s*320px/s);
   assert.match(css, /@media \(max-width:\s*760px\)/);
   assert.match(css, /@media \(prefers-reduced-motion:\s*reduce\)/);
   assert.match(css, /:focus-visible/);
@@ -98,11 +140,96 @@ test("global CSS protects focus, small screens, motion preferences, and page wid
   assert.match(css, /\.updates-preview/);
 });
 
+test("persistent header and lightbox controls keep phone-sized touch targets", async () => {
+  const css = await read("styles.css");
+
+  assert.match(css, /\.brand\s*\{[^}]*min-height:\s*44px/s);
+  assert.match(css, /\.project-lightbox__close\s*\{[^}]*width:\s*44px[^}]*height:\s*44px/s);
+});
+
 test("shared progressive enhancement module is safe outside a browser", async () => {
   const module = await import("../site.js");
 
   assert.equal(typeof module.setMenuState, "function");
   assert.equal(typeof module.initRevealAnimations, "function");
+});
+
+test("global menu owns its scroll lock and closes at the CSS desktop breakpoint", async () => {
+  const { initSiteShell, setMenuState } = await import("../site.js");
+  const menuToggle = createElement();
+  const mainNav = createElement();
+  const root = createRoot({ ".menu-toggle": menuToggle, ".main-nav": mainNav });
+  let mediaQuery = "";
+  let mediaChange;
+  const view = {
+    matchMedia: (query) => {
+      mediaQuery = query;
+      return {
+        matches: false,
+        addEventListener: (_type, listener) => {
+          mediaChange = listener;
+        },
+      };
+    },
+  };
+
+  initSiteShell(root, view);
+  setMenuState(true, { root });
+
+  assert.equal(mediaQuery, "(min-width: 881px)");
+  assert.equal(root.body.classList.contains("site-menu-open"), true);
+  assert.equal(root.body.classList.contains("docs-menu-open"), false);
+
+  mediaChange({ matches: true });
+
+  assert.equal(mainNav.classList.contains("is-open"), false);
+  assert.equal(root.body.classList.contains("site-menu-open"), false);
+});
+
+test("docs drawer exposes a visible close state and resets at the desktop breakpoint", async () => {
+  const { initDocsShell, setSidebarState } = await import("../docs.js");
+  const sidebar = createElement();
+  const toggle = createElement();
+  const backdrop = createElement();
+  const root = createRoot({
+    "#docsSidebar": sidebar,
+    ".docs-sidebar-toggle": toggle,
+    ".docs-backdrop": backdrop,
+  });
+  let mediaQuery = "";
+  let mediaChange;
+  const view = {
+    matchMedia: (query) => {
+      mediaQuery = query;
+      return {
+        addEventListener: (_type, listener) => {
+          mediaChange = listener;
+        },
+      };
+    },
+  };
+
+  initDocsShell(root, view);
+  setSidebarState(true, { root });
+
+  assert.equal(mediaQuery, "(min-width: 881px)");
+  assert.equal(toggle.textContent, "关闭目录 ×");
+  assert.equal(toggle.getAttribute("aria-label"), "关闭目录");
+  assert.equal(root.body.classList.contains("docs-menu-open"), true);
+
+  root.dispatch("keydown", { key: "Escape" });
+
+  assert.equal(toggle.focused, true);
+  assert.equal(sidebar.classList.contains("is-open"), false);
+
+  setSidebarState(true, { root });
+
+  mediaChange({ matches: true });
+
+  assert.equal(sidebar.classList.contains("is-open"), false);
+  assert.equal(backdrop.classList.contains("is-visible"), false);
+  assert.equal(toggle.textContent, "目录 ☰");
+  assert.equal(root.body.classList.contains("docs-menu-open"), false);
 });
 
 test("homepage update preview renders three recent static records without remote access", async () => {

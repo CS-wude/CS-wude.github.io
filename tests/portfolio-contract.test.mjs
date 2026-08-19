@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const loadProjects = () => import("../data/projects.js");
@@ -103,4 +103,37 @@ test("homepage update preview renders three recent static records without remote
   assert.match(markup, /第七条/);
   assert.doesNotMatch(markup, /不应出现/);
   assert.match(markup, /updates\.html\?issue=9/);
+});
+
+test("project index renderer exposes all seven cases and their ownership", async () => {
+  const { renderProjectCatalog } = await import("../projects.js");
+  const markup = renderProjectCatalog();
+
+  assert.equal((markup.match(/data-project-slug=/g) ?? []).length, 7);
+  assert.equal((markup.match(/项目主导者/g) ?? []).length, 4);
+  assert.match(markup, /独立全栈开发/);
+  assert.match(markup, /独立开发/);
+  assert.match(markup, /全栈开发 \/ AI 应用开发/);
+  assert.match(markup, /id="lynkvis-ai"/);
+  assert.match(markup, /id="content-orchestration"/);
+});
+
+test("every declared local project image is available in the static artifact", async () => {
+  const { PROJECTS } = await loadProjects();
+
+  for (const { slug, image } of PROJECTS.filter(({ image }) => image)) {
+    await assert.doesNotReject(
+      access(new URL(`../${image.replace(/^\.\//, "")}`, import.meta.url)),
+      `${slug} image must exist`,
+    );
+  }
+});
+
+test("project page provides a progressive catalog mount and no-script path", async () => {
+  const html = await read("projects.html");
+
+  assert.match(html, /id="projectCatalog"/);
+  assert.match(html, /type="module" src="\.\/projects\.js"/);
+  assert.match(html, /<noscript>[\s\S]*项目/);
+  assert.match(html, /七个项目，七条真实链路/);
 });

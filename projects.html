@@ -57,29 +57,10 @@
         </section>
 
         <section class="doc-section" id="selected-projects">
-          <h2>四个项目，四种麻烦</h2>
-          <div class="project-index">
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>01 / 2026</span><h3 id="care-platform">大白 AI 心理健康平台</h3></div>
-              <p>产品把 AI 咨询、心理画像、风险预警和快速筛查放在同一套服务里。真正难处理的是对话、测评、咨询与交易共享用户状态，却又各自有异步回调和超时。我参与了统一接入层、AI 会话、测评与交易链路，也补了数据扩展和交付流程。</p>
-              <div class="project-index__tags"><span>Spring Cloud</span><span>SSE</span><span>MongoDB</span><span>CI/CD</span></div>
-            </article>
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>02 / 2025—2026</span><h3 id="knowledge-platform">工业合规知识平台</h3></div>
-              <p>项目主线是让内部文档变成可检索、可追踪、可重建的知识。我负责过文档加工、异步向量化、混合检索和本地模型接入。相比“回答得像不像”，我更关心答案能不能回到原文，以及一份坏文档会不会堵住整条流水线。</p>
-              <div class="project-index__tags"><span>RAG</span><span>Redis Stream</span><span>Vector Search</span><span>Local LLM</span></div>
-            </article>
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>03 / 2025</span><h3 id="sre-agent">智能 SRE 运维助手</h3></div>
-              <p>这个项目让我开始认真对待 Agent 的边界。模型可以规划排查步骤，但工具必须知道自己查哪个集群、哪段时间、多少数据，也必须允许人随时中断。我主要搭了执行循环、工具接入和流式反馈这几层。</p>
-              <div class="project-index__tags"><span>AI Agent</span><span>MCP</span><span>Prometheus</span><span>Kubernetes</span></div>
-            </article>
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>04 / 2025—2026</span><h3 id="aigc-scheduler">生成式内容调度平台</h3></div>
-              <p>批量任务把模型调用变成了一个调度问题：导入的数据不总是干净，队列会积压，供应方会超时，用户还想随时看到进度。我处理了任务标准化、分级队列、模型网关和实时状态推送。</p>
-              <div class="project-index__tags"><span>NestJS</span><span>Redis Stream</span><span>WebSocket</span><span>Docker</span></div>
-            </article>
-          </div>
+          <h2>七个项目，七条真实链路</h2>
+          <p>包含独立开发与团队项目。角色、职责和公开事实按本人项目记录标注；团队成果不会包装成单人完成，未公开的客户与成员信息也不会写入页面。</p>
+          <div class="project-index" id="projectCatalog" aria-live="polite"></div>
+          <noscript><p>项目增强脚本未运行。你仍可以从首页的项目摘要和本页其他章节了解我处理过的工程问题。</p></noscript>
         </section>
 
         <section class="doc-section" id="recurring-problems">
@@ -107,6 +88,6 @@
       <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
     </div>
     <div class="docs-backdrop"></div>
-    <script src="./site.js"></script><script src="./docs.js"></script>
+    <script type="module" src="./site.js"></script><script src="./docs.js"></script><script type="module" src="./projects.js"></script>
   </body>
 </html>

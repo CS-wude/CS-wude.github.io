@@ -1,9 +1,28 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 const loadProjects = () => import("../data/projects.js");
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
+
+const publicTextFiles = async () => {
+  const root = new URL("../", import.meta.url);
+  const output = [];
+  const visit = async (directory, prefix = "") => {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      const path = `${prefix}${entry.name}`;
+      if (entry.isDirectory()) {
+        if ([".git", ".worktrees", "docs", "tests"].includes(entry.name)) continue;
+        await visit(new URL(`${entry.name}/`, directory), `${path}/`);
+        continue;
+      }
+      if (!/\.(?:css|html|js|json|md|mjs|yml)$/i.test(entry.name)) continue;
+      output.push([path, await readFile(new URL(entry.name, directory), "utf8")]);
+    }
+  };
+  await visit(root);
+  return output;
+};
 
 test("project catalog exposes seven complete and uniquely addressable owned cases", async () => {
   const { PROJECTS } = await loadProjects();
@@ -196,4 +215,29 @@ test("updates controls remain touch-sized and long content stays contained", asy
   assert.match(css, /overflow-wrap:\s*anywhere/);
   assert.match(css, /overflow-x:\s*auto/);
   assert.match(css, /@media \(max-width:\s*760px\)/);
+});
+
+test("public artifact contains no GitHub credential or reference-owner contact data", async () => {
+  for (const [name, source] of await publicTextFiles()) {
+    assert.doesNotMatch(source, /github_pat_[A-Za-z0-9_]+/, name);
+    assert.doesNotMatch(source, /837911722@qq\.com|wmc837911722@gmail\.com/, name);
+  }
+});
+
+test("Pages workflow still generates the issue snapshot before static deployment", async () => {
+  const workflow = await read(".github/workflows/deploy-pages.yml");
+
+  assert.match(workflow, /branches:\s*\n\s*- main/);
+  assert.match(workflow, /pages:\s*write/);
+  assert.match(workflow, /id-token:\s*write/);
+  assert.match(workflow, /node \.github\/scripts\/sync-issues\.mjs/);
+  assert.match(workflow, /actions\/deploy-pages@v4/);
+});
+
+test("phone hero keeps each display word intact", async () => {
+  const css = await read("styles.css");
+  const phoneRules = css.slice(css.lastIndexOf("@media (max-width: 760px)"));
+
+  assert.match(phoneRules, /\.hero h1\s*\{[\s\S]*?word-break:\s*normal/);
+  assert.match(phoneRules, /\.hero h1\s*>\s*\*\s*\{[\s\S]*?white-space:\s*nowrap/);
 });

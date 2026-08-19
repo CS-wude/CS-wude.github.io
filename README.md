@@ -20,10 +20,15 @@
 
 项目页按工程主题整理，重点记录我负责的链路、判断与取舍。
 
-- **AI 服务平台**：多模块状态协同、流式对话、异步回调和核心链路一致性
-- **企业知识平台**：文档处理、异步向量化、混合检索、本地推理和结果追溯
-- **智能运维助手**：Agent 执行循环、工具边界、实时反馈、人工中断和故障降级
-- **生成式内容调度**：批量任务、分级队列、模型网关、实时进度和容器化交付
+当前公开目录包含 7 个本人主导或独立开发的案例：
+
+- **Lynkvis AI 室内设计出图平台**：统一模型 Provider、异步任务、素材管理和会员权益
+- **电商选品与内容自动化 Agent**：跨平台研究、证据保留、机会评分和结构化报告
+- **复能助手：企业级 RAG + MCP Agent**：文档检索、业务工具调用、流式回答和引用溯源
+- **大白 AI 心理健康平台**：多模块状态协同、流式对话、测评与交易链路
+- **工业合规知识平台**：文档处理、异步向量化、混合检索和本地推理
+- **智能 SRE 运维助手**：Agent 执行循环、工具边界、实时反馈与故障降级
+- **生成式内容调度平台**：批量任务、分级队列、模型网关与实时进度
 
 ## 网站内容
 
@@ -36,7 +41,7 @@
 
 ## 技术实现
 
-网站使用原生 HTML、CSS 和 JavaScript 构建，不依赖前端框架，也没有在线后端服务。
+网站使用原生 HTML、CSS 和 JavaScript ES Modules 构建，不依赖前端框架，也没有在线后端服务。项目资料集中在 `data/projects.js`，首页和项目索引从同一份静态数据渲染。
 
 动态内容由 GitHub Actions 在构建阶段生成静态快照，再随网站一起部署到 GitHub Pages。浏览器只读取已经发布的数据，不直接请求 GitHub API。
 
@@ -49,7 +54,11 @@
 ├── notes.html                 # 技术手记
 ├── updates.html               # 动态内容
 ├── assets/projects/           # 项目配图
-├── data/                      # Action 生成的静态快照
+├── data/
+│   ├── projects.js            # 7 个项目的统一数据源
+│   └── updates.*              # Action 生成的静态快照
+├── tests/                     # 无依赖的静态站契约测试
+├── package.json               # npm test 入口
 └── .github/
     ├── workflows/             # Pages 部署工作流
     └── scripts/               # 内容同步脚本
@@ -65,9 +74,19 @@ python -m http.server 8000
 
 然后访问 `http://localhost:8000/`。
 
+## 本地检查
+
+仓库不需要安装第三方依赖。使用 Node.js 20 或更高版本运行：
+
+```powershell
+npm test
+```
+
+测试会检查项目数据、页面结构、移动端与减弱动效保护、静态资源、Actions 部署契约，以及公开产物中是否意外出现凭据或参考站联系人信息。
+
 ## 部署
 
-推送到 `main` 后，`Deploy portfolio with GitHub updates` 工作流会生成最新内容快照并部署 GitHub Pages。定时任务会刷新更新页数据，构建产物只包含静态站点文件。
+推送到 `main` 后，`Deploy portfolio with GitHub updates` 工作流会先运行 `.github/scripts/sync-issues.mjs`，生成 `data/updates.json` 和 `data/updates-data.js`，再部署 GitHub Pages。定时任务会刷新更新页数据，浏览器只读取已经发布的静态快照，不直接访问 GitHub API。
 
 ## 内容说明
 

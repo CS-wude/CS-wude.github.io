@@ -69,6 +69,51 @@ const projectMarkup = (project, index) => {
 export const renderFeaturedProjects = () =>
   featuredProjects().map(projectMarkup).join("");
 
+const updateExcerpt = (issue) => {
+  const source = issue?.body_text || issue?.body || "";
+  const text = String(source)
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[#>*_`~|-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!text) return "这条先留个标题，正文还没整理。";
+  return text.length > 92 ? `${text.slice(0, 92).trim()}…` : text;
+};
+
+export const renderUpdatesPreview = (snapshot) => {
+  if (snapshot?.schemaVersion !== 1 || !Array.isArray(snapshot.issues)) {
+    return '<p class="updates-preview__empty">静态记录暂时不可用，可以前往动态页稍后再看。</p>';
+  }
+
+  const issues = snapshot.issues.slice(0, 3);
+  if (!issues.length) {
+    return '<p class="updates-preview__empty">工作台还没有公开记录。</p>';
+  }
+
+  return issues
+    .map((issue) => {
+      const date = Number.isNaN(Date.parse(issue.created_at))
+        ? "日期待补"
+        : new Intl.DateTimeFormat("zh-CN", {
+            month: "2-digit",
+            day: "2-digit",
+            timeZone: "Asia/Shanghai",
+          }).format(new Date(issue.created_at));
+      return `<article class="updates-preview__item" data-reveal>
+        <time datetime="${escapeHTML(issue.created_at)}">${escapeHTML(date)}</time>
+        <a href="./updates.html?issue=${escapeHTML(issue.number)}">
+          <h3>${escapeHTML(issue.title)}</h3>
+          <p>${escapeHTML(updateExcerpt(issue))}</p>
+        </a>
+        <span aria-hidden="true">#${escapeHTML(issue.number)} ↗</span>
+      </article>`;
+    })
+    .join("");
+};
+
 const initProjectLightbox = (projectList) => {
   const lightbox = document.createElement("dialog");
   lightbox.className = "project-lightbox";
@@ -122,6 +167,27 @@ export const initHomepageProjects = () => {
   if (!projectList) return;
   projectList.innerHTML = renderFeaturedProjects();
   initProjectLightbox(projectList);
+  window.requestAnimationFrame(() => {
+    projectList.querySelectorAll("[data-reveal]").forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  });
 };
 
-if (typeof document !== "undefined") initHomepageProjects();
+export const initUpdatesPreview = (
+  snapshot = globalThis.window?.WUDE_UPDATES_SNAPSHOT,
+) => {
+  const container = globalThis.document?.querySelector("#updatesPreview");
+  if (!container) return;
+  container.innerHTML = renderUpdatesPreview(snapshot);
+  globalThis.window?.requestAnimationFrame(() => {
+    container.querySelectorAll("[data-reveal]").forEach((element) => {
+      element.classList.add("is-visible");
+    });
+  });
+};
+
+if (typeof document !== "undefined") {
+  initHomepageProjects();
+  initUpdatesPreview();
+}

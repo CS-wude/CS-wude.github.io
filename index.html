@@ -3,36 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f3f4ef" />
-    <meta
-      name="description"
-      content="WUDE 工程项目与数字作品档案，记录 AI 应用、平台工程与产品实践。"
-    />
+    <meta name="theme-color" content="#f3f1ea" />
+    <meta name="description" content="WUDE 的个人技术博客与工程作品集：Java 后端、AI 应用、Agent、RAG、分布式系统与平台交付。" />
+    <link rel="canonical" href="https://cs-wude.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WUDE — Java 后端与 AI 平台工程" />
+    <meta property="og:description" content="记录真实项目里的状态、失败路径、恢复入口和工程判断。" />
+    <meta property="og:url" content="https://cs-wude.github.io/" />
     <title>WUDE — Java 后端与 AI 平台工程</title>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111111'/%3E%3Cpath d='M12 17h9l5 26h1l5-18h8l5 18h1l5-26h9l-9 32H40l-4-15-4 15H21z' fill='%23d8ff57'/%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "name": "WUDE",
+            "url": "https://cs-wude.github.io/",
+            "sameAs": ["https://github.com/CS-wude"],
+            "knowsAbout": ["Java", "Spring Boot", "AI Agent", "RAG", "MCP", "Kubernetes"]
+          },
+          {
+            "@type": "WebSite",
+            "name": "WUDE / Personal Site",
+            "url": "https://cs-wude.github.io/",
+            "inLanguage": "zh-CN"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
+
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="返回首页">
+      <a class="brand" href="#top" aria-label="返回首页顶部">
         <span class="brand-mark">W</span>
         <span>WUDE</span>
       </a>
-
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-label="打开菜单"
-        aria-controls="mainNav"
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
+      <p class="header-status"><span aria-hidden="true"></span> Build systems that can recover.</p>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false">
+        <span></span><span></span>
       </button>
-
       <nav class="main-nav" id="mainNav" aria-label="主导航">
         <a class="is-current" href="./index.html" aria-current="page">首页</a>
         <a href="./projects.html">项目</a>
@@ -42,62 +58,99 @@
       </nav>
     </header>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-meta">
-          <span>Backend / AI / Systems</span>
-          <span>Notes from China · 2026</span>
+    <main id="mainContent">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-meta" data-reveal>
+          <span>Java backend / AI application / Platform delivery</span>
+          <span>China · 2026</span>
         </div>
-
         <div class="hero-layout">
-          <div class="hero-copy">
+          <div class="hero-copy" data-reveal>
             <p class="section-label">Software engineer / Tech lead</p>
-            <h1 id="hero-title">WUDE</h1>
+            <h1 id="hero-title"><span>BUILD.</span><span>TRACE.</span><em>RECOVER.</em></h1>
           </div>
-
-          <div class="hero-intro">
-            <p>
-              Java 后端与 AI 平台工程师，开发组组长。长期处理微服务、Agent、RAG、异步任务与容器化交付，把技术方案推进成可部署、可观测、可持续迭代的系统。
-            </p>
+          <div class="hero-intro" data-reveal>
+            <p class="hero-lead">我是 WUDE，Java 后端与 AI 平台工程师，也是开发组组长。</p>
+            <p>我习惯先画清状态、事件和失败路径，再把微服务、Agent、RAG、异步任务与部署链路接成能运行、能解释、能继续维护的系统。</p>
             <div class="hero-actions">
-              <a class="text-link" href="#projects">浏览项目 <span>↓</span></a>
-              <span class="availability"><i></i> Java / AI / Cloud native</span>
+              <a class="primary-link" href="#projects"><span>看我主导的项目</span><span aria-hidden="true">↓</span></a>
+              <a class="quiet-link" href="./updates.html">最近在做什么 ↗</a>
             </div>
           </div>
         </div>
+        <div class="hero-footer" data-reveal>
+          <span class="hero-monogram" aria-hidden="true">W</span>
+          <p>并发会涨，依赖会抖，任务会失败。<br />系统要留下证据，也要留一条回来的路。</p>
+          <span class="hero-code">01 / HOME</span>
+        </div>
+      </section>
 
-        <div class="hero-index" aria-hidden="true">
-          <span>W</span>
-          <span>MICROSERVICES / RAG / AGENT / DEVOPS</span>
+      <section class="capability-ticker" aria-label="技术方向">
+        <div class="capability-ticker__track">
+          <span>JAVA / SPRING CLOUD</span><i aria-hidden="true"></i>
+          <span>AI AGENT / MCP</span><i aria-hidden="true"></i>
+          <span>RAG / VECTOR SEARCH</span><i aria-hidden="true"></i>
+          <span>ASYNC / EVENT / RETRY</span><i aria-hidden="true"></i>
+          <span>DOCKER / KUBERNETES</span><i aria-hidden="true"></i>
+          <span>TECH LEAD / DELIVERY</span><i aria-hidden="true"></i>
         </div>
       </section>
 
       <section class="projects-section" id="projects" aria-labelledby="projects-title">
-        <div class="section-heading">
-          <p class="section-label">Selected systems</p>
-          <h2 id="projects-title">项目</h2>
-          <p>心理健康 SaaS、工业知识检索、智能运维与生成式内容调度。</p>
+        <div class="section-heading" data-reveal>
+          <p class="section-label"><span>02</span> Selected systems</p>
+          <div>
+            <p class="section-kicker">真实项目，不只展示界面</p>
+            <h2 id="projects-title">我接住的<br />系统链路。</h2>
+          </div>
+          <p>这里写清我负责的边界、最容易失控的环节，以及最后留下了哪些可恢复、可交付的能力。</p>
         </div>
+        <div class="project-list" id="projectList" aria-live="polite"></div>
+        <noscript><p class="noscript-note">项目脚本未运行，你仍可以前往 <a href="./projects.html">完整项目索引</a> 阅读全部案例。</p></noscript>
+        <a class="section-more" href="./projects.html">查看 7 个完整项目 <span aria-hidden="true">↗</span></a>
+      </section>
 
-        <div class="project-list" id="projectList"></div>
-        <noscript>请启用 JavaScript 以显示项目列表。</noscript>
+      <section class="principles" aria-labelledby="principles-title">
+        <div class="principles-intro" data-reveal>
+          <p class="section-label"><span>03</span> Engineering habits</p>
+          <h2 id="principles-title">先处理失败，<br />再优化顺利。</h2>
+          <p>功能第一次跑通只是开始。真正能交出去的系统，还要知道自己在哪里、为什么失败、由谁恢复。</p>
+        </div>
+        <ol class="principle-grid">
+          <li data-reveal><span>01</span><h3>状态先行</h3><p>先定义状态、事件、幂等键和检查点，再写正常流程。</p></li>
+          <li data-reveal><span>02</span><h3>边界明确</h3><p>给模型、工具和外部服务明确超时、权限、范围与降级。</p></li>
+          <li data-reveal><span>03</span><h3>证据完整</h3><p>让日志、指标和调用链能回答“刚才发生了什么”。</p></li>
+          <li data-reveal><span>04</span><h3>交付可重复</h3><p>把构建、检查、配置与回滚写进流水线，而不是人的记忆。</p></li>
+        </ol>
+      </section>
+
+      <section class="updates-preview" aria-labelledby="updates-preview-title">
+        <div class="updates-preview__heading" data-reveal>
+          <p class="section-label"><span>04</span> Workbench log</p>
+          <h2 id="updates-preview-title">最近的<br />工作台记录。</h2>
+          <a href="./updates.html">进入全部动态 →</a>
+        </div>
+        <div class="updates-preview__list" id="updatesPreview">
+          <p class="updates-preview__empty">正在读取已经随网站发布的静态记录……</p>
+        </div>
+        <noscript><p class="noscript-note">前往 <a href="./updates.html">动态页</a> 查看已经同步的工作记录。</p></noscript>
       </section>
 
       <section class="about" id="about" aria-labelledby="about-title">
-        <div class="about-heading">
-          <p class="section-label">Working habits</p>
-          <h2 id="about-title">从状态、事件和调用链开始排查。</h2>
+        <div class="about-heading" data-reveal>
+          <p class="section-label"><span>05</span> Working profile</p>
+          <h2 id="about-title">从业务状态，<br />一直做到部署现场。</h2>
         </div>
-
-        <div class="about-body">
-          <p>
-            碰到长任务、外部模型、消息队列或支付回调，我会先补状态机、超时、幂等和可观测字段，再处理正常流程。问题能复现、链路能追踪、版本能回滚，系统才具备继续迭代的基础。
-          </p>
-          <div class="about-facts" aria-label="网站特性">
-            <div><strong>04</strong><span>Public projects</span></div>
-            <div><strong>AI</strong><span>Core focus</span></div>
+        <div class="about-body" data-reveal>
+          <p>我的工作通常落在业务系统与基础设施之间：向上理解流程和验收标准，向下处理存储、队列、模型服务、工具协议和容器环境。</p>
+          <p>带组时，我负责把问题拆到可以独立负责、独立验收；出故障时先补证据和复现，再决定是修主流程、补恢复入口，还是减少不必要的复杂度。</p>
+          <div class="about-facts" aria-label="作品集概览">
+            <div><strong>07</strong><span>Owned cases</span></div>
+            <div><strong>3×</strong><span>Backend / AI / Delivery</span></div>
             <div><strong>∞</strong><span>Iteration</span></div>
           </div>
+          <a class="section-more" href="./about.html">关于我与技术偏好 →</a>
         </div>
       </section>
     </main>
@@ -105,19 +158,23 @@
     <footer class="site-footer">
       <div>
         <p class="section-label">Keep building</p>
-        <h2>先把东西做出来，剩下的边做边写。</h2>
+        <h2>先把东西做出来，<br />剩下的边做边写。</h2>
       </div>
       <div class="footer-links">
+        <a href="./projects.html">Projects ↗</a>
+        <a href="./notes.html">Notes ↗</a>
         <a href="mailto:wudemail@foxmail.com">Email ↗</a>
         <a href="https://github.com/CS-wude" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
       <div class="footer-bottom">
         <span>© <span id="currentYear"></span> WUDE</span>
+        <span>Made as a static, inspectable site.</span>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>
 
-    <script src="./site.js"></script>
-    <script src="./script.js"></script>
+    <script src="./data/updates-data.js"></script>
+    <script type="module" src="./site.js"></script>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

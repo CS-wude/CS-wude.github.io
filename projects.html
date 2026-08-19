@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./docs.css" />
   </head>
-  <body data-page="overview">
+  <body id="top" data-page="overview">
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
       <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
@@ -19,7 +20,7 @@
     </header>
 
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
-    <div class="docs-layout">
+    <main class="docs-layout" id="mainContent">
       <aside class="docs-sidebar" id="docsSidebar">
         <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
         <details class="docs-group" open>
@@ -86,7 +87,7 @@
       </article>
 
       <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
-    </div>
+    </main>
     <div class="docs-backdrop"></div>
     <script type="module" src="./site.js"></script><script src="./docs.js"></script><script type="module" src="./projects.js"></script>
   </body>

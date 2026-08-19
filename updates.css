@@ -702,3 +702,56 @@
     animation: none;
   }
 }
+
+/* Shared responsive shell refinements ------------------------------------ */
+.updates-repo-link,
+.updates-filter a,
+.update-label,
+.update-entry__open,
+.updates-pagination a,
+.update-detail__toolbar a,
+.update-detail__footer a,
+.updates-message__actions a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.updates-page,
+.updates-content,
+.update-entry,
+.update-entry__body,
+.update-detail,
+.markdown-body {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.update-entry__body,
+.update-detail__body,
+.markdown-body a {
+  overflow-wrap: anywhere;
+}
+
+.markdown-body pre,
+.markdown-body table {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+@media (max-width: 760px) {
+  .updates-repo-link {
+    max-width: 48vw;
+    overflow-wrap: anywhere;
+  }
+
+  .updates-filter {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .update-entry__open {
+    width: 44px;
+    height: 44px;
+  }
+}

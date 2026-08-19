@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./docs.css" />
   </head>
-  <body data-page="notes">
+  <body id="top" data-page="notes">
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
       <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a class="is-current" href="./notes.html" aria-current="page">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
     </header>
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
-    <div class="docs-layout">
+    <main class="docs-layout" id="mainContent">
       <aside class="docs-sidebar" id="docsSidebar">
         <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
         <details class="docs-group" open><summary>项目</summary><nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav></details>
@@ -104,8 +105,8 @@
         <footer class="article-footer"><a href="./agent-tooling.html">← Agent 工具链复盘</a><a href="./about.html">关于我 →</a></footer>
       </article>
       <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
-    </div>
+    </main>
     <div class="docs-backdrop"></div>
-    <script src="./site.js"></script><script src="./docs.js"></script>
+    <script type="module" src="./site.js"></script><script src="./docs.js"></script>
   </body>
 </html>

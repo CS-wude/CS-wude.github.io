@@ -137,3 +137,63 @@ test("project page provides a progressive catalog mount and no-script path", asy
   assert.match(html, /<noscript>[\s\S]*项目/);
   assert.match(html, /七个项目，七条真实链路/);
 });
+
+test("every public page exposes the same keyboard-accessible shell", async () => {
+  const pages = [
+    "index.html",
+    "projects.html",
+    "notes.html",
+    "updates.html",
+    "about.html",
+    "agent-tooling.html",
+  ];
+
+  for (const page of pages) {
+    const html = await read(page);
+    assert.match(html, /class="skip-link"/, `${page} needs a skip link`);
+    assert.match(html, /<main[^>]+id="mainContent"/, `${page} needs the shared main target`);
+    assert.match(
+      html,
+      /<script type="module" src="\.\/site\.js"><\/script>/,
+      `${page} must load the shared module`,
+    );
+  }
+});
+
+test("public pages keep unique non-empty search descriptions", async () => {
+  const pages = [
+    "index.html",
+    "projects.html",
+    "notes.html",
+    "updates.html",
+    "about.html",
+    "agent-tooling.html",
+  ];
+  const descriptions = [];
+
+  for (const page of pages) {
+    const html = await read(page);
+    const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/s)?.[1];
+    assert.ok(description?.trim(), `${page} needs a description`);
+    descriptions.push(description.trim());
+  }
+
+  assert.equal(new Set(descriptions).size, pages.length);
+});
+
+test("updates remain generated static data rather than a browser GitHub API client", async () => {
+  const [html, script] = await Promise.all([read("updates.html"), read("updates.js")]);
+
+  assert.match(html, /data\/updates-data\.js/);
+  assert.match(script, /window\.WUDE_UPDATES_SNAPSHOT/);
+  assert.doesNotMatch(script, /api\.github\.com/);
+});
+
+test("updates controls remain touch-sized and long content stays contained", async () => {
+  const css = await read("updates.css");
+
+  assert.match(css, /min-height:\s*44px/);
+  assert.match(css, /overflow-wrap:\s*anywhere/);
+  assert.match(css, /overflow-x:\s*auto/);
+  assert.match(css, /@media \(max-width:\s*760px\)/);
+});

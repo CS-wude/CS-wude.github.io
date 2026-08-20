@@ -279,9 +279,9 @@ test("project page provides a progressive catalog mount and no-script path", asy
   const html = await read("projects.html");
 
   assert.match(html, /id="projectCatalog"/);
-  assert.match(html, /type="module" src="\.\/projects\.js"/);
+  assert.match(html, /type="module" src="\.\/projects\.js(?:\?v=[^"]+)?"/);
   assert.match(html, /<noscript>[\s\S]*项目/);
-  assert.match(html, /七个项目，七条真实链路/);
+  assert.match(html, /七条真实链路/);
 });
 
 test("every public page exposes the same keyboard-accessible shell", async () => {

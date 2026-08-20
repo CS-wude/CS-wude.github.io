@@ -7,9 +7,9 @@
     <meta name="description" content="WUDE 做过的系统，以及我在其中负责解决的问题。" />
     <title>项目 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./docs.css" />
+    <link rel="stylesheet" href="./docs.css?v=20260820-3" />
   </head>
-  <body id="top" data-page="overview">
+  <body id="top" class="projects-page" data-page="overview">
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
@@ -39,29 +39,33 @@
 
       <article class="doc-article">
         <header class="article-header">
-          <p class="article-kicker">Projects / Selected work</p>
-          <h1>做过的几类系统</h1>
-          <p class="article-lead">这些项目都不是一张架构图能说完的。我更愿意写清楚自己接住了哪一段：哪里最容易失控，我做了什么，最后留下了哪些还算可靠的东西。</p>
+          <p class="article-kicker">Projects / 07 selected cases</p>
+          <h1>先看项目，<br />再看我怎么做。</h1>
+          <p class="article-lead">七条真实链路，覆盖 AI 应用、知识检索、Agent 工具和平台工程。先快速选项目，再展开职责与实现细节。</p>
           <div class="article-meta"><span>Backend</span><span>AI application</span><span>Platform engineering</span></div>
         </header>
 
-        <div class="article-figure archive-visual" aria-hidden="true">
-          <aside><strong>W.</strong><span></span><span></span><span></span><span></span></aside>
-          <div class="archive-grid"><span>AI 应用落地</span><span>知识检索</span><span>Agent 工具链</span><span>任务调度</span></div>
-        </div>
+        <section class="project-jump" aria-labelledby="projectJumpHeading">
+          <div class="project-jump__heading">
+            <p>Project index / 07</p>
+            <h2 id="projectJumpHeading">先选一条链路。</h2>
+            <span>点选项目直达概览；需要时再展开职责和关键实现。</span>
+          </div>
+          <nav class="project-jump__grid" id="projectJumpList" aria-label="项目快速索引"></nav>
+        </section>
+
+        <section class="doc-section" id="selected-projects">
+          <h2>七条真实链路</h2>
+          <p>角色、职责与公开事实按本人记录标注；团队成果不会包装成单人完成。</p>
+          <div class="project-index" id="projectCatalog" aria-live="polite"></div>
+          <noscript><p>项目增强脚本未运行。你仍可以从首页的项目摘要和本页其他章节了解我处理过的工程问题。</p></noscript>
+        </section>
 
         <section class="doc-section" id="my-part">
           <h2>我通常接哪一段</h2>
           <p>我主要写 Java 后端，也会把模型、前端和部署串起来。比起从零做一个单页原型，我更常接手那些跨了好几个模块、失败后又很难解释的链路：长任务、流式连接、工具调用、支付回调、模型服务和发布过程。</p>
           <p>所以这里不把项目写成“我独立完成了全部”。我会把团队成果和我负责的部分分开，只讲自己实际处理过的问题。</p>
           <div class="doc-callout">我判断一个功能做没做完，通常不是看它第一次有没有跑通，而是看第二次失败时，我们知不知道该从哪里回来。</div>
-        </section>
-
-        <section class="doc-section" id="selected-projects">
-          <h2>七个项目，七条真实链路</h2>
-          <p>包含独立开发与团队项目。角色、职责和公开事实按本人项目记录标注；团队成果不会包装成单人完成，未公开的客户与成员信息也不会写入页面。</p>
-          <div class="project-index" id="projectCatalog" aria-live="polite"></div>
-          <noscript><p>项目增强脚本未运行。你仍可以从首页的项目摘要和本页其他章节了解我处理过的工程问题。</p></noscript>
         </section>
 
         <section class="doc-section" id="recurring-problems">
@@ -89,6 +93,6 @@
       <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
     </main>
     <div class="docs-backdrop"></div>
-    <script type="module" src="./site.js"></script><script type="module" src="./docs.js"></script><script type="module" src="./projects.js"></script>
+    <script type="module" src="./site.js"></script><script type="module" src="./docs.js"></script><script type="module" src="./projects.js?v=20260820-3"></script>
   </body>
 </html>

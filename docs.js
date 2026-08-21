@@ -1,68 +1,152 @@
-const docsSidebar = document.querySelector("#docsSidebar");
-const docsToggle = document.querySelector(".docs-sidebar-toggle");
-const docsBackdrop = document.querySelector(".docs-backdrop");
-const currentPage = document.body.dataset.page;
+import { PROJECTS } from "./data/projects.js";
 
-document.querySelectorAll(".docs-group a[data-page]").forEach((link) => {
-  if (link.dataset.page === currentPage) {
-    link.classList.add("is-active");
-    link.closest("details")?.setAttribute("open", "");
-  }
-});
+const escapeHTML = (value) =>
+  String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
-const setSidebarOpen = (open) => {
-  docsSidebar?.classList.toggle("is-open", open);
-  docsBackdrop?.classList.toggle("is-visible", open);
-  docsToggle?.setAttribute("aria-expanded", String(open));
-  document.body.classList.toggle("menu-open", open);
+const renderLink = ({ href, text, page, attributes = "" }) =>
+  '<a' +
+  (page ? ' data-page="' + page + '"' : "") +
+  (attributes ? " " + attributes : "") +
+  ' href="' +
+  escapeHTML(href) +
+  '">' +
+  escapeHTML(text) +
+  "</a>";
+
+export const renderDocsNavigation = ({ currentPage = "", headings = [] } = {}) => {
+  const contentLinks = [
+    { href: "./projects.html", text: "项目索引", page: "overview" },
+    { href: "./agent-tooling.html", text: "Agent 工具链复盘", page: "case-study" },
+    { href: "./notes.html", text: "全部手记", page: "notes" },
+  ];
+  const siteLinks = [
+    { href: "./index.html", text: "首页" },
+    { href: "./updates.html", text: "最近动态", page: "updates" },
+    { href: "./about.html", text: "关于我", page: "about" },
+  ];
+  const currentLinks =
+    currentPage === "overview"
+      ? PROJECTS.map(({ slug, title }) => ({
+          href: "./projects.html#" + slug,
+          text: title,
+          attributes: "data-project-link",
+        }))
+      : headings.map(({ id, text, level = "2" }) => ({
+          href: "#" + id,
+          text,
+          attributes: 'data-current-section data-level="' + level + '"',
+        }));
+  const currentLabel =
+    currentPage === "overview" ? "项目直达" : currentPage === "notes" ? "本页手记" : "本页目录";
+  const currentGroup = currentLinks.length
+    ? '<details class="docs-group docs-group--current" open><summary>' +
+      currentLabel +
+      "</summary><nav>" +
+      currentLinks.map(renderLink).join("") +
+      "</nav></details>"
+    : "";
+
+  return (
+    '<details class="docs-group docs-group--content" open><summary>内容库</summary><nav>' +
+    contentLinks.map(renderLink).join("") +
+    "</nav></details>" +
+    currentGroup +
+    '<details class="docs-group docs-group--site" open><summary>站点</summary><nav>' +
+    siteLinks.map(renderLink).join("") +
+    "</nav></details>"
+  );
 };
 
-docsToggle?.addEventListener("click", () => {
-  setSidebarOpen(!docsSidebar?.classList.contains("is-open"));
-});
+export const setSidebarState = (
+  open,
+  { restoreFocus = false, root = globalThis.document } = {},
+) => {
+  if (!root) return;
+  const sidebar = root.querySelector("#docsSidebar");
+  const toggle = root.querySelector(".docs-sidebar-toggle");
+  const backdrop = root.querySelector(".docs-backdrop");
 
-docsBackdrop?.addEventListener("click", () => setSidebarOpen(false));
+  sidebar?.classList.toggle("is-open", open);
+  backdrop?.classList.toggle("is-visible", open);
+  toggle?.setAttribute("aria-expanded", String(open));
+  toggle?.setAttribute("aria-label", open ? "关闭目录" : "打开目录");
+  if (toggle) toggle.textContent = open ? "关闭目录 ×" : "目录 ☰";
+  root.body?.classList.toggle("docs-menu-open", open);
+  if (restoreFocus) toggle?.focus();
+};
 
-docsSidebar?.addEventListener("click", (event) => {
-  if (event.target.closest("a")) {
-    setSidebarOpen(false);
-  }
-});
+export const initDocsShell = (
+  root = globalThis.document,
+  view = globalThis.window,
+) => {
+  if (!root || !view) return;
+  const sidebar = root.querySelector("#docsSidebar");
+  const toggle = root.querySelector(".docs-sidebar-toggle");
+  const backdrop = root.querySelector(".docs-backdrop");
+  const currentPage = root.body?.dataset.page;
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    setSidebarOpen(false);
-  }
-});
-
-const tocNav = document.querySelector("#tocNav");
-const headings = [...document.querySelectorAll(".doc-section h2, .doc-section h3")];
-
-if (tocNav) {
-  headings.forEach((heading, index) => {
-    if (!heading.id) {
-      heading.id = `section-${index + 1}`;
-    }
-
-    const link = document.createElement("a");
-    link.href = `#${heading.id}`;
-    link.textContent = heading.textContent;
-    link.dataset.level = heading.tagName === "H3" ? "3" : "2";
-    tocNav.append(link);
+  toggle?.setAttribute("aria-label", "打开目录");
+  toggle?.addEventListener("click", () => {
+    setSidebarState(!sidebar?.classList.contains("is-open"), { root });
   });
-}
+  backdrop?.addEventListener("click", () => setSidebarState(false, { root }));
+  sidebar?.addEventListener("click", (event) => {
+    if (event.target.closest("a")) setSidebarState(false, { root });
+  });
+  root.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && sidebar?.classList.contains("is-open")) {
+      setSidebarState(false, { restoreFocus: true, root });
+    }
+  });
 
-if (headings.length && "IntersectionObserver" in window) {
-  const tocLinks = [...document.querySelectorAll("#tocNav a")];
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries.find((entry) => entry.isIntersecting);
-      if (!visible) return;
-      tocLinks.forEach((link) => {
-        link.classList.toggle("is-active", link.getAttribute("href") === `#${visible.target.id}`);
-      });
-    },
-    { rootMargin: "-18% 0px -70% 0px" },
-  );
-  headings.forEach((heading) => observer.observe(heading));
+  const desktopQuery = view.matchMedia?.("(min-width: 881px)");
+  desktopQuery?.addEventListener?.("change", (event) => {
+    if (event.matches) setSidebarState(false, { root });
+  });
+
+  const headings = [...root.querySelectorAll(".doc-section h2, .doc-section h3")];
+  const headingData = headings.map((heading, index) => {
+    const id = heading.id || heading.closest?.("[id]")?.id || "section-" + (index + 1);
+    heading.id = id;
+    return {
+      id,
+      text: heading.textContent,
+      level: heading.tagName === "H3" ? "3" : "2",
+    };
+  });
+  const navigation = root.querySelector("[data-docs-navigation]");
+  if (navigation) {
+    navigation.innerHTML = renderDocsNavigation({ currentPage, headings: headingData });
+  }
+
+  root.querySelectorAll(".docs-group a[data-page]").forEach((link) => {
+    if (link.dataset.page === currentPage) {
+      link.classList.add("is-active");
+      link.closest("details")?.setAttribute("open", "");
+    }
+  });
+
+  if (headings.length && typeof view.IntersectionObserver === "function") {
+    const tocLinks = [...root.querySelectorAll("[data-current-section]")];
+    const observer = new view.IntersectionObserver(
+      (entries) => {
+        const visible = entries.find((entry) => entry.isIntersecting);
+        if (!visible) return;
+        tocLinks.forEach((link) => {
+          link.classList.toggle("is-active", link.getAttribute("href") === `#${visible.target.id}`);
+        });
+      },
+      { rootMargin: "-18% 0px -70% 0px" },
+    );
+    headings.forEach((heading) => observer.observe(heading));
+  }
+};
+
+if (typeof document !== "undefined" && typeof window !== "undefined") {
+  initDocsShell();
 }

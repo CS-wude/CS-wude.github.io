@@ -3,83 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="theme-color" content="#e9b949" />
     <meta name="description" content="WUDE 做过的系统，以及我在其中负责解决的问题。" />
     <title>项目 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./docs.css" />
+    <link rel="stylesheet" href="./docs.css?v=20260821-3" />
+    <link rel="stylesheet" href="./vault.css?v=20260821-3" />
   </head>
-  <body data-page="overview">
+  <body id="top" class="projects-page" data-page="overview">
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
-      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false" hidden><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="主导航">
         <a href="./index.html">首页</a><a class="is-current" href="./projects.html" aria-current="page">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a>
       </nav>
     </header>
 
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
-    <div class="docs-layout">
+    <main class="docs-layout" id="mainContent">
       <aside class="docs-sidebar" id="docsSidebar">
-        <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
-        <details class="docs-group" open>
-          <summary>项目</summary>
-          <nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav>
-        </details>
-        <details class="docs-group" open>
-          <summary>手记</summary>
-          <nav><a data-page="notes" href="./notes.html">全部手记</a><a href="./notes.html#leading">带组之后</a><a href="./notes.html#ai-responsibility">AI 与判断</a></nav>
-        </details>
-        <details class="docs-group" open>
-          <summary>其他</summary>
-          <nav><a href="./updates.html">最近动态</a><a data-page="about" href="./about.html">关于我</a><a href="./index.html">返回首页</a></nav>
-        </details>
+        <div class="docs-sidebar-title"><span>WUDE / CONTENT</span><span>INDEX</span></div>
+        <div class="docs-navigation" data-docs-navigation>
+          <noscript><nav class="docs-fallback"><a href="./projects.html">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav></noscript>
+        </div>
       </aside>
 
       <article class="doc-article">
         <header class="article-header">
-          <p class="article-kicker">Projects / Selected work</p>
-          <h1>做过的几类系统</h1>
-          <p class="article-lead">这些项目都不是一张架构图能说完的。我更愿意写清楚自己接住了哪一段：哪里最容易失控，我做了什么，最后留下了哪些还算可靠的东西。</p>
+          <p class="article-kicker">Projects / 07 selected cases</p>
+          <h1>先看项目，<br />再看我怎么做。</h1>
+          <p class="article-lead">七条真实链路，覆盖 AI 应用、知识检索、Agent 工具和平台工程。先快速选项目，再展开职责与实现细节。</p>
           <div class="article-meta"><span>Backend</span><span>AI application</span><span>Platform engineering</span></div>
         </header>
 
-        <div class="article-figure archive-visual" aria-hidden="true">
-          <aside><strong>W.</strong><span></span><span></span><span></span><span></span></aside>
-          <div class="archive-grid"><span>AI 应用落地</span><span>知识检索</span><span>Agent 工具链</span><span>任务调度</span></div>
-        </div>
+        <section class="doc-section" id="selected-projects">
+          <h2>七条真实链路</h2>
+          <p>角色、职责与公开事实按本人记录标注；团队成果不会包装成单人完成。</p>
+          <div class="project-index" id="projectCatalog" aria-live="polite"></div>
+          <noscript><p>项目增强脚本未运行。你仍可以从首页的项目摘要和本页其他章节了解我处理过的工程问题。</p></noscript>
+        </section>
 
         <section class="doc-section" id="my-part">
           <h2>我通常接哪一段</h2>
           <p>我主要写 Java 后端，也会把模型、前端和部署串起来。比起从零做一个单页原型，我更常接手那些跨了好几个模块、失败后又很难解释的链路：长任务、流式连接、工具调用、支付回调、模型服务和发布过程。</p>
           <p>所以这里不把项目写成“我独立完成了全部”。我会把团队成果和我负责的部分分开，只讲自己实际处理过的问题。</p>
           <div class="doc-callout">我判断一个功能做没做完，通常不是看它第一次有没有跑通，而是看第二次失败时，我们知不知道该从哪里回来。</div>
-        </section>
-
-        <section class="doc-section" id="selected-projects">
-          <h2>四个项目，四种麻烦</h2>
-          <div class="project-index">
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>01 / 2026</span><h3 id="care-platform">大白 AI 心理健康平台</h3></div>
-              <p>产品把 AI 咨询、心理画像、风险预警和快速筛查放在同一套服务里。真正难处理的是对话、测评、咨询与交易共享用户状态，却又各自有异步回调和超时。我参与了统一接入层、AI 会话、测评与交易链路，也补了数据扩展和交付流程。</p>
-              <div class="project-index__tags"><span>Spring Cloud</span><span>SSE</span><span>MongoDB</span><span>CI/CD</span></div>
-            </article>
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>02 / 2025—2026</span><h3 id="knowledge-platform">工业合规知识平台</h3></div>
-              <p>项目主线是让内部文档变成可检索、可追踪、可重建的知识。我负责过文档加工、异步向量化、混合检索和本地模型接入。相比“回答得像不像”，我更关心答案能不能回到原文，以及一份坏文档会不会堵住整条流水线。</p>
-              <div class="project-index__tags"><span>RAG</span><span>Redis Stream</span><span>Vector Search</span><span>Local LLM</span></div>
-            </article>
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>03 / 2025</span><h3 id="sre-agent">智能 SRE 运维助手</h3></div>
-              <p>这个项目让我开始认真对待 Agent 的边界。模型可以规划排查步骤，但工具必须知道自己查哪个集群、哪段时间、多少数据，也必须允许人随时中断。我主要搭了执行循环、工具接入和流式反馈这几层。</p>
-              <div class="project-index__tags"><span>AI Agent</span><span>MCP</span><span>Prometheus</span><span>Kubernetes</span></div>
-            </article>
-            <article class="project-index__item">
-              <div class="project-index__heading"><span>04 / 2025—2026</span><h3 id="aigc-scheduler">生成式内容调度平台</h3></div>
-              <p>批量任务把模型调用变成了一个调度问题：导入的数据不总是干净，队列会积压，供应方会超时，用户还想随时看到进度。我处理了任务标准化、分级队列、模型网关和实时状态推送。</p>
-              <div class="project-index__tags"><span>NestJS</span><span>Redis Stream</span><span>WebSocket</span><span>Docker</span></div>
-            </article>
-          </div>
         </section>
 
         <section class="doc-section" id="recurring-problems">
@@ -101,12 +70,10 @@
           <p>所以我常把时间花在不太适合截图的地方：事件结构、幂等键、任务检查点、日志上下文、健康检查和回滚入口。它们很少出现在功能列表里，却决定了项目三个月后还好不好改。</p>
         </section>
 
-        <footer class="article-footer"><span>WUDE / PROJECTS</span><a href="./agent-tooling.html">下一篇：Agent 工具链复盘 →</a></footer>
+        <nav class="page-route" data-page-route aria-label="页面间导航"></nav>
       </article>
-
-      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
-    </div>
+    </main>
     <div class="docs-backdrop"></div>
-    <script src="./site.js"></script><script src="./docs.js"></script>
+    <script type="module" src="./site.js"></script><script type="module" src="./page-route.js?v=20260821-1"></script><script type="module" src="./docs.js?v=20260821-3"></script><script type="module" src="./projects.js?v=20260821-3"></script>
   </body>
 </html>

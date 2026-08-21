@@ -1,0 +1,813 @@
+/* WUDE Vault Neo ----------------------------------------------------------
+   A restrained neo-brutalist layer inspired by note-vault interfaces.
+   It intentionally loads after every page stylesheet. */
+
+:root {
+  --acid: #e9b949;
+  --blue: #2f54c9;
+  --vault-ink: #11110f;
+  --vault-paper: #f5f1e7;
+  --vault-card: #fffdf7;
+  --vault-muted: #625f56;
+  --vault-line: #11110f;
+  --vault-accent: #e9b949;
+  --vault-link: #2f54c9;
+  --vault-shadow-1: 2px 2px 0 #11110f;
+  --vault-shadow-2: 4px 4px 0 #11110f;
+  --vault-shadow-3: 7px 7px 0 #11110f;
+  --vault-rail: 86px;
+}
+
+html {
+  background: var(--vault-paper);
+  scroll-padding-top: 24px;
+}
+
+body {
+  background: var(--vault-paper);
+  color: var(--vault-ink);
+}
+
+button,
+input,
+textarea,
+select,
+dialog,
+.primary-link,
+.quiet-link,
+.section-more,
+.project,
+.project-visual,
+.project-index__item,
+.project-index__visual,
+.project-index__role,
+.project-jump,
+.project-jump__item,
+.principle-grid li,
+.updates-preview__item,
+.about-facts div,
+.article-figure,
+.doc-callout,
+.doc-table,
+.note-entry,
+.update-entry,
+.update-detail,
+.updates-repo-link,
+.docs-sidebar-toggle {
+  border-radius: 0 !important;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Desktop vault rail ------------------------------------------------------ */
+@media (min-width: 881px) {
+  .site-header {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 80;
+    width: var(--vault-rail);
+    height: 100vh;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    padding: 18px 9px 16px;
+    border: 0;
+    border-right: 2px solid var(--vault-line);
+    background: var(--vault-accent);
+    backdrop-filter: none;
+  }
+
+  .site-header .brand {
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    color: var(--vault-ink);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .site-header .brand-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto;
+    border: 2px solid var(--vault-line);
+    background: var(--vault-ink);
+    color: var(--vault-accent);
+    box-shadow: var(--vault-shadow-1);
+  }
+
+  .site-header .header-status {
+    display: none;
+  }
+
+  .site-header .main-nav {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .site-header .main-nav a {
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+    padding: 7px 4px;
+    border: 2px solid transparent;
+    color: rgba(17, 17, 15, 0.62);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+  }
+
+  .site-header .main-nav a:hover {
+    border-color: var(--vault-line);
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--vault-ink);
+    box-shadow: var(--vault-shadow-1);
+  }
+
+  .site-header .main-nav a.is-current,
+  .site-header .main-nav a[aria-current="page"] {
+    border-color: var(--vault-line);
+    background: var(--vault-ink);
+    color: #fff;
+    box-shadow: var(--vault-shadow-1);
+  }
+
+  body > main,
+  body > .site-footer {
+    margin-left: var(--vault-rail);
+  }
+
+  .docs-layout {
+    min-height: 100vh;
+  }
+
+  .docs-sidebar,
+  .page-toc {
+    top: 0;
+    height: 100vh;
+  }
+
+  .docs-group--site {
+    display: none;
+  }
+}
+
+/* Shared interaction language -------------------------------------------- */
+.primary-link,
+.quiet-link,
+.section-more,
+.updates-repo-link,
+.updates-search button,
+.update-entry__open,
+.update-detail__toolbar a,
+.update-detail__footer a {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  color: var(--vault-ink);
+  box-shadow: var(--vault-shadow-2);
+  transition: box-shadow 120ms ease, transform 120ms ease;
+}
+
+.primary-link,
+.updates-search button {
+  background: var(--vault-accent);
+}
+
+.primary-link:hover,
+.primary-link:focus-visible,
+.quiet-link:hover,
+.quiet-link:focus-visible,
+.section-more:hover,
+.section-more:focus-visible,
+.updates-repo-link:hover,
+.updates-repo-link:focus-visible,
+.updates-search button:hover,
+.updates-search button:focus-visible,
+.update-entry__open:hover,
+.update-entry__open:focus-visible,
+.update-detail__toolbar a:hover,
+.update-detail__toolbar a:focus-visible,
+.update-detail__footer a:hover,
+.update-detail__footer a:focus-visible {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+}
+
+.quiet-link,
+.section-more {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 10px 14px;
+}
+
+input,
+textarea,
+select,
+.updates-search input {
+  border: 2px solid var(--vault-line) !important;
+  background: var(--vault-card);
+  color: var(--vault-ink);
+  box-shadow: var(--vault-shadow-1);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--vault-link);
+  outline-offset: 3px;
+}
+
+/* Home: a working vault, not a landing-page collage ---------------------- */
+.hero {
+  border-bottom: 2px solid var(--vault-line);
+  background-color: var(--vault-paper);
+}
+
+.hero-grid {
+  opacity: 0.62;
+}
+
+.hero-meta,
+.hero-footer,
+.section-heading,
+.updates-preview__heading {
+  border-color: var(--vault-line);
+  border-width: 2px;
+}
+
+.hero h1 em {
+  -webkit-text-stroke-color: var(--vault-link);
+}
+
+.hero-actions {
+  align-items: flex-start;
+}
+
+.capability-ticker {
+  border-block: 2px solid var(--vault-line);
+  background: var(--vault-ink);
+}
+
+.projects-section,
+.principles,
+.updates-preview,
+.about {
+  border-bottom: 2px solid var(--vault-line);
+}
+
+.section-label,
+.section-kicker,
+.project-number,
+.project-type,
+.article-kicker,
+.updates-masthead__meta,
+.updates-results-head .section-label {
+  letter-spacing: 0.08em;
+}
+
+.project {
+  overflow: visible;
+  margin-bottom: 24px;
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  transform: none !important;
+  transition: box-shadow 140ms ease;
+}
+
+.project-info {
+  padding: clamp(24px, 4vw, 54px);
+}
+
+.project-visual {
+  border: 0;
+  border-left: 2px solid var(--vault-line);
+  background-color: var(--vault-card);
+  box-shadow: none;
+}
+
+.project-tags span,
+.project-index__tags span,
+.update-labels a,
+.update-labels span {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  color: var(--vault-ink);
+  box-shadow: var(--vault-shadow-1);
+}
+
+.project-detail-link {
+  color: var(--vault-link);
+  font-weight: 900;
+}
+
+.principle-grid {
+  gap: 16px;
+}
+
+.principle-grid li,
+.principle-grid li:nth-child(2n) {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  transform: none;
+  transition: box-shadow 140ms ease;
+}
+
+.principle-grid li:nth-child(2) {
+  background: var(--vault-accent);
+}
+
+.updates-preview__list {
+  gap: 14px;
+}
+
+.updates-preview__item {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  transition: box-shadow 140ms ease;
+}
+
+.about-facts {
+  gap: 12px;
+}
+
+.about-facts div {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+}
+
+.about-facts div:first-child {
+  background: var(--vault-accent);
+}
+
+@media (hover: hover) {
+  .project:hover,
+  .principle-grid li:hover,
+  .updates-preview__item:hover,
+  .project-index__item:hover,
+  .note-entry:hover,
+  .update-entry:hover {
+    box-shadow: var(--vault-shadow-3);
+  }
+}
+
+/* Documentation and case pages ------------------------------------------ */
+.docs-sidebar {
+  border-right: 2px solid var(--vault-line);
+  background: #ecece3;
+}
+
+.docs-sidebar-title {
+  border-bottom: 2px solid var(--vault-line);
+  color: var(--vault-ink);
+}
+
+.docs-group nav {
+  border-left: 2px solid rgba(17, 17, 15, 0.48);
+}
+
+.docs-group summary,
+.docs-group a {
+  color: var(--vault-ink);
+}
+
+.docs-group a:hover {
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--vault-ink);
+  box-shadow: var(--vault-shadow-1);
+}
+
+.docs-group a.is-active {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-accent);
+  color: var(--vault-ink);
+  box-shadow: var(--vault-shadow-1);
+}
+
+.doc-article {
+  background: var(--vault-paper);
+}
+
+.article-header {
+  border-bottom: 2px solid var(--vault-line);
+}
+
+.article-figure,
+.screenshot-figure,
+.profile-visual,
+.notes-visual {
+  border: 2px solid var(--vault-line);
+  box-shadow: var(--vault-shadow-3);
+}
+
+.doc-callout {
+  border: 2px solid var(--vault-line);
+  border-left-width: 8px;
+  background: #eef1ff;
+  color: #1d337f;
+  box-shadow: var(--vault-shadow-2);
+}
+
+.doc-table {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  box-shadow: var(--vault-shadow-2);
+}
+
+.doc-table th,
+.doc-table td {
+  border-color: var(--vault-line);
+}
+
+.note-entry {
+  margin-top: 28px;
+  padding: 28px;
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  transition: box-shadow 140ms ease;
+}
+
+.page-toc {
+  border-left: 2px solid var(--vault-line);
+  background: #edede6;
+}
+
+.page-toc a.is-active {
+  color: var(--vault-link);
+  font-weight: 900;
+}
+
+/* Project library -------------------------------------------------------- */
+.project-jump {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-ink);
+  box-shadow: var(--vault-shadow-3);
+}
+
+.project-jump__grid {
+  border-color: #5b5c55;
+}
+
+.project-jump__item {
+  border-color: #5b5c55;
+}
+
+.project-jump__item:hover,
+.project-jump__item:focus-visible {
+  background: var(--vault-accent);
+  color: var(--vault-ink);
+}
+
+.project-index {
+  border-top: 0;
+}
+
+.project-index__item {
+  margin-bottom: 20px;
+  padding: clamp(24px, 4vw, 42px);
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  transition: box-shadow 140ms ease;
+}
+
+.project-index__visual {
+  border: 2px solid var(--vault-line);
+  box-shadow: none;
+}
+
+.project-index__role {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-accent);
+  box-shadow: var(--vault-shadow-1);
+}
+
+.project-index__details {
+  border-color: var(--vault-line);
+  border-width: 2px;
+}
+
+.project-index__details > summary {
+  min-height: 52px;
+}
+
+/* Workbench log ---------------------------------------------------------- */
+.updates-masthead {
+  border-bottom: 2px solid var(--vault-line);
+}
+
+.updates-workspace {
+  background: var(--vault-paper);
+}
+
+.updates-toolbar,
+.updates-results-head {
+  border-color: var(--vault-line);
+  border-width: 2px;
+}
+
+.updates-search__control {
+  gap: 8px;
+}
+
+.update-entry {
+  margin-bottom: 16px;
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  transition: box-shadow 140ms ease;
+}
+
+.update-entry__index {
+  border-right: 2px solid var(--vault-line);
+  background: var(--vault-accent);
+}
+
+.update-entry__open {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.update-detail {
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  box-shadow: var(--vault-shadow-3);
+}
+
+/* Page routes ------------------------------------------------------------ */
+.page-route {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(52px, 8vw, 84px);
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  box-shadow: var(--vault-shadow-2);
+}
+
+.page-route__link {
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  color: var(--vault-ink);
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.page-route__link + .page-route__link {
+  border-left: 2px solid var(--vault-line);
+}
+
+.page-route__link--next {
+  text-align: right;
+}
+
+.page-route__link span {
+  color: var(--vault-muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.page-route__link strong {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 500;
+}
+
+.page-route__link:hover,
+.page-route__link:focus-visible {
+  background: var(--vault-accent);
+  color: var(--vault-ink);
+}
+
+.page-route__link:hover span,
+.page-route__link:focus-visible span {
+  color: var(--vault-ink);
+}
+
+.page-route--standalone {
+  width: min(calc(100% - 64px), 1100px);
+  margin: 64px auto 96px;
+}
+
+/* Keep the update log on the same first-screen rhythm as the docs pages. */
+.updates-masthead {
+  padding: clamp(42px, 6vw, 72px) clamp(24px, 5vw, 64px);
+}
+
+.updates-masthead__layout {
+  grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1.22fr);
+  gap: clamp(32px, 6vw, 80px);
+  margin-top: 34px;
+}
+
+.updates-masthead h1 {
+  font-size: clamp(3.7rem, 7vw, 6.2rem);
+}
+
+/* Footer ----------------------------------------------------------------- */
+.site-footer {
+  border-top: 2px solid var(--vault-line);
+  background: var(--vault-ink);
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--vault-accent);
+}
+
+/* Mobile keeps the vault language without a permanent rail. ------------- */
+@media (max-width: 880px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 64px;
+    border: 0;
+    border-bottom: 2px solid var(--vault-line);
+    background: var(--vault-accent);
+    backdrop-filter: none;
+  }
+
+  .site-header .brand-mark {
+    border: 2px solid var(--vault-line);
+    background: var(--vault-ink);
+    color: var(--vault-accent);
+    box-shadow: var(--vault-shadow-1);
+  }
+
+  .site-header .main-nav {
+    border-top: 2px solid var(--vault-line);
+    background: var(--vault-accent);
+  }
+
+  .site-header .main-nav a {
+    border-bottom: 1px solid rgba(17, 17, 15, 0.3);
+    color: var(--vault-ink);
+  }
+
+  .site-header .main-nav a.is-current,
+  .site-header .main-nav a[aria-current="page"] {
+    background: var(--vault-ink);
+    color: #fff;
+  }
+
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    border: 2px solid var(--vault-line);
+    background: var(--vault-card);
+    box-shadow: var(--vault-shadow-1);
+  }
+
+  body > main,
+  body > .site-footer {
+    margin-left: 0;
+  }
+
+  .docs-sidebar {
+    top: 64px;
+    height: calc(100vh - 64px);
+  }
+
+  .docs-sidebar-toggle {
+    position: fixed;
+    top: 10px;
+    right: 16px;
+    z-index: 95;
+    min-width: 68px;
+    min-height: 44px;
+    margin: 0;
+    justify-content: center;
+    border: 2px solid var(--vault-line);
+    background: var(--vault-card);
+    box-shadow: var(--vault-shadow-1);
+  }
+
+  .project {
+    margin-bottom: 18px;
+  }
+
+  .project-visual {
+    border-left: 0;
+    border-top: 2px solid var(--vault-line);
+  }
+
+  .project-index__item,
+  .note-entry {
+    padding: 22px;
+  }
+
+  .project-index__overview,
+  .project-index__details {
+    margin-left: 0;
+  }
+
+  .project-jump,
+  .article-figure,
+  .screenshot-figure,
+  .profile-visual,
+  .notes-visual,
+  .update-detail {
+    box-shadow: var(--vault-shadow-2);
+  }
+
+  .page-route--standalone {
+    width: calc(100% - 40px);
+    margin: 48px auto 72px;
+  }
+
+  .updates-masthead {
+    padding: 36px 20px 42px;
+  }
+
+  .updates-masthead__layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --vault-shadow-3: 4px 4px 0 #11110f;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 15.2vw, 4.75rem);
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .hero h1 > * {
+    white-space: nowrap;
+  }
+
+  .hero-actions {
+    align-items: stretch;
+  }
+
+  .hero-actions a,
+  .section-more {
+    width: 100%;
+  }
+
+  .project-index__item,
+  .note-entry {
+    padding: 18px;
+  }
+
+  .update-entry__index {
+    border-right: 0;
+    border-bottom: 2px solid var(--vault-line);
+  }
+
+  .page-route {
+    grid-template-columns: 1fr;
+  }
+
+  .page-route__link + .page-route__link {
+    border-top: 2px solid var(--vault-line);
+    border-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-link,
+  .quiet-link,
+  .section-more,
+  .updates-repo-link,
+  .updates-search button,
+  .update-entry__open,
+  .update-detail__toolbar a,
+  .update-detail__footer a,
+  .project,
+  .principle-grid li,
+  .updates-preview__item,
+  .project-index__item,
+  .note-entry,
+  .update-entry {
+    transition: none !important;
+  }
+}

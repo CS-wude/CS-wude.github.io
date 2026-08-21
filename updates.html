@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="theme-color" content="#e9b949" />
     <meta
       name="description"
       content="WUDE 工作台边上的短记录、问题和临时结论。"
@@ -11,8 +11,10 @@
     <title>动态 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="./updates.css" />
+    <link rel="stylesheet" href="./vault.css?v=20260821-3" />
   </head>
-  <body data-page="updates">
+  <body id="top" data-page="updates">
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页">
         <span class="brand-mark">W</span>
@@ -39,7 +41,7 @@
       </nav>
     </header>
 
-    <main class="updates-page" id="top">
+    <main class="updates-page" id="mainContent">
       <section class="updates-masthead" aria-labelledby="updatesTitle">
         <div class="updates-masthead__meta">
           <p class="section-label">Workbench log / ongoing</p>
@@ -112,6 +114,7 @@
           </p>
         </noscript>
       </section>
+      <nav class="page-route page-route--standalone" data-page-route aria-label="页面间导航"></nav>
     </main>
 
     <footer class="site-footer updates-footer">
@@ -129,7 +132,8 @@
       </div>
     </footer>
 
-    <script src="./site.js"></script>
+    <script type="module" src="./site.js"></script>
+    <script type="module" src="./page-route.js?v=20260821-1"></script>
     <script src="./data/updates-data.js"></script>
     <script src="./updates.js"></script>
   </body>

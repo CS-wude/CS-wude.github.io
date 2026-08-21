@@ -3,25 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="theme-color" content="#e9b949" />
     <meta name="description" content="一次智能运维项目里，我如何收紧 Agent 的工具调用边界。" />
     <title>让 Agent 的工具调用收得住 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./docs.css" />
+    <link rel="stylesheet" href="./docs.css?v=20260821-3" />
+    <link rel="stylesheet" href="./vault.css?v=20260821-3" />
   </head>
-  <body data-page="case-study">
+  <body id="top" data-page="case-study">
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
-      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false" hidden><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a class="is-current" href="./projects.html" aria-current="page">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
     </header>
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
-    <div class="docs-layout">
+    <main class="docs-layout" id="mainContent">
       <aside class="docs-sidebar" id="docsSidebar">
-        <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
-        <details class="docs-group" open><summary>项目</summary><nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav></details>
-        <details class="docs-group" open><summary>手记</summary><nav><a data-page="notes" href="./notes.html">全部手记</a><a href="./notes.html#leading">带组之后</a><a href="./notes.html#ai-responsibility">AI 与判断</a></nav></details>
-        <details class="docs-group" open><summary>其他</summary><nav><a href="./updates.html">最近动态</a><a data-page="about" href="./about.html">关于我</a><a href="./index.html">返回首页</a></nav></details>
+        <div class="docs-sidebar-title"><span>WUDE / CONTENT</span><span>INDEX</span></div>
+        <div class="docs-navigation" data-docs-navigation>
+          <noscript><nav class="docs-fallback"><a href="./projects.html">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav></noscript>
+        </div>
       </aside>
 
       <article class="doc-article">
@@ -79,11 +81,10 @@
           <p>如果再做一遍，我会更早统一事件协议，并把执行记录设计成可回放的数据。那会让调试、评估和复盘都简单很多，也能更快区分是模型判断错了，还是工具给错了事实。</p>
         </section>
 
-        <footer class="article-footer"><a href="./projects.html">← 项目索引</a><a href="./notes.html">下一页：手记 →</a></footer>
+        <nav class="page-route" data-page-route aria-label="页面间导航"></nav>
       </article>
-      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
-    </div>
+    </main>
     <div class="docs-backdrop"></div>
-    <script src="./site.js"></script><script src="./docs.js"></script>
+    <script type="module" src="./site.js"></script><script type="module" src="./page-route.js?v=20260821-1"></script><script type="module" src="./docs.js?v=20260821-3"></script>
   </body>
 </html>

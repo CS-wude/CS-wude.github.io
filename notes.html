@@ -3,25 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f3f4ef" />
+    <meta name="theme-color" content="#e9b949" />
     <meta name="description" content="WUDE 关于后端、AI、带组和工程交付的手记。" />
     <title>手记 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./docs.css" />
+    <link rel="stylesheet" href="./docs.css?v=20260821-3" />
+    <link rel="stylesheet" href="./vault.css?v=20260821-3" />
   </head>
-  <body data-page="notes">
+  <body id="top" data-page="notes">
+    <a class="skip-link" href="#mainContent">跳到主要内容</a>
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
-      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+      <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false" hidden><span></span><span></span></button>
       <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a class="is-current" href="./notes.html" aria-current="page">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
     </header>
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
-    <div class="docs-layout">
+    <main class="docs-layout" id="mainContent">
       <aside class="docs-sidebar" id="docsSidebar">
-        <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
-        <details class="docs-group" open><summary>项目</summary><nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav></details>
-        <details class="docs-group" open><summary>手记</summary><nav><a data-page="notes" href="./notes.html">全部手记</a><a href="./notes.html#leading">带组之后</a><a href="./notes.html#ai-responsibility">AI 与判断</a></nav></details>
-        <details class="docs-group" open><summary>其他</summary><nav><a href="./updates.html">最近动态</a><a data-page="about" href="./about.html">关于我</a><a href="./index.html">返回首页</a></nav></details>
+        <div class="docs-sidebar-title"><span>WUDE / CONTENT</span><span>INDEX</span></div>
+        <div class="docs-navigation" data-docs-navigation>
+          <noscript><nav class="docs-fallback"><a href="./projects.html">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav></noscript>
+        </div>
       </aside>
 
       <article class="doc-article">
@@ -30,8 +32,6 @@
           <p class="article-lead">技术之外，也记一些带组以后才慢慢想明白的事：怎样把问题交给合适的人，怎样给反馈，什么时候该亲自下场，以及用了 AI 之后哪些判断反而更不能省。</p>
           <div class="article-meta"><span>Engineering</span><span>Team</span><span>AI</span></div>
         </header>
-
-        <div class="article-figure notes-visual" aria-hidden="true"><article><span>Note 01</span><strong>组长不是超级程序员</strong></article><article><span>Note 02</span><strong>1on1 不开成周报</strong></article><article><span>Note 03</span><strong>AI 不代签责任</strong></article></div>
 
         <section class="doc-section" id="reading-note">
           <h2>从《自洽的程序员》说起</h2>
@@ -101,11 +101,10 @@
 
         <section class="doc-section" id="why-here"><h2>为什么留在这里</h2><p>很多判断离开当时的代码就会显得很普通，但过几个月再遇到类似问题时，最有用的往往正是那句“当时为什么没有这么做”。我把它们写下来，主要是给未来的自己留一个入口。</p></section>
 
-        <footer class="article-footer"><a href="./agent-tooling.html">← Agent 工具链复盘</a><a href="./about.html">关于我 →</a></footer>
+        <nav class="page-route" data-page-route aria-label="页面间导航"></nav>
       </article>
-      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
-    </div>
+    </main>
     <div class="docs-backdrop"></div>
-    <script src="./site.js"></script><script src="./docs.js"></script>
+    <script type="module" src="./site.js"></script><script type="module" src="./page-route.js?v=20260821-1"></script><script type="module" src="./docs.js?v=20260821-3"></script>
   </body>
 </html>

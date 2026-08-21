@@ -7,8 +7,8 @@
     <meta name="description" content="关于 WUDE：后端、AI 应用与平台工程。" />
     <title>关于我 — WUDE</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./docs.css" />
-    <link rel="stylesheet" href="./vault.css?v=20260821-1" />
+    <link rel="stylesheet" href="./docs.css?v=20260821-3" />
+    <link rel="stylesheet" href="./vault.css?v=20260821-3" />
   </head>
   <body id="top" data-page="about">
     <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -20,10 +20,10 @@
     <button class="docs-sidebar-toggle" type="button" aria-controls="docsSidebar" aria-expanded="false">目录 ☰</button>
     <main class="docs-layout" id="mainContent">
       <aside class="docs-sidebar" id="docsSidebar">
-        <div class="docs-sidebar-title"><span>WUDE / INDEX</span><span>04</span></div>
-        <details class="docs-group" open><summary>项目</summary><nav><a data-page="overview" href="./projects.html">项目索引</a><a data-page="case-study" href="./agent-tooling.html">Agent 工具链复盘</a></nav></details>
-        <details class="docs-group" open><summary>手记</summary><nav><a data-page="notes" href="./notes.html">全部手记</a><a href="./notes.html#leading">带组之后</a><a href="./notes.html#ai-responsibility">AI 与判断</a></nav></details>
-        <details class="docs-group" open><summary>其他</summary><nav><a href="./updates.html">最近动态</a><a data-page="about" href="./about.html">关于我</a><a href="./index.html">返回首页</a></nav></details>
+        <div class="docs-sidebar-title"><span>WUDE / CONTENT</span><span>INDEX</span></div>
+        <div class="docs-navigation" data-docs-navigation>
+          <noscript><nav class="docs-fallback"><a href="./projects.html">项目</a><a href="./notes.html">手记</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav></noscript>
+        </div>
       </aside>
 
       <article class="doc-article">
@@ -65,11 +65,10 @@
 
         <section class="doc-section" id="contact"><h2>联系我</h2><p>邮件适合说完整一点的事情，GitHub 适合看代码和原始记录。我通常会认真读，但回复不一定很快。</p><p><a class="text-link" href="mailto:wudemail@foxmail.com">wudemail@foxmail.com ↗</a></p><p><a class="text-link" href="https://github.com/CS-wude" target="_blank" rel="noreferrer">github.com/CS-wude ↗</a></p></section>
 
-        <footer class="article-footer"><a href="./notes.html">← 手记</a><a href="./updates.html">最近动态 →</a></footer>
+        <nav class="page-route" data-page-route aria-label="页面间导航"></nav>
       </article>
-      <aside class="page-toc"><p>本页目录</p><nav id="tocNav"></nav></aside>
     </main>
     <div class="docs-backdrop"></div>
-    <script type="module" src="./site.js"></script><script type="module" src="./docs.js"></script>
+    <script type="module" src="./site.js"></script><script type="module" src="./page-route.js?v=20260821-1"></script><script type="module" src="./docs.js?v=20260821-3"></script>
   </body>
 </html>

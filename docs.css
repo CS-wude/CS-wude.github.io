@@ -1,7 +1,7 @@
 .docs-layout {
   min-height: calc(100vh - 66px);
   display: grid;
-  grid-template-columns: 282px minmax(0, 1fr) 220px;
+  grid-template-columns: 282px minmax(0, 1fr);
   align-items: start;
 }
 
@@ -700,7 +700,7 @@
 
 /* Projects: scan first, expand details ------------------------------------ */
 .projects-page .docs-layout {
-  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-columns: 282px minmax(0, 1fr);
 }
 
 .projects-page .page-toc {
@@ -1038,7 +1038,7 @@
 
 @media (max-width: 1120px) {
   .projects-page .docs-layout {
-    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-columns: 250px minmax(0, 1fr);
   }
 
   .project-jump__grid {

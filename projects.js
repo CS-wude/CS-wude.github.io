@@ -45,14 +45,6 @@ const projectMarkup = (project, index) => {
 
 export const renderProjectCatalog = () => PROJECTS.map(projectMarkup).join("");
 
-export const renderProjectJumpList = () =>
-  PROJECTS.map((project, index) => {
-    const number = String(index + 1).padStart(2, "0");
-    return `<a class="project-jump__item" href="#${escapeHTML(project.slug)}">
-      <span>${number}</span><strong>${escapeHTML(project.title)}</strong><small>${escapeHTML(project.role)}</small>
-    </a>`;
-  }).join("");
-
 export const initProjectCatalog = (
   root = globalThis.document,
   view = globalThis.window,
@@ -60,8 +52,6 @@ export const initProjectCatalog = (
   const catalog = root?.querySelector("#projectCatalog");
   if (!catalog) return;
   catalog.innerHTML = renderProjectCatalog();
-  const jumpList = root.querySelector("#projectJumpList");
-  if (jumpList) jumpList.innerHTML = renderProjectJumpList();
 
   const hash = view?.location?.hash?.slice(1);
   if (!hash) return;

@@ -5,13 +5,9 @@ import test from "node:test";
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("project catalog lets visitors scan seven cases before opening details", async () => {
-  const { renderProjectCatalog, renderProjectJumpList } = await import("../projects.js");
+  const { renderProjectCatalog } = await import("../projects.js");
   const catalog = renderProjectCatalog();
-  const jumpList = renderProjectJumpList();
 
-  assert.equal((jumpList.match(/class="project-jump__item"/g) ?? []).length, 7);
-  assert.match(jumpList, /href="#lynkvis-ai"/);
-  assert.match(jumpList, /href="#content-orchestration"/);
   assert.equal((catalog.match(/<details class="project-index__details">/g) ?? []).length, 7);
   assert.equal((catalog.match(/查看职责与关键链路/g) ?? []).length, 7);
   assert.doesNotMatch(catalog, /<details class="project-index__details" open>/);
@@ -20,7 +16,6 @@ test("project catalog lets visitors scan seven cases before opening details", as
 test("project catalog opens and scrolls to a case rendered after initial hash navigation", async () => {
   const { initProjectCatalog } = await import("../projects.js");
   const catalog = { innerHTML: "" };
-  const jumpList = { innerHTML: "" };
   const details = { open: false };
   let scrollOptions = null;
   const target = {
@@ -31,8 +26,7 @@ test("project catalog opens and scrolls to a case rendered after initial hash na
   };
   const root = {
     getElementById: (id) => (id === "enterprise-rag-mcp-assistant" ? target : null),
-    querySelector: (selector) =>
-      selector === "#projectCatalog" ? catalog : selector === "#projectJumpList" ? jumpList : null,
+    querySelector: (selector) => (selector === "#projectCatalog" ? catalog : null),
   };
   const view = {
     location: { hash: "#enterprise-rag-mcp-assistant" },
@@ -45,15 +39,13 @@ test("project catalog opens and scrolls to a case rendered after initial hash na
   assert.deepEqual(scrollOptions, { block: "start" });
 });
 
-test("project page puts a compact index before the case catalog and supporting context", async () => {
+test("project page puts the case catalog before supporting context without a duplicate index", async () => {
   const html = await read("projects.html");
-  const jumpIndex = html.indexOf('id="projectJumpList"');
   const catalogIndex = html.indexOf('id="selected-projects"');
   const contextIndex = html.indexOf('id="my-part"');
 
   assert.match(html, /<body[^>]+class="projects-page"/);
-  assert.ok(jumpIndex > 0, "project page needs the quick index mount");
-  assert.ok(jumpIndex < catalogIndex, "quick index must appear before the case catalog");
+  assert.doesNotMatch(html, /id="projectJumpList"/);
   assert.ok(catalogIndex < contextIndex, "case catalog must appear before supporting context");
   assert.doesNotMatch(html, /archive-visual/);
 });

@@ -160,6 +160,10 @@ select {
     top: 0;
     height: 100vh;
   }
+
+  .docs-group--site {
+    display: none;
+  }
 }
 
 /* Shared interaction language -------------------------------------------- */
@@ -544,6 +548,80 @@ select:focus {
   box-shadow: var(--vault-shadow-3);
 }
 
+/* Page routes ------------------------------------------------------------ */
+.page-route {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(52px, 8vw, 84px);
+  border: 2px solid var(--vault-line);
+  background: var(--vault-card);
+  box-shadow: var(--vault-shadow-2);
+}
+
+.page-route__link {
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 18px;
+  color: var(--vault-ink);
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.page-route__link + .page-route__link {
+  border-left: 2px solid var(--vault-line);
+}
+
+.page-route__link--next {
+  text-align: right;
+}
+
+.page-route__link span {
+  color: var(--vault-muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.page-route__link strong {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 500;
+}
+
+.page-route__link:hover,
+.page-route__link:focus-visible {
+  background: var(--vault-accent);
+  color: var(--vault-ink);
+}
+
+.page-route__link:hover span,
+.page-route__link:focus-visible span {
+  color: var(--vault-ink);
+}
+
+.page-route--standalone {
+  width: min(calc(100% - 64px), 1100px);
+  margin: 64px auto 96px;
+}
+
+/* Keep the update log on the same first-screen rhythm as the docs pages. */
+.updates-masthead {
+  padding: clamp(42px, 6vw, 72px) clamp(24px, 5vw, 64px);
+}
+
+.updates-masthead__layout {
+  grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1.22fr);
+  gap: clamp(32px, 6vw, 80px);
+  margin-top: 34px;
+}
+
+.updates-masthead h1 {
+  font-size: clamp(3.7rem, 7vw, 6.2rem);
+}
+
 /* Footer ----------------------------------------------------------------- */
 .site-footer {
   border-top: 2px solid var(--vault-line);
@@ -654,6 +732,21 @@ select:focus {
   .update-detail {
     box-shadow: var(--vault-shadow-2);
   }
+
+  .page-route--standalone {
+    width: calc(100% - 40px);
+    margin: 48px auto 72px;
+  }
+
+  .updates-masthead {
+    padding: 36px 20px 42px;
+  }
+
+  .updates-masthead__layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 32px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -688,6 +781,15 @@ select:focus {
   .update-entry__index {
     border-right: 0;
     border-bottom: 2px solid var(--vault-line);
+  }
+
+  .page-route {
+    grid-template-columns: 1fr;
+  }
+
+  .page-route__link + .page-route__link {
+    border-top: 2px solid var(--vault-line);
+    border-left: 0;
   }
 }
 

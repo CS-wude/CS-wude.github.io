@@ -1,3 +1,67 @@
+import { PROJECTS } from "./data/projects.js";
+
+const escapeHTML = (value) =>
+  String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+const renderLink = ({ href, text, page, attributes = "" }) =>
+  '<a' +
+  (page ? ' data-page="' + page + '"' : "") +
+  (attributes ? " " + attributes : "") +
+  ' href="' +
+  escapeHTML(href) +
+  '">' +
+  escapeHTML(text) +
+  "</a>";
+
+export const renderDocsNavigation = ({ currentPage = "", headings = [] } = {}) => {
+  const contentLinks = [
+    { href: "./projects.html", text: "项目索引", page: "overview" },
+    { href: "./agent-tooling.html", text: "Agent 工具链复盘", page: "case-study" },
+    { href: "./notes.html", text: "全部手记", page: "notes" },
+  ];
+  const siteLinks = [
+    { href: "./index.html", text: "首页" },
+    { href: "./updates.html", text: "最近动态", page: "updates" },
+    { href: "./about.html", text: "关于我", page: "about" },
+  ];
+  const currentLinks =
+    currentPage === "overview"
+      ? PROJECTS.map(({ slug, title }) => ({
+          href: "./projects.html#" + slug,
+          text: title,
+          attributes: "data-project-link",
+        }))
+      : headings.map(({ id, text, level = "2" }) => ({
+          href: "#" + id,
+          text,
+          attributes: 'data-current-section data-level="' + level + '"',
+        }));
+  const currentLabel =
+    currentPage === "overview" ? "项目直达" : currentPage === "notes" ? "本页手记" : "本页目录";
+  const currentGroup = currentLinks.length
+    ? '<details class="docs-group docs-group--current" open><summary>' +
+      currentLabel +
+      "</summary><nav>" +
+      currentLinks.map(renderLink).join("") +
+      "</nav></details>"
+    : "";
+
+  return (
+    '<details class="docs-group docs-group--content" open><summary>内容库</summary><nav>' +
+    contentLinks.map(renderLink).join("") +
+    "</nav></details>" +
+    currentGroup +
+    '<details class="docs-group docs-group--site" open><summary>站点</summary><nav>' +
+    siteLinks.map(renderLink).join("") +
+    "</nav></details>"
+  );
+};
+
 export const setSidebarState = (
   open,
   { restoreFocus = false, root = globalThis.document } = {},
@@ -26,13 +90,6 @@ export const initDocsShell = (
   const backdrop = root.querySelector(".docs-backdrop");
   const currentPage = root.body?.dataset.page;
 
-  root.querySelectorAll(".docs-group a[data-page]").forEach((link) => {
-    if (link.dataset.page === currentPage) {
-      link.classList.add("is-active");
-      link.closest("details")?.setAttribute("open", "");
-    }
-  });
-
   toggle?.setAttribute("aria-label", "打开目录");
   toggle?.addEventListener("click", () => {
     setSidebarState(!sidebar?.classList.contains("is-open"), { root });
@@ -52,21 +109,30 @@ export const initDocsShell = (
     if (event.matches) setSidebarState(false, { root });
   });
 
-  const tocNav = root.querySelector("#tocNav");
   const headings = [...root.querySelectorAll(".doc-section h2, .doc-section h3")];
-  if (tocNav) {
-    headings.forEach((heading, index) => {
-      if (!heading.id) heading.id = `section-${index + 1}`;
-      const link = root.createElement("a");
-      link.href = `#${heading.id}`;
-      link.textContent = heading.textContent;
-      link.dataset.level = heading.tagName === "H3" ? "3" : "2";
-      tocNav.append(link);
-    });
+  const headingData = headings.map((heading, index) => {
+    const id = heading.id || heading.closest?.("[id]")?.id || "section-" + (index + 1);
+    heading.id = id;
+    return {
+      id,
+      text: heading.textContent,
+      level: heading.tagName === "H3" ? "3" : "2",
+    };
+  });
+  const navigation = root.querySelector("[data-docs-navigation]");
+  if (navigation) {
+    navigation.innerHTML = renderDocsNavigation({ currentPage, headings: headingData });
   }
 
+  root.querySelectorAll(".docs-group a[data-page]").forEach((link) => {
+    if (link.dataset.page === currentPage) {
+      link.classList.add("is-active");
+      link.closest("details")?.setAttribute("open", "");
+    }
+  });
+
   if (headings.length && typeof view.IntersectionObserver === "function") {
-    const tocLinks = [...root.querySelectorAll("#tocNav a")];
+    const tocLinks = [...root.querySelectorAll("[data-current-section]")];
     const observer = new view.IntersectionObserver(
       (entries) => {
         const visible = entries.find((entry) => entry.isIntersecting);

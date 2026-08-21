@@ -64,6 +64,10 @@ select {
   font: inherit;
 }
 
+.menu-toggle[hidden] {
+  display: none !important;
+}
+
 /* Desktop vault rail ------------------------------------------------------ */
 @media (min-width: 881px) {
   .site-header {
@@ -703,6 +707,19 @@ select:focus {
     border: 2px solid var(--vault-line);
     background: var(--vault-card);
     box-shadow: var(--vault-shadow-1);
+  }
+
+  .docs-group summary,
+  .docs-group a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .site-footer a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .project {

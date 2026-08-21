@@ -11,6 +11,11 @@ test("project catalog lets visitors scan seven cases before opening details", as
   assert.equal((catalog.match(/<details class="project-index__details">/g) ?? []).length, 7);
   assert.equal((catalog.match(/查看职责与关键链路/g) ?? []).length, 7);
   assert.doesNotMatch(catalog, /<details class="project-index__details" open>/);
+
+  const firstCase = catalog.slice(0, catalog.indexOf('<article class="project-index__item"', 1));
+  const detailsIndex = firstCase.indexOf('<details class="project-index__details">');
+  const imageIndex = firstCase.search(/class="project-index__visual/);
+  assert.ok(detailsIndex >= 0 && imageIndex > detailsIndex, "large media belongs to expanded details");
 });
 
 test("project catalog opens and scrolls to a case rendered after initial hash navigation", async () => {
@@ -64,4 +69,18 @@ test("project page versions its page-specific assets to prevent mixed deployment
 
   assert.match(html, /href="\.\/docs\.css\?v=[^"]+"/);
   assert.match(html, /src="\.\/projects\.js\?v=[^"]+"/);
+});
+
+test("project masthead stays subordinate to the project catalog", async () => {
+  const css = await read("docs.css");
+  const desktopRule = css.match(
+    /\.projects-page \.article-header h1\s*{[^}]*font-size:\s*clamp\([^,]+,\s*([\d.]+)vw,\s*([\d.]+)rem\)/s,
+  );
+  const phoneCss = css.slice(css.lastIndexOf("@media (max-width: 640px)"));
+  const phoneRule = phoneCss.match(
+    /\.projects-page \.article-header h1\s*{[^}]*font-size:\s*clamp\([^,]+,\s*([\d.]+)vw,\s*([\d.]+)rem\)/s,
+  );
+
+  assert.ok(desktopRule && Number(desktopRule[1]) <= 5.6 && Number(desktopRule[2]) <= 4.8);
+  assert.ok(phoneRule && Number(phoneRule[1]) <= 11.5 && Number(phoneRule[2]) <= 3.5);
 });

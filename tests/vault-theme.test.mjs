@@ -77,6 +77,20 @@ test("Vault tablet navigation keeps a full touch-sized menu control", async () =
   assert.match(tablet, /\.menu-toggle\s*{[^}]*min-width:\s*44px[^}]*min-height:\s*44px/s);
 });
 
+test("Vault mobile navigation and footer links expose touch-sized hit areas", async () => {
+  const css = await read("vault.css");
+  const tablet = css.slice(
+    css.indexOf("@media (max-width: 880px)"),
+    css.indexOf("@media (max-width: 520px)"),
+  );
+
+  assert.match(
+    tablet,
+    /\.docs-group summary,\s*\.docs-group a\s*{[^}]*min-height:\s*44px/s,
+  );
+  assert.match(tablet, /\.site-footer a\s*{[^}]*min-height:\s*44px/s);
+});
+
 test("docs pages yield the global menu button to their single navigation control", async () => {
   const { initSiteShell } = await import("../site.js");
   const menuToggle = createElement();
@@ -89,4 +103,14 @@ test("docs pages yield the global menu button to their single navigation control
   assert.equal(menuToggle.hidden, true);
   assert.equal(menuToggle.getAttribute("aria-hidden"), "true");
   assert.equal(docsToggle.hidden, false);
+});
+
+test("author styles preserve the hidden global menu control on content pages", async () => {
+  const css = await read("vault.css");
+
+  assert.match(
+    css,
+    /\.menu-toggle\[hidden\]\s*{[^}]*display:\s*none\s*!important/s,
+    "the mobile display rule must not override the hidden attribute",
+  );
 });

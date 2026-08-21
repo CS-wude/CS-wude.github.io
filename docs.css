@@ -1,7 +1,7 @@
 .docs-layout {
   min-height: calc(100vh - 66px);
   display: grid;
-  grid-template-columns: 282px minmax(0, 1fr);
+  grid-template-columns: 240px minmax(0, 1fr);
   align-items: start;
 }
 
@@ -524,7 +524,7 @@
 
 @media (max-width: 1120px) {
   .docs-layout {
-    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
   }
 
   .page-toc {
@@ -700,7 +700,7 @@
 
 /* Projects: scan first, expand details ------------------------------------ */
 .projects-page .docs-layout {
-  grid-template-columns: 282px minmax(0, 1fr);
+  grid-template-columns: 240px minmax(0, 1fr);
 }
 
 .projects-page .page-toc {
@@ -719,7 +719,7 @@
 }
 
 .projects-page .article-header h1 {
-  font-size: clamp(3.3rem, 6.7vw, 5.8rem);
+  font-size: clamp(3.1rem, 5.6vw, 4.8rem);
   letter-spacing: -0.045em;
   line-height: 0.95;
 }
@@ -870,11 +870,8 @@
 }
 
 .project-index__overview {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.72fr) minmax(320px, 1.28fr);
-  gap: clamp(24px, 4vw, 48px);
-  align-items: center;
-  margin: 26px 0 0 118px;
+  max-width: 720px;
+  margin: 20px 0 0 118px;
 }
 
 .project-index__summary {
@@ -940,6 +937,12 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.75;
+}
+
+.project-index__details-body > .project-index__visual {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
 }
 
 .project-index__highlights {
@@ -1038,7 +1041,7 @@
 
 @media (max-width: 1120px) {
   .projects-page .docs-layout {
-    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
   }
 
   .project-jump__grid {
@@ -1088,7 +1091,7 @@
   }
 
   .projects-page .article-header h1 {
-    font-size: clamp(2.75rem, 14vw, 4rem);
+    font-size: clamp(2.55rem, 11.5vw, 3.5rem);
   }
 
   .project-jump {
@@ -1120,6 +1123,11 @@
   .project-index__details-body {
     grid-template-columns: 1fr;
     gap: 22px;
+  }
+
+  .project-index__details-body > .project-index__visual {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .project-index__tags {

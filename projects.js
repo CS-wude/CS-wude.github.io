@@ -30,12 +30,12 @@ const projectMarkup = (project, index) => {
     </div>
     <div class="project-index__overview">
       <p class="project-index__summary">${escapeHTML(project.summary)}</p>
-      ${projectImage(project)}
     </div>
     <details class="project-index__details">
       <summary><span>查看职责与关键链路</span><span aria-hidden="true">＋</span></summary>
       <div class="project-index__details-body">
         <p>${escapeHTML(project.description)}</p>
+        ${projectImage(project)}
         <ol class="project-index__highlights">${highlights}</ol>
         <div class="project-index__tags">${tags}</div>
       </div>

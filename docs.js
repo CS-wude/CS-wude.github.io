@@ -43,8 +43,9 @@ export const renderDocsNavigation = ({ currentPage = "", headings = [] } = {}) =
         }));
   const currentLabel =
     currentPage === "overview" ? "项目直达" : currentPage === "notes" ? "本页手记" : "本页目录";
+  const currentGroupState = currentPage === "overview" ? "" : " open";
   const currentGroup = currentLinks.length
-    ? '<details class="docs-group docs-group--current" open><summary>' +
+    ? '<details class="docs-group docs-group--current"' + currentGroupState + "><summary>" +
       currentLabel +
       "</summary><nav>" +
       currentLinks.map(renderLink).join("") +

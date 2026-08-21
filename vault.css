@@ -3,13 +3,15 @@
    It intentionally loads after every page stylesheet. */
 
 :root {
+  --acid: #e9b949;
+  --blue: #2f54c9;
   --vault-ink: #11110f;
-  --vault-paper: #f4f3eb;
-  --vault-card: #fffef8;
-  --vault-muted: #65665f;
+  --vault-paper: #f5f1e7;
+  --vault-card: #fffdf7;
+  --vault-muted: #625f56;
   --vault-line: #11110f;
-  --vault-accent: var(--acid, #d9ff59);
-  --vault-link: var(--blue, #284ee8);
+  --vault-accent: #e9b949;
+  --vault-link: #2f54c9;
   --vault-shadow-1: 2px 2px 0 #11110f;
   --vault-shadow-2: 4px 4px 0 #11110f;
   --vault-shadow-3: 7px 7px 0 #11110f;
@@ -612,8 +614,16 @@ select:focus {
   }
 
   .docs-sidebar-toggle {
+    position: fixed;
+    top: 10px;
+    right: 16px;
+    z-index: 95;
+    min-width: 68px;
+    min-height: 44px;
+    margin: 0;
+    justify-content: center;
     border: 2px solid var(--vault-line);
-    background: var(--vault-accent);
+    background: var(--vault-card);
     box-shadow: var(--vault-shadow-1);
   }
 

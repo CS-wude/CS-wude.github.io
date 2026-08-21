@@ -4,6 +4,41 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
+const createElement = () => {
+  const attributes = new Map();
+  const classes = new Set();
+
+  return {
+    hidden: false,
+    textContent: "",
+    classList: {
+      add: (...names) => names.forEach((name) => classes.add(name)),
+      contains: (name) => classes.has(name),
+      toggle: (name, force) => {
+        if (force) classes.add(name);
+        else classes.delete(name);
+      },
+    },
+    addEventListener: () => {},
+    focus: () => {},
+    getAttribute: (name) => attributes.get(name) ?? null,
+    setAttribute: (name, value) => attributes.set(name, String(value)),
+  };
+};
+
+const createNavigationRoot = ({ menuToggle, mainNav, docsToggle }) => ({
+  body: { classList: createElement().classList },
+  documentElement: createElement(),
+  querySelector: (selector) =>
+    ({
+      ".menu-toggle": menuToggle,
+      ".main-nav": mainNav,
+      ".docs-sidebar-toggle": docsToggle,
+    })[selector] ?? null,
+  querySelectorAll: () => [],
+  addEventListener: () => {},
+});
+
 test("every public page loads the Vault theme after its page styles", async () => {
   const pages = [
     "index.html",
@@ -40,4 +75,18 @@ test("Vault tablet navigation keeps a full touch-sized menu control", async () =
   );
 
   assert.match(tablet, /\.menu-toggle\s*{[^}]*min-width:\s*44px[^}]*min-height:\s*44px/s);
+});
+
+test("docs pages yield the global menu button to their single navigation control", async () => {
+  const { initSiteShell } = await import("../site.js");
+  const menuToggle = createElement();
+  const docsToggle = createElement();
+  const root = createNavigationRoot({ menuToggle, mainNav: createElement(), docsToggle });
+  const view = { matchMedia: () => ({ addEventListener: () => {} }) };
+
+  initSiteShell(root, view);
+
+  assert.equal(menuToggle.hidden, true);
+  assert.equal(menuToggle.getAttribute("aria-hidden"), "true");
+  assert.equal(docsToggle.hidden, false);
 });

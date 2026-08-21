@@ -49,6 +49,12 @@ export const initSiteShell = (
   if (!root || !view) return;
   const menuToggle = root.querySelector(".menu-toggle");
   const mainNav = root.querySelector(".main-nav");
+  const docsToggle = root.querySelector(".docs-sidebar-toggle");
+
+  if (menuToggle && docsToggle) {
+    menuToggle.hidden = true;
+    menuToggle.setAttribute("aria-hidden", "true");
+  }
 
   menuToggle?.addEventListener("click", () => {
     setMenuState(!mainNav?.classList.contains("is-open"), { root });

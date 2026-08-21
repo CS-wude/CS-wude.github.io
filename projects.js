@@ -45,14 +45,10 @@ const projectMarkup = (project, index) => {
 
 export const renderProjectCatalog = () => PROJECTS.map(projectMarkup).join("");
 
-export const initProjectCatalog = (
+export const openProjectFromHash = (
   root = globalThis.document,
   view = globalThis.window,
 ) => {
-  const catalog = root?.querySelector("#projectCatalog");
-  if (!catalog) return;
-  catalog.innerHTML = renderProjectCatalog();
-
   const hash = view?.location?.hash?.slice(1);
   if (!hash) return;
 
@@ -63,13 +59,28 @@ export const initProjectCatalog = (
     return;
   }
 
-  view.requestAnimationFrame?.(() => {
+  const reveal = () => {
     const target = root.getElementById?.(targetId);
     if (!target) return;
     const details = target.querySelector(".project-index__details");
     if (details) details.open = true;
     target.scrollIntoView({ block: "start" });
-  });
+  };
+
+  if (typeof view?.requestAnimationFrame === "function") view.requestAnimationFrame(reveal);
+  else reveal();
+};
+
+export const initProjectCatalog = (
+  root = globalThis.document,
+  view = globalThis.window,
+) => {
+  const catalog = root?.querySelector("#projectCatalog");
+  if (!catalog) return;
+  catalog.innerHTML = renderProjectCatalog();
+  const revealHashTarget = () => openProjectFromHash(root, view);
+  revealHashTarget();
+  view?.addEventListener?.("hashchange", revealHashTarget);
 };
 
 if (typeof document !== "undefined" && typeof window !== "undefined") {

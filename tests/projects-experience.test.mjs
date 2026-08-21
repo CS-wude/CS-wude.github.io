@@ -44,6 +44,39 @@ test("project catalog opens and scrolls to a case rendered after initial hash na
   assert.deepEqual(scrollOptions, { block: "start" });
 });
 
+test("same-page project shortcuts expand the newly selected hash target", async () => {
+  const { initProjectCatalog } = await import("../projects.js");
+  const catalog = { innerHTML: "" };
+  const details = { open: false };
+  let scrollCount = 0;
+  let hashChange = null;
+  const target = {
+    querySelector: (selector) => (selector === ".project-index__details" ? details : null),
+    scrollIntoView: () => {
+      scrollCount += 1;
+    },
+  };
+  const root = {
+    getElementById: (id) => (id === "sre-copilot" ? target : null),
+    querySelector: (selector) => (selector === "#projectCatalog" ? catalog : null),
+  };
+  const view = {
+    location: { hash: "" },
+    requestAnimationFrame: (callback) => callback(),
+    addEventListener: (name, callback) => {
+      if (name === "hashchange") hashChange = callback;
+    },
+  };
+
+  initProjectCatalog(root, view);
+  view.location.hash = "#sre-copilot";
+  hashChange?.();
+
+  assert.equal(typeof hashChange, "function");
+  assert.equal(details.open, true);
+  assert.equal(scrollCount, 1);
+});
+
 test("project page puts the case catalog before supporting context without a duplicate index", async () => {
   const html = await read("projects.html");
   const catalogIndex = html.indexOf('id="selected-projects"');

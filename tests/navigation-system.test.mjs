@@ -96,3 +96,12 @@ test("desktop content shells leave most of the viewport to reading", async () =>
   assert.ok(railWidths.length >= 2, "base and project shells should declare their secondary rail");
   assert.ok(railWidths.every((width) => width <= 240), `secondary rails are too wide: ${railWidths}`);
 });
+
+test("closed directory groups do not render their navigation links", async () => {
+  const css = await read("docs.css");
+
+  assert.match(
+    css,
+    /\.docs-group:not\(\[open\]\)\s*>\s*nav\s*{[^}]*display:\s*none/s,
+  );
+});

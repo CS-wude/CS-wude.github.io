@@ -22,7 +22,12 @@ const createElement = () => {
     addEventListener: () => {},
     focus: () => {},
     getAttribute: (name) => attributes.get(name) ?? null,
+    removeAttribute: (name) => attributes.delete(name),
     setAttribute: (name, value) => attributes.set(name, String(value)),
+    toggleAttribute: (name, force) => {
+      if (force) attributes.set(name, "");
+      else attributes.delete(name);
+    },
   };
 };
 
@@ -113,4 +118,32 @@ test("author styles preserve the hidden global menu control on content pages", a
     /\.menu-toggle\[hidden\]\s*{[^}]*display:\s*none\s*!important/s,
     "the mobile display rule must not override the hidden attribute",
   );
+});
+
+test("closed mobile directory leaves the keyboard and accessibility trees", async () => {
+  const { setSidebarState } = await import("../docs.js");
+  const sidebar = createElement();
+  const toggle = createElement();
+  const backdrop = createElement();
+  const root = {
+    body: { classList: createElement().classList },
+    querySelector: (selector) =>
+      ({
+        "#docsSidebar": sidebar,
+        ".docs-sidebar-toggle": toggle,
+        ".docs-backdrop": backdrop,
+      })[selector] ?? null,
+  };
+
+  setSidebarState(false, { root, conceal: true });
+  assert.equal(sidebar.getAttribute("inert"), "");
+  assert.equal(sidebar.getAttribute("aria-hidden"), "true");
+
+  setSidebarState(true, { root, conceal: true });
+  assert.equal(sidebar.getAttribute("inert"), null);
+  assert.equal(sidebar.getAttribute("aria-hidden"), null);
+
+  setSidebarState(false, { root, conceal: false });
+  assert.equal(sidebar.getAttribute("inert"), null);
+  assert.equal(sidebar.getAttribute("aria-hidden"), null);
 });

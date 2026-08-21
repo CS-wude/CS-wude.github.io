@@ -73,6 +73,10 @@
   border-left: 1px solid var(--line);
 }
 
+.docs-group:not([open]) > nav {
+  display: none;
+}
+
 .docs-group a {
   display: block;
   padding: 8px 10px;

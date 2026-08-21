@@ -65,7 +65,7 @@ export const renderDocsNavigation = ({ currentPage = "", headings = [] } = {}) =
 
 export const setSidebarState = (
   open,
-  { restoreFocus = false, root = globalThis.document } = {},
+  { restoreFocus = false, conceal = false, root = globalThis.document } = {},
 ) => {
   if (!root) return;
   const sidebar = root.querySelector("#docsSidebar");
@@ -78,6 +78,10 @@ export const setSidebarState = (
   toggle?.setAttribute("aria-label", open ? "关闭目录" : "打开目录");
   if (toggle) toggle.textContent = open ? "关闭目录 ×" : "目录 ☰";
   root.body?.classList.toggle("docs-menu-open", open);
+  const concealed = conceal && !open;
+  sidebar?.toggleAttribute?.("inert", concealed);
+  if (concealed) sidebar?.setAttribute("aria-hidden", "true");
+  else sidebar?.removeAttribute?.("aria-hidden");
   if (restoreFocus) toggle?.focus();
 };
 
@@ -90,25 +94,32 @@ export const initDocsShell = (
   const toggle = root.querySelector(".docs-sidebar-toggle");
   const backdrop = root.querySelector(".docs-backdrop");
   const currentPage = root.body?.dataset.page;
+  const desktopQuery = view.matchMedia?.("(min-width: 881px)");
+  const updateSidebar = (open, options = {}) =>
+    setSidebarState(open, {
+      ...options,
+      root,
+      conceal: desktopQuery ? !desktopQuery.matches : true,
+    });
 
   toggle?.setAttribute("aria-label", "打开目录");
   toggle?.addEventListener("click", () => {
-    setSidebarState(!sidebar?.classList.contains("is-open"), { root });
+    updateSidebar(!sidebar?.classList.contains("is-open"));
   });
-  backdrop?.addEventListener("click", () => setSidebarState(false, { root }));
+  backdrop?.addEventListener("click", () => updateSidebar(false));
   sidebar?.addEventListener("click", (event) => {
-    if (event.target.closest("a")) setSidebarState(false, { root });
+    if (event.target.closest("a")) updateSidebar(false);
   });
   root.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && sidebar?.classList.contains("is-open")) {
-      setSidebarState(false, { restoreFocus: true, root });
+      updateSidebar(false, { restoreFocus: true });
     }
   });
 
-  const desktopQuery = view.matchMedia?.("(min-width: 881px)");
   desktopQuery?.addEventListener?.("change", (event) => {
-    if (event.matches) setSidebarState(false, { root });
+    setSidebarState(false, { root, conceal: !event.matches });
   });
+  updateSidebar(false);
 
   const headings = [...root.querySelectorAll(".doc-section h2, .doc-section h3")];
   const headingData = headings.map((heading, index) => {

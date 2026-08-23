@@ -28,6 +28,8 @@ const state = {
   issue: Math.max(0, Number.parseInt(params.get("issue") || "0", 10) || 0),
 };
 
+document.body.classList.toggle("updates-detail-mode", Boolean(state.issue));
+
 let loadedSnapshot = null;
 
 const escapeHTML = (value) =>
@@ -66,7 +68,7 @@ const excerptFromIssue = (issue) => {
     .trim();
 
   if (!text) return "这条先留个标题，正文还没整理。";
-  return text.length > 180 ? `${text.slice(0, 180).trim()}…` : text;
+  return text.length > 140 ? `${text.slice(0, 140).trim()}…` : text;
 };
 
 class SnapshotError extends Error {
@@ -340,7 +342,7 @@ const renderList = (snapshot) => {
               <span>${issue.comments} 条讨论</span>
             </div>
           </div>
-          <a class="update-entry__open" href="${escapeHTML(detailUrl)}" aria-label="阅读：${escapeHTML(issue.title)}">↗</a>
+          <a class="update-entry__open" href="${escapeHTML(detailUrl)}" aria-label="阅读：${escapeHTML(issue.title)}">阅读全文 →</a>
         </article>`;
     })
     .join("");
@@ -473,6 +475,29 @@ const renderDetail = (issue, snapshot) => {
   const body = issue.body_html
     ? sanitizeGitHubHtml(issue.body_html)
     : `<p class="update-detail__plain">${escapeHTML(issue.body || "这条先留个标题，正文还没整理。")}</p>`;
+  const currentIndex = snapshot.issues.findIndex((entry) => entry.number === issue.number);
+  const newerIssue =
+    currentIndex > 0
+      ? snapshot.issues.slice(0, currentIndex).reverse().find((entry) => entry.state === "open") || null
+      : null;
+  const olderIssue =
+    currentIndex >= 0
+      ? snapshot.issues.slice(currentIndex + 1).find((entry) => entry.state === "open") || null
+      : null;
+  const neighborLink = (entry, direction, label) =>
+    entry
+      ? `<a class="update-detail__neighbor update-detail__neighbor--${direction}" href="${escapeHTML(pageUrl({ issue: entry.number }))}">
+          <span>${label}</span>
+          <strong>${escapeHTML(entry.title)}</strong>
+        </a>`
+      : "";
+  const neighborMarkup =
+    newerIssue || olderIssue
+      ? `<nav class="update-detail__neighbors" aria-label="相邻动态">
+          ${neighborLink(newerIssue, "newer", "← 较新一条")}
+          ${neighborLink(olderIssue, "older", "更早一条 →")}
+        </nav>`
+      : "";
 
   feedKicker.textContent = `Note / #${issue.number}`;
   feedHeading.textContent = "这一条";
@@ -497,10 +522,7 @@ const renderDetail = (issue, snapshot) => {
         <div class="update-labels" aria-label="标签">${labelMarkup(issue.labels)}</div>
       </header>
       <div class="update-detail__body markdown-body">${body}</div>
-      <footer class="update-detail__footer">
-        <a href="${escapeHTML(backUrl)}">← 返回动态</a>
-        <a href="${escapeHTML(issue.html_url)}" target="_blank" rel="noreferrer">去 GitHub 留言 ↗</a>
-      </footer>
+      ${neighborMarkup}
     </article>`;
   content.setAttribute("aria-busy", "false");
 };

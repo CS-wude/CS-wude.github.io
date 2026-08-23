@@ -367,6 +367,22 @@ test("updates controls remain touch-sized and long content stays contained", asy
   assert.match(css, /@media \(max-width:\s*760px\)/);
 });
 
+test("update deep links prioritize the selected note and continue to adjacent notes", async () => {
+  const script = await read("updates.js");
+
+  assert.match(
+    script,
+    /document\.body\.classList\.toggle\("updates-detail-mode", Boolean\(state\.issue\)\)/,
+  );
+  assert.match(script, /update-detail__neighbors/);
+  assert.match(script, /较新一条/);
+  assert.match(script, /更早一条/);
+  assert.match(script, /阅读全文 →/);
+  assert.doesNotMatch(script, /update-detail__neighbor-placeholder/);
+  assert.match(script, /slice\(0, currentIndex\)\.reverse\(\)\.find/);
+  assert.match(script, /slice\(currentIndex \+ 1\)\.find/);
+});
+
 test("public artifact contains no GitHub credential or reference-owner contact data", async () => {
   for (const [name, source] of await publicTextFiles()) {
     assert.doesNotMatch(source, /github_pat_[A-Za-z0-9_]+/, name);

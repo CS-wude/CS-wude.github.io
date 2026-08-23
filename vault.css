@@ -507,8 +507,7 @@ select:focus {
   .project:hover,
   .updates-preview__item:hover,
   .project-index__item:hover,
-  .note-entry:hover,
-  .update-entry:hover {
+  .note-entry:hover {
     box-shadow: var(--vault-shadow-3);
   }
 }
@@ -654,6 +653,7 @@ select:focus {
 
 /* Workbench log ---------------------------------------------------------- */
 .updates-masthead {
+  padding: clamp(32px, 4vw, 52px) clamp(24px, 5vw, 64px);
   border-bottom: 2px solid var(--vault-line);
 }
 
@@ -667,31 +667,149 @@ select:focus {
   border-width: 2px;
 }
 
+.updates-toolbar {
+  padding-block: 16px;
+}
+
+.updates-search {
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: center;
+}
+
 .updates-search__control {
+  width: min(100%, 620px);
+  justify-self: end;
   gap: 8px;
 }
 
+.updates-results-head {
+  padding: 48px 0 28px;
+}
+
+.updates-list {
+  border-top: 2px solid var(--vault-line);
+}
+
 .update-entry {
-  margin-bottom: 16px;
-  border: 2px solid var(--vault-line);
-  background: var(--vault-card);
-  transition: box-shadow 140ms ease;
+  grid-template-columns: 132px minmax(0, 1fr) auto;
+  gap: 28px;
+  margin-bottom: 0;
+  padding: 30px 0 34px;
+  border: 0;
+  border-bottom: 2px solid var(--vault-line);
+  background: transparent;
+  transition: background 140ms ease;
 }
 
 .update-entry__index {
-  border-right: 2px solid var(--vault-line);
-  background: var(--vault-accent);
+  border-right: 0;
+  background: transparent;
+}
+
+.update-entry__index span {
+  color: var(--vault-link);
+  font-weight: 900;
 }
 
 .update-entry__open {
-  min-width: 44px;
+  width: auto;
+  min-width: 96px;
   min-height: 44px;
+  padding: 0 14px;
+  font-size: 11px;
+  font-weight: 900;
 }
 
 .update-detail {
-  border: 2px solid var(--vault-line);
-  background: var(--vault-card);
-  box-shadow: var(--vault-shadow-3);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.updates-detail-mode .updates-masthead,
+.updates-detail-mode .updates-toolbar,
+.updates-detail-mode .updates-results-head {
+  display: none;
+}
+
+.updates-detail-mode .updates-workspace {
+  padding-top: clamp(24px, 4vw, 48px);
+}
+
+.update-detail__toolbar {
+  padding: 0 0 20px;
+  border-bottom: 2px solid var(--vault-line);
+}
+
+.update-detail__header {
+  padding: clamp(42px, 6vw, 72px) 0 clamp(34px, 5vw, 56px);
+  border-top: 0;
+  border-bottom: 2px solid var(--vault-line);
+}
+
+.update-detail__header h1 {
+  max-width: 860px;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.update-detail__body {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 72px) 0;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.update-detail__neighbors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(18px, 4vw, 42px);
+  border-block: 2px solid var(--vault-line);
+}
+
+.update-detail__neighbor {
+  min-height: 112px;
+}
+
+.update-detail__neighbor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  transition: background 120ms ease;
+}
+
+.update-detail__neighbor--newer + .update-detail__neighbor--older {
+  border-left: 2px solid var(--vault-line);
+}
+
+.update-detail__neighbor--older {
+  grid-column: 2;
+  text-align: right;
+}
+
+.update-detail__neighbor span {
+  color: var(--vault-muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.update-detail__neighbor strong {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.update-detail__neighbor:hover,
+.update-detail__neighbor:focus-visible,
+.update-entry:hover,
+.update-entry:focus-within {
+  background: rgba(240, 187, 61, 0.14);
 }
 
 /* Page routes ------------------------------------------------------------ */
@@ -753,19 +871,14 @@ select:focus {
   margin: 64px auto 96px;
 }
 
-/* Keep the update log on the same first-screen rhythm as the docs pages. */
-.updates-masthead {
-  padding: clamp(42px, 6vw, 72px) clamp(24px, 5vw, 64px);
-}
-
 .updates-masthead__layout {
-  grid-template-columns: minmax(0, 0.78fr) minmax(320px, 1.22fr);
-  gap: clamp(32px, 6vw, 80px);
-  margin-top: 34px;
+  grid-template-columns: minmax(0, 0.72fr) minmax(320px, 1.28fr);
+  gap: clamp(28px, 5vw, 64px);
+  margin-top: 24px;
 }
 
 .updates-masthead h1 {
-  font-size: clamp(3.7rem, 7vw, 6.2rem);
+  font-size: clamp(3.4rem, 6vw, 5.4rem);
 }
 
 /* Footer ----------------------------------------------------------------- */
@@ -910,9 +1023,12 @@ select:focus {
   .article-figure,
   .screenshot-figure,
   .profile-visual,
-  .notes-visual,
-  .update-detail {
+  .notes-visual {
     box-shadow: var(--vault-shadow-2);
+  }
+
+  .update-detail {
+    box-shadow: none;
   }
 
   .page-route--standalone {
@@ -921,19 +1037,78 @@ select:focus {
   }
 
   .updates-masthead {
-    padding: 36px 20px 42px;
+    padding: 24px 20px 28px;
   }
 
   .updates-masthead__layout {
     grid-template-columns: 1fr;
-    gap: 22px;
-    margin-top: 32px;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .updates-masthead__copy > p {
+    display: none;
+  }
+
+  .updates-sync {
+    margin-top: 0;
   }
 }
 
 @media (max-width: 760px) {
   .principle-grid li:nth-child(odd) {
     border-right: 0;
+  }
+
+  .updates-search {
+    grid-template-columns: 1fr;
+  }
+
+  .updates-search__control {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .updates-results-head {
+    padding: 32px 0 20px;
+  }
+
+  .update-entry {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 24px 0 28px;
+  }
+
+  .update-entry__index {
+    grid-column: 1;
+  }
+
+  .update-entry__open {
+    width: auto;
+    justify-self: start;
+  }
+
+  .update-detail__body {
+    font-size: 16px;
+  }
+
+  .update-detail__toolbar {
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .update-detail__neighbors {
+    grid-template-columns: 1fr;
+  }
+
+  .update-detail__neighbor--older {
+    grid-column: 1;
+  }
+
+  .update-detail__neighbor--newer + .update-detail__neighbor--older {
+    border-top: 2px solid var(--vault-line);
+    border-left: 0;
   }
 }
 

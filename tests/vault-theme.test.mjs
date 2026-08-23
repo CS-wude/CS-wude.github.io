@@ -228,3 +228,49 @@ test("homepage engineering principles read as one dark editorial system", async 
     "the desktop column divider must disappear after the grid becomes one column",
   );
 });
+
+test("updates list surfaces content early and detail deep links remove list chrome", async () => {
+  const css = await read("vault.css");
+
+  assert.match(
+    css,
+    /\.updates-masthead\s*{[^}]*padding:\s*clamp\(32px,\s*4vw,\s*52px\)/s,
+  );
+  assert.match(
+    css,
+    /\.updates-results-head\s*{[^}]*padding:\s*48px 0 28px/s,
+  );
+  assert.match(
+    css,
+    /\.update-entry\s*{[^}]*margin-bottom:\s*0[^}]*border:\s*0[^}]*background:\s*transparent/s,
+  );
+  assert.match(
+    css,
+    /\.updates-detail-mode \.updates-masthead,\s*\.updates-detail-mode \.updates-toolbar,\s*\.updates-detail-mode \.updates-results-head\s*{[^}]*display:\s*none/s,
+  );
+  assert.match(
+    css,
+    /\.update-detail\s*{[^}]*border:\s*0[^}]*background:\s*transparent[^}]*box-shadow:\s*none/s,
+  );
+  assert.match(
+    css,
+    /\.updates-masthead__copy > p\s*{[^}]*display:\s*none/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-width:\s*880px\)[\s\S]*?\.update-detail\s*{[^}]*box-shadow:\s*none/s,
+  );
+  assert.doesNotMatch(css, /update-detail__neighbor-placeholder/);
+  assert.match(
+    css,
+    /\.update-detail__neighbor--older\s*{[^}]*grid-column:\s*2/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-width:\s*760px\)[\s\S]*?\.update-detail__neighbor--older\s*{[^}]*grid-column:\s*1/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-width:\s*760px\)[\s\S]*?\.update-detail__toolbar\s*{[^}]*flex-direction:\s*row/s,
+  );
+});

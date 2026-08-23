@@ -167,3 +167,33 @@ test("homepage Vault layer keeps the ticker readable and project previews compac
   assert.match(mobile, /\.project-list\s*{[^}]*grid-template-columns:\s*1fr/s);
   assert.match(css, /\.updates-preview:has\(\.updates-preview__empty-card\)/);
 });
+
+test("homepage phone hero fits its first viewport without crowding the actions", async () => {
+  const css = await read("vault.css");
+  const phone = css.slice(
+    css.indexOf("@media (max-width: 520px)"),
+    css.indexOf("@media (min-width: 700px)"),
+  );
+
+  assert.match(phone, /\.hero-layout\s*{[^}]*gap:\s*28px[^}]*padding-block:\s*28px\s+22px/s);
+  assert.match(phone, /\.hero-actions\s*{[^}]*margin-top:\s*22px/s);
+});
+
+test("homepage landscape keeps compact project previews in two columns", async () => {
+  const css = await read("vault.css");
+  const landscape = css.slice(css.indexOf("@media (min-width: 700px)"));
+
+  assert.match(
+    landscape,
+    /\.project-list\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s,
+  );
+});
+
+test("homepage empty update heading avoids a desktop orphan line", async () => {
+  const css = await read("vault.css");
+
+  assert.match(
+    css,
+    /\.updates-preview:has\(\.updates-preview__empty-card\) h2\s*{[^}]*font-size:\s*clamp\(2\.6rem,\s*4\.2vw,\s*4\.4rem\)/s,
+  );
+});

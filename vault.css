@@ -420,7 +420,7 @@ select:focus {
 
 .updates-preview:has(.updates-preview__empty-card) h2 {
   margin-bottom: 24px;
-  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-size: clamp(2.6rem, 4.2vw, 4.4rem);
 }
 
 .updates-preview__empty-card {
@@ -897,6 +897,11 @@ select:focus {
     --vault-shadow-3: 4px 4px 0 #11110f;
   }
 
+  .hero-layout {
+    gap: 28px;
+    padding-block: 28px 22px;
+  }
+
   .hero h1 {
     font-size: clamp(2.8rem, 14vw, 4.4rem);
     overflow-wrap: normal;
@@ -909,6 +914,7 @@ select:focus {
 
   .hero-actions {
     align-items: stretch;
+    margin-top: 22px;
   }
 
   .hero-actions a,
@@ -1013,6 +1019,11 @@ select:focus {
 
   .hero-actions {
     margin-top: 18px;
+  }
+
+  .project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 }
 

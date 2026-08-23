@@ -9,7 +9,9 @@
   --vault-paper: #f5f1e7;
   --vault-card: #fffdf7;
   --vault-muted: #625f56;
+  --vault-dark-muted: #c9cac5;
   --vault-line: #11110f;
+  --vault-muted-line: #565750;
   --vault-accent: #e9b949;
   --vault-link: #2f54c9;
   --vault-shadow-1: 2px 2px 0 #11110f;
@@ -386,20 +388,58 @@ select:focus {
   font-weight: 900;
 }
 
+.principles {
+  gap: clamp(48px, 6vw, 96px);
+  padding-block: clamp(80px, 8vw, 120px);
+}
+
+.principles h2 {
+  font-size: clamp(3.8rem, 4.4vw, 5.4rem);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
 .principle-grid {
-  gap: 16px;
+  gap: 0;
+  border-top: 2px solid var(--vault-muted-line);
 }
 
 .principle-grid li,
 .principle-grid li:nth-child(2n) {
-  border: 2px solid var(--vault-line);
-  background: var(--vault-card);
+  min-height: 190px;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  align-content: start;
+  column-gap: 18px;
+  padding: 32px;
+  border: 0;
+  border-bottom: 2px solid var(--vault-muted-line);
+  background: transparent;
+  color: var(--vault-card);
   transform: none;
-  transition: box-shadow 140ms ease;
 }
 
-.principle-grid li:nth-child(2) {
-  background: var(--vault-accent);
+.principle-grid li:nth-child(odd) {
+  border-right: 2px solid var(--vault-muted-line);
+}
+
+.principle-grid span {
+  grid-row: 1 / 3;
+  color: var(--vault-accent);
+  font-size: 12px;
+}
+
+.principle-grid h3 {
+  margin: 0 0 12px;
+  font-size: clamp(1.65rem, 2.1vw, 2.35rem);
+  line-height: 1.1;
+}
+
+.principle-grid p {
+  grid-column: 2;
+  max-width: 390px;
+  color: var(--vault-dark-muted);
 }
 
 .updates-preview__list {
@@ -465,7 +505,6 @@ select:focus {
 
 @media (hover: hover) {
   .project:hover,
-  .principle-grid li:hover,
   .updates-preview__item:hover,
   .project-index__item:hover,
   .note-entry:hover,
@@ -889,6 +928,12 @@ select:focus {
     grid-template-columns: 1fr;
     gap: 22px;
     margin-top: 32px;
+  }
+}
+
+@media (max-width: 760px) {
+  .principle-grid li:nth-child(odd) {
+    border-right: 0;
   }
 }
 

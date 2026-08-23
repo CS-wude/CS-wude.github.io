@@ -197,3 +197,34 @@ test("homepage empty update heading avoids a desktop orphan line", async () => {
     /\.updates-preview:has\(\.updates-preview__empty-card\) h2\s*{[^}]*font-size:\s*clamp\(2\.6rem,\s*4\.2vw,\s*4\.4rem\)/s,
   );
 });
+
+test("homepage engineering principles read as one dark editorial system", async () => {
+  const css = await read("vault.css");
+  const phone = css.slice(
+    css.indexOf("@media (max-width: 760px)"),
+    css.indexOf("@media (max-width: 520px)"),
+  );
+
+  assert.match(
+    css,
+    /\.principles h2\s*{[^}]*font-size:\s*clamp\(3\.8rem,\s*4\.4vw,\s*5\.4rem\)[^}]*text-wrap:\s*balance/s,
+  );
+  assert.match(
+    css,
+    /\.principle-grid\s*{[^}]*gap:\s*0[^}]*border-top:\s*2px solid var\(--vault-muted-line\)/s,
+  );
+  assert.match(
+    css,
+    /\.principle-grid li,\s*\.principle-grid li:nth-child\(2n\)\s*{[^}]*grid-template-columns:\s*36px minmax\(0,\s*1fr\)[^}]*background:\s*transparent[^}]*color:\s*var\(--vault-card\)/s,
+  );
+  assert.match(
+    css,
+    /\.principle-grid p\s*{[^}]*color:\s*var\(--vault-dark-muted\)/s,
+    "body copy must keep readable contrast on the dark surface",
+  );
+  assert.match(
+    phone,
+    /\.principle-grid li:nth-child\(odd\)\s*{[^}]*border-right:\s*0/s,
+    "the desktop column divider must disappear after the grid becomes one column",
+  );
+});

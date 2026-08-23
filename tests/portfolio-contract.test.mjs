@@ -115,6 +115,20 @@ test("homepage renderer emits only the selected projects with safe text", async 
   assert.equal((markup.match(/<article class="project"/g) ?? []).length, 4);
 });
 
+test("homepage project previews stay concise and keep a direct path to each case", async () => {
+  const { renderFeaturedProjects } = await import("../script.js");
+  const markup = renderFeaturedProjects();
+
+  assert.equal((markup.match(/class="project-summary"/g) ?? []).length, 4);
+  assert.equal((markup.match(/class="project-detail-link"/g) ?? []).length, 4);
+  assert.doesNotMatch(markup, /project-highlights/);
+  assert.doesNotMatch(markup, /project-tags/);
+  assert.ok(
+    markup.indexOf("<h3>") < markup.indexOf('class="project-number"'),
+    "project name should appear before supporting metadata",
+  );
+});
+
 test("homepage exposes the refreshed progressive content structure", async () => {
   const html = await read("index.html");
 
@@ -122,7 +136,7 @@ test("homepage exposes the refreshed progressive content structure", async () =>
   assert.match(html, /<main id="mainContent"/);
   assert.match(html, /class="capability-ticker"/);
   assert.match(html, /id="updatesPreview"/);
-  assert.match(html, /type="module" src="\.\/script\.js"/);
+  assert.match(html, /type="module" src="\.\/script\.js(?:\?v=[^"]+)?"/);
   assert.match(html, /<noscript>[\s\S]*projects\.html/);
   assert.match(html, /application\/ld\+json/);
 });
@@ -249,6 +263,15 @@ test("homepage update preview renders three recent static records without remote
   assert.match(markup, /第七条/);
   assert.doesNotMatch(markup, /不应出现/);
   assert.match(markup, /updates\.html\?issue=9/);
+});
+
+test("homepage empty update preview offers a useful next step", async () => {
+  const { renderUpdatesPreview } = await import("../script.js");
+  const markup = renderUpdatesPreview({ schemaVersion: 1, issues: [] });
+
+  assert.match(markup, /class="updates-preview__empty-card"/);
+  assert.match(markup, /href="\.\/updates\.html"/);
+  assert.match(markup, /查看动态同步状态/);
 });
 
 test("project index renderer exposes all seven cases and their ownership", async () => {

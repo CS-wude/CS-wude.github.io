@@ -36,10 +36,6 @@ const visualTemplates = {
 };
 
 const projectMarkup = (project, index) => {
-  const tags = project.tags.map((tag) => `<span>${escapeHTML(tag)}</span>`).join("");
-  const highlights = project.highlights
-    .map((highlight) => `<li>${escapeHTML(highlight)}</li>`)
-    .join("");
   const number = String(index + 1).padStart(2, "0");
   const imageRatio = /^\d+\s*\/\s*\d+$/.test(project.imageRatio || "")
     ? project.imageRatio
@@ -54,13 +50,14 @@ const projectMarkup = (project, index) => {
   return `
     <article class="project" data-project-slug="${escapeHTML(project.slug)}" data-reveal>
       <div class="project-info">
-        <p class="project-number">${number} / ${escapeHTML(project.period)}</p>
-        <p class="project-role">${escapeHTML(project.role)}</p>
         <h3>${escapeHTML(project.title)}</h3>
-        <p class="project-type">${escapeHTML(project.category)}</p>
-        <p class="project-description">${escapeHTML(project.description)}</p>
-        <ol class="project-highlights">${highlights}</ol>
-        <div class="project-meta"><div class="project-tags">${tags}</div><a class="project-detail-link" href="./projects.html#${escapeHTML(project.slug)}">查看项目链路 →</a></div>
+        <p class="project-summary">${escapeHTML(project.summary)}</p>
+        <div class="project-facts">
+          <p class="project-number">${number} / ${escapeHTML(project.period)}</p>
+          <p class="project-type">${escapeHTML(project.category)}</p>
+          <p class="project-role">${escapeHTML(project.role)}</p>
+        </div>
+        <div class="project-meta"><a class="project-detail-link" href="./projects.html#${escapeHTML(project.slug)}">查看项目链路 →</a></div>
       </div>
       ${visual}
     </article>`;
@@ -90,7 +87,10 @@ export const renderUpdatesPreview = (snapshot) => {
 
   const issues = snapshot.issues.slice(0, 3);
   if (!issues.length) {
-    return '<p class="updates-preview__empty">工作台还没有公开记录。</p>';
+    return `<div class="updates-preview__empty-card">
+      <p>工作台还没有公开记录。</p>
+      <a href="./updates.html">查看动态同步状态 →</a>
+    </div>`;
   }
 
   return issues

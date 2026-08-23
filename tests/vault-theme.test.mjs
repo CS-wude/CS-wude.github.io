@@ -147,3 +147,23 @@ test("closed mobile directory leaves the keyboard and accessibility trees", asyn
   assert.equal(sidebar.getAttribute("inert"), null);
   assert.equal(sidebar.getAttribute("aria-hidden"), null);
 });
+
+test("homepage Vault layer keeps the ticker readable and project previews compact", async () => {
+  const css = await read("vault.css");
+  const mobile = css.slice(css.indexOf("@media (max-width: 880px)"));
+
+  assert.match(
+    css,
+    /\.capability-ticker\s*{[^}]*background:\s*var\(--vault-ink\)[^}]*color:\s*var\(--vault-card\)/s,
+  );
+  assert.match(
+    css,
+    /\.project-list\s*{[^}]*display:\s*grid[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s,
+  );
+  assert.match(
+    css,
+    /\.project-list\s+\.project-visual\s*{[^}]*aspect-ratio:\s*21\s*\/\s*9/s,
+  );
+  assert.match(mobile, /\.project-list\s*{[^}]*grid-template-columns:\s*1fr/s);
+  assert.match(css, /\.updates-preview:has\(\.updates-preview__empty-card\)/);
+});

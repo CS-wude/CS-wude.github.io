@@ -25,22 +25,11 @@ jobs:
     steps:
       - name: Check out site
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 11.19.0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
-
-      - name: Install site dependencies
-        run: pnpm install --frozen-lockfile
 
       - name: Generate GitHub Issues snapshot
         run: node .github/scripts/sync-issues.mjs
@@ -53,18 +42,11 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Build all sites
-        run: pnpm build
+      - name: Verify blog
+        run: npm run test:blog
 
-      - name: Verify sites
-        run: |
-          pnpm test
-          pnpm --dir sites/product check
-          pnpm --dir sites/fde-learning check
-          pnpm --dir sites/fde-learning verify
-
-      - name: Prepare product repository artifact
-        run: node scripts/assemble-site.mjs --product-only
+      - name: Prepare blog artifact
+        run: npm run build:blog
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

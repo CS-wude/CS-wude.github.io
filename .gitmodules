@@ -1,3 +1,6 @@
 [submodule "sites/fde-learning"]
 	path = sites/fde-learning
 	url = https://github.com/CS-wude/fde-learning.git
+[submodule "sites/product"]
+	path = sites/product
+	url = https://github.com/CS-wude/product.git

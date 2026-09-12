@@ -2,7 +2,7 @@
 
 ## 产品站与 FDE 学习站
 
-新增的两个子站分别位于 `/product/` 和 `/fde-learning/`。产品站源码位于 `sites/product/`；`sites/fde-learning/` 是独立仓库 [CS-wude/fde-learning](https://github.com/CS-wude/fde-learning) 的 submodule。参考项目、课程内容继续保留。
+本仓库专门发布个人博客。产品站由独立仓库 [CS-wude/product](https://github.com/CS-wude/product) 发布到 `/product/`；学习站由 [CS-wude/fde-learning](https://github.com/CS-wude/fde-learning) 发布到 `/fde-learning/`。`sites/product/` 和 `sites/fde-learning/` 是可选的 submodule，用于本地联调。参考项目、课程内容继续保留。
 
 - [个人信息补充清单](docs/PERSONAL-INFO.md)
 - [参考源码与版本](docs/UPSTREAM-SOURCES.md)
@@ -18,7 +18,7 @@ pnpm preview
 
 首次克隆请使用 `git clone --recurse-submodules`，或运行 `git submodule update --init --recursive`。本地预览：`http://127.0.0.1:8012/product/`、`http://127.0.0.1:8012/fde-learning/`。
 
-两个仓库独立部署：本仓库发布原个人站和产品站；学习站由 `CS-wude/fde-learning` 发布。`pnpm build` 生成合并的本地预览，主仓库 CI 校验后通过 `node scripts/assemble-site.mjs --product-only` 生成不含学习站的发布产物。
+三个仓库独立部署。本仓库 CI 无须安装子站依赖或拉取 submodule，运行 `npm run test:blog` 后通过 `npm run build:blog` 生成仅含博客的发布产物。`pnpm build` 和 `pnpm test` 用于三个站点的本地联合检查。子站可单独克隆、开发和发布。
 
 这是我的个人网站，也是我整理项目、技术判断和工程经验的地方。
 

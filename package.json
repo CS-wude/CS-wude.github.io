@@ -8,12 +8,11 @@
   },
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "build": "node scripts/generate-social-images.mjs && pnpm --dir sites/product build && pnpm --dir sites/fde-learning build && node scripts/assemble-site.mjs",
+    "test:blog": "node --test tests/navigation-system.test.mjs tests/portfolio-contract.test.mjs tests/projects-experience.test.mjs tests/vault-theme.test.mjs",
+    "build:blog": "node scripts/assemble-site.mjs --blog-only",
+    "build": "pnpm --dir sites/product build && pnpm --dir sites/fde-learning build && node scripts/assemble-site.mjs",
     "dev:product": "pnpm --dir sites/product dev",
     "dev:fde": "pnpm --dir sites/fde-learning dev",
     "preview": "node scripts/preview-site.mjs"
-  },
-  "devDependencies": {
-    "sharp": "0.34.5"
   }
 }

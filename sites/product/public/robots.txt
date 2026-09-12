@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://cs-wude.github.io/product/sitemap.xml

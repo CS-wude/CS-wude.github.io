@@ -46,11 +46,12 @@ pnpm preview
 
 ## 发布
 
-两个仓库分别发布，GitHub Pages 的 Source 均为 GitHub Actions：
+三个仓库分别发布，GitHub Pages 的 Source 均为 GitHub Actions：
 
-- `CS-wude/CS-wude.github.io`：发布原个人站和 `/product/`。根工作流构建联调产物并完成校验，发布前排除学习站文件。
+- `CS-wude/CS-wude.github.io`：仅发布个人博客，无须构建或安装两个子站。
+- `CS-wude/product`：独立发布 `/product/`，使用产品站自己的工作流、依赖锁文件和发布校验。
 - `CS-wude/fde-learning`：发布 `/fde-learning/`，使用学习站自己的工作流与依赖锁文件。
 
-`sites/fde-learning` 是独立仓库的 Git submodule，便于本地同时预览两个站。首次克隆主仓库时使用 `git clone --recurse-submodules`；已有克隆执行 `git submodule update --init --recursive`。修改学习站后，应先在该目录提交并推送，再在主仓库提交新的 submodule 版本引用。
+`sites/product`、`sites/fde-learning` 是独立仓库的 Git submodule，便于本地同时预览三个站。首次克隆主仓库时使用 `git clone --recurse-submodules`；已有克隆执行 `git submodule update --init --recursive`。修改子站后，应先在对应目录提交并推送，再在主仓库提交新的 submodule 版本引用。仅维护博客时不需要初始化子站。
 
 教程导航沿用上游“24 周标准教程”规划，但上游实际只有第 1–20 周文章。本次未补写第 21–24 周。

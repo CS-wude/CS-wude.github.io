@@ -1,6 +1,6 @@
 # 参考源码
 
-2026-09-13 部署结构调整：产品站由 `CS-wude/CS-wude.github.io` 发布；学习站独立为 `CS-wude/fde-learning` 仓库，并以 `sites/fde-learning` submodule 供本地联调。两个仓库各自拥有 GitHub Pages 工作流。
+2026-09-13 部署结构调整：`CS-wude/CS-wude.github.io` 仅发布博客；产品站独立为 `CS-wude/product`，学习站独立为 `CS-wude/fde-learning`。两个子站分别以 `sites/product`、`sites/fde-learning` submodule 供本地联调。三个仓库各自拥有 GitHub Pages 工作流，产品站访问路径仍为 `/product/`。
 
 2026-09-12 拉取并迁移：
 

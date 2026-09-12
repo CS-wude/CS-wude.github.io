@@ -1,5 +1,25 @@
 # WUDE / Personal Site
 
+## 产品站与 FDE 学习站
+
+新增的两个子站分别位于 `/product/` 和 `/fde-learning/`。产品站源码位于 `sites/product/`；`sites/fde-learning/` 是独立仓库 [CS-wude/fde-learning](https://github.com/CS-wude/fde-learning) 的 submodule。参考项目、课程内容继续保留。
+
+- [个人信息补充清单](docs/PERSONAL-INFO.md)
+- [参考源码与版本](docs/UPSTREAM-SOURCES.md)
+
+完整构建需要 Node.js 24 与 pnpm 11.19.0：
+
+```powershell
+pnpm install --frozen-lockfile
+pnpm build
+pnpm test
+pnpm preview
+```
+
+首次克隆请使用 `git clone --recurse-submodules`，或运行 `git submodule update --init --recursive`。本地预览：`http://127.0.0.1:8012/product/`、`http://127.0.0.1:8012/fde-learning/`。
+
+两个仓库独立部署：本仓库发布原个人站和产品站；学习站由 `CS-wude/fde-learning` 发布。`pnpm build` 生成合并的本地预览，主仓库 CI 校验后通过 `node scripts/assemble-site.mjs --product-only` 生成不含学习站的发布产物。
+
 这是我的个人网站，也是我整理项目、技术判断和工程经验的地方。
 
 我主要做 Java 后端、AI 应用工程和平台交付。相比把功能快速拼出来，我更关心系统在并发、超时、重试和依赖抖动时是否仍然可靠，以及问题发生后能不能留下足够清楚的证据。
@@ -41,7 +61,7 @@
 
 ## 技术实现
 
-网站使用原生 HTML、CSS 和 JavaScript ES Modules 构建，不依赖前端框架，也没有在线后端服务。项目资料集中在 `data/projects.js`，首页和项目索引从同一份静态数据渲染。
+原有个人站使用原生 HTML、CSS 和 JavaScript ES Modules 构建。项目资料集中在 `data/projects.js`，首页和项目索引从同一份静态数据渲染。新增产品站使用 React + Vite，教程站使用 Astro + Starlight；三个站点均发布为静态文件。
 
 动态内容由 GitHub Actions 在构建阶段生成静态快照，再随网站一起部署到 GitHub Pages。浏览器只读取已经发布的数据，不直接请求 GitHub API。
 
@@ -76,10 +96,10 @@ python -m http.server 8000
 
 ## 本地检查
 
-仓库不需要安装第三方依赖。使用 Node.js 20 或更高版本运行：
+使用 Node.js 24，在完成上面的依赖安装与 `pnpm build` 后运行：
 
 ```powershell
-npm test
+pnpm test
 ```
 
 测试会检查项目数据、页面结构、移动端与减弱动效保护、静态资源、Actions 部署契约，以及公开产物中是否意外出现凭据或参考站联系人信息。

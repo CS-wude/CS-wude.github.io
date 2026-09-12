@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://cs-wude.github.io/product/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cs-wude.github.io/product/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://cs-wude.github.io/product/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cs-wude.github.io/product/" />
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/en/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://cs-wude.github.io/product/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://cs-wude.github.io/product/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cs-wude.github.io/product/" />
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/cases/lynkvis-ai/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/cases/ecommerce-research-agent/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/cases/enterprise-rag-mcp-assistant/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/cases/mental-health-platform/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/cases/industrial-compliance-platform/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/cases/sre-copilot/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cs-wude.github.io/product/cases/content-orchestration/</loc>
+    <lastmod>2026-08-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

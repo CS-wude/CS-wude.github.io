@@ -53,7 +53,7 @@ const publicTextFiles = async () => {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const path = `${prefix}${entry.name}`;
       if (entry.isDirectory()) {
-        if ([".git", ".worktrees", "docs", "tests"].includes(entry.name)) continue;
+        if ([".git", ".worktrees", "docs", "tests", "sites", "node_modules", "_site"].includes(entry.name)) continue;
         await visit(new URL(`${entry.name}/`, directory), `${path}/`);
         continue;
       }

@@ -1,4 +1,4 @@
-name: Deploy portfolio with GitHub updates
+name: Deploy blog with GitHub updates
 
 on:
   push:
@@ -43,10 +43,10 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Verify blog
-        run: npm run test:blog
+        run: npm test
 
       - name: Prepare blog artifact
-        run: npm run build:blog
+        run: npm run build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

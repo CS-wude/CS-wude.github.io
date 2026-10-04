@@ -16,4 +16,4 @@ createServer(async (req, res) => {
     const body = await readFile(file);
     res.writeHead(200, { 'content-type': types[extname(file)] || 'application/octet-stream' }).end(body);
   } catch { res.writeHead(404).end('Not found'); }
-}).listen(port, '127.0.0.1', () => console.log(`Preview: http://127.0.0.1:${port}/product/ and http://127.0.0.1:${port}/fde-learning/`));
+}).listen(port, '127.0.0.1', () => console.log(`Preview: http://127.0.0.1:${port}/`));

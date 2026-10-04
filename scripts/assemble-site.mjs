@@ -12,10 +12,4 @@ for (const entry of await readdir(root, { withFileTypes: true })) {
   }
 }
 for (const dir of ['assets', 'data']) await cp(join(root, dir), join(output, dir), { recursive: true });
-if (!process.argv.includes('--blog-only')) {
-  await cp(join(root, 'sites/product/dist-github-pages'), join(output, 'product'), { recursive: true });
-  await cp(join(root, 'sites/fde-learning/dist'), join(output, 'fde-learning'), { recursive: true });
-  console.log('Built combined local preview with the portfolio, /product/ and /fde-learning/.');
-} else {
-  console.log('Built blog artifact; product and FDE learning deploy from their own repositories.');
-}
+console.log('Built blog artifact.');

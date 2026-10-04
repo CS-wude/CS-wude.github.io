@@ -26,8 +26,6 @@ export const renderDocsNavigation = ({ currentPage = "", headings = [] } = {}) =
   ];
   const siteLinks = [
     { href: "./index.html", text: "首页" },
-    { href: "./product/", text: "产品与服务" },
-    { href: "./fde-learning/", text: "FDE 教程" },
     { href: "./updates.html", text: "最近动态", page: "updates" },
     { href: "./about.html", text: "关于我", page: "about" },
   ];

@@ -1,6 +1,3 @@
 node_modules/
 _site/
-sites/*/dist/
-sites/*/dist-github-pages/
-sites/*/.astro/
 .worktrees/

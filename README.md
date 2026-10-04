@@ -1,26 +1,6 @@
-# WUDE / Personal Site
+# WUDE / Personal Blog
 
-## 产品站与 FDE 学习站
-
-本仓库专门发布个人博客。产品站由独立仓库 [CS-wude/product](https://github.com/CS-wude/product) 发布到 `/product/`；学习站由 [CS-wude/fde-learning](https://github.com/CS-wude/fde-learning) 发布到 `/fde-learning/`。`sites/product/` 和 `sites/fde-learning/` 是可选的 submodule，用于本地联调。参考项目、课程内容继续保留。
-
-- [个人信息补充清单](docs/PERSONAL-INFO.md)
-- [参考源码与版本](docs/UPSTREAM-SOURCES.md)
-
-完整构建需要 Node.js 24 与 pnpm 11.19.0：
-
-```powershell
-pnpm install --frozen-lockfile
-pnpm build
-pnpm test
-pnpm preview
-```
-
-首次克隆请使用 `git clone --recurse-submodules`，或运行 `git submodule update --init --recursive`。本地预览：`http://127.0.0.1:8012/product/`、`http://127.0.0.1:8012/fde-learning/`。
-
-三个仓库独立部署。本仓库 CI 无须安装子站依赖或拉取 submodule，运行 `npm run test:blog` 后通过 `npm run build:blog` 生成仅含博客的发布产物。`pnpm build` 和 `pnpm test` 用于三个站点的本地联合检查。子站可单独克隆、开发和发布。
-
-这是我的个人网站，也是我整理项目、技术判断和工程经验的地方。
+这是我的个人技术博客，也是我整理项目、技术判断和工程经验的地方。仓库只包含博客本身，使用 GitHub Pages 独立构建和发布。
 
 我主要做 Java 后端、AI 应用工程和平台交付。相比把功能快速拼出来，我更关心系统在并发、超时、重试和依赖抖动时是否仍然可靠，以及问题发生后能不能留下足够清楚的证据。
 
@@ -61,7 +41,7 @@ pnpm preview
 
 ## 技术实现
 
-原有个人站使用原生 HTML、CSS 和 JavaScript ES Modules 构建。项目资料集中在 `data/projects.js`，首页和项目索引从同一份静态数据渲染。新增产品站使用 React + Vite，教程站使用 Astro + Starlight；三个站点均发布为静态文件。
+博客使用原生 HTML、CSS 和 JavaScript ES Modules 构建。项目资料集中在 `data/projects.js`，首页和项目索引从同一份静态数据渲染。
 
 动态内容由 GitHub Actions 在构建阶段生成静态快照，再随网站一起部署到 GitHub Pages。浏览器只读取已经发布的数据，不直接请求 GitHub API。
 
@@ -96,17 +76,19 @@ python -m http.server 8000
 
 ## 本地检查
 
-使用 Node.js 24，在完成上面的依赖安装与 `pnpm build` 后运行：
+使用 Node.js 22.13 或更高版本：
 
 ```powershell
-pnpm test
+npm test
+npm run build
+npm run preview
 ```
 
 测试会检查项目数据、页面结构、移动端与减弱动效保护、静态资源、Actions 部署契约，以及公开产物中是否意外出现凭据或参考站联系人信息。
 
 ## 部署
 
-推送到 `main` 后，`Deploy portfolio with GitHub updates` 工作流会先运行 `.github/scripts/sync-issues.mjs`，生成 `data/updates.json` 和 `data/updates-data.js`，再部署 GitHub Pages。定时任务会刷新更新页数据，浏览器只读取已经发布的静态快照，不直接访问 GitHub API。
+推送到 `main` 后，`Deploy blog with GitHub updates` 工作流会先运行 `.github/scripts/sync-issues.mjs`，生成 `data/updates.json` 和 `data/updates-data.js`，再部署 GitHub Pages。定时任务会刷新更新页数据，浏览器只读取已经发布的静态快照，不直接访问 GitHub API。
 
 ## 内容说明
 

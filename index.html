@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#e9b949" />
+    <meta name="theme-color" content="#f8f7f2" />
     <meta name="description" content="WUDE 的个人技术博客与工程作品集：Java 后端、AI 应用、Agent、RAG、分布式系统与平台交付。" />
     <link rel="canonical" href="https://cs-wude.github.io/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="WUDE — Java 后端与 AI 平台工程" />
-    <meta property="og:description" content="记录真实项目里的状态、失败路径、恢复入口和工程判断。" />
+    <meta property="og:title" content="WUDE — 代码与思考" />
+    <meta property="og:description" content="记录 Java 后端与 AI 应用开发中的项目实践、问题和思考。" />
     <meta property="og:url" content="https://cs-wude.github.io/" />
-    <title>WUDE — Java 后端与 AI 平台工程</title>
+    <title>WUDE — 代码与思考</title>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111111'/%3E%3Cpath d='M12 17h9l5 26h1l5-18h8l5 18h1l5-26h9l-9 32H40l-4-15-4 15H21z' fill='%23e9b949'/%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./vault.css?v=20260823-4" />
+    <link rel="stylesheet" href="./vault.css?v=20261028-2" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -61,28 +61,27 @@
 
     <main id="mainContent">
       <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-art" aria-hidden="true"></div>
         <div class="hero-meta" data-reveal>
           <span>Java backend / AI application / Platform delivery</span>
           <span>China · 2026</span>
         </div>
         <div class="hero-layout">
           <div class="hero-copy" data-reveal>
-            <p class="section-label">Software engineer / Tech lead</p>
-            <h1 id="hero-title"><span>BUILD.</span><span>TRACE.</span><em>RECOVER.</em></h1>
+            <p class="section-label">Engineering notes</p>
+            <h1 id="hero-title"><span>写代码，</span><span>也记下思考。</span></h1>
           </div>
           <div class="hero-intro" data-reveal>
-            <p class="hero-lead">我是 WUDE，Java 后端与 AI 平台工程师，也是开发组组长。</p>
-            <p>我习惯先画清状态、事件和失败路径，再把微服务、Agent、RAG、异步任务与部署链路接成能运行、能解释、能继续维护的系统。</p>
+            <p class="hero-lead">我是 WUDE，主要做 Java 后端和 AI 应用开发。</p>
+            <p>这里记录我做过的项目，也写一些开发中的经验与思考。</p>
             <div class="hero-actions">
-              <a class="primary-link" href="#projects"><span>看我主导的项目</span><span aria-hidden="true">↓</span></a>
-              <a class="quiet-link" href="./updates.html">最近在做什么 ↗</a>
+              <a class="primary-link" href="#projects"><span>项目与实践</span><span aria-hidden="true">↓</span></a>
+              <a class="quiet-link" href="#recent-writing">最近写的 ↓</a>
             </div>
           </div>
         </div>
         <div class="hero-footer" data-reveal>
-          <span class="hero-monogram" aria-hidden="true">W</span>
-          <p>并发会涨，依赖会抖，任务会失败。<br />系统要留下证据，也要留一条回来的路。</p>
+          <p>记录开发过程中的问题、取舍和经验。</p>
           <span class="hero-code">01 / HOME</span>
         </div>
       </section>
@@ -94,18 +93,30 @@
           <span>RAG / VECTOR SEARCH</span><i aria-hidden="true"></i>
           <span>ASYNC / EVENT / RETRY</span><i aria-hidden="true"></i>
           <span>DOCKER / KUBERNETES</span><i aria-hidden="true"></i>
-          <span>TECH LEAD / DELIVERY</span><i aria-hidden="true"></i>
+          <span>BUILD / DEPLOY</span><i aria-hidden="true"></i>
         </div>
+      </section>
+
+      <section class="updates-preview" id="recent-writing" aria-labelledby="updates-preview-title">
+        <div class="updates-preview__heading" data-reveal>
+          <p class="section-label"><span>02</span> Recent writing</p>
+          <h2 id="updates-preview-title">最近写的</h2>
+          <a href="./updates.html">查看全部记录 →</a>
+        </div>
+        <div class="updates-preview__list" id="updatesPreview">
+          <p class="updates-preview__empty">正在读取已经随网站发布的静态记录……</p>
+        </div>
+        <noscript><p class="noscript-note">前往 <a href="./updates.html">动态页</a> 查看已经同步的工作记录。</p></noscript>
       </section>
 
       <section class="projects-section" id="projects" aria-labelledby="projects-title">
         <div class="section-heading" data-reveal>
-          <p class="section-label"><span>02</span> Selected systems</p>
+          <p class="section-label"><span>03</span> Selected projects</p>
           <div>
-            <p class="section-kicker">真实项目，不只展示界面</p>
-            <h2 id="projects-title">我接住的<br />系统链路。</h2>
+            <p class="section-kicker">从需求到交付</p>
+            <h2 id="projects-title">项目与实践</h2>
           </div>
-          <p>这里写清我负责的边界、最容易失控的环节，以及最后留下了哪些可恢复、可交付的能力。</p>
+          <p>一些做过的项目，以及其中的技术选择、实现过程和复盘。</p>
         </div>
         <div class="project-list" id="projectList" aria-live="polite"></div>
         <noscript><p class="noscript-note">项目脚本未运行，你仍可以前往 <a href="./projects.html">完整项目索引</a> 阅读全部案例。</p></noscript>
@@ -114,9 +125,9 @@
 
       <section class="principles" aria-labelledby="principles-title">
         <div class="principles-intro" data-reveal>
-          <p class="section-label"><span>03</span> Engineering habits</p>
-          <h2 id="principles-title">先处理失败，<br />再优化顺利。</h2>
-          <p>功能第一次跑通只是开始。真正能交出去的系统，还要知道自己在哪里、为什么失败、由谁恢复。</p>
+          <p class="section-label"><span>04</span> Engineering habits</p>
+          <h2 id="principles-title">开发中的习惯</h2>
+          <p>做项目时，我会多花一些时间想清楚状态、边界和失败后的处理方式。</p>
         </div>
         <ol class="principle-grid">
           <li data-reveal><span>01</span><h3>状态先行</h3><p>先定义状态、事件、幂等键和检查点，再写正常流程。</p></li>
@@ -126,32 +137,15 @@
         </ol>
       </section>
 
-      <section class="updates-preview" aria-labelledby="updates-preview-title">
-        <div class="updates-preview__heading" data-reveal>
-          <p class="section-label"><span>04</span> Workbench log</p>
-          <h2 id="updates-preview-title">最近的<br />工作台记录。</h2>
-          <a href="./updates.html">进入全部动态 →</a>
-        </div>
-        <div class="updates-preview__list" id="updatesPreview">
-          <p class="updates-preview__empty">正在读取已经随网站发布的静态记录……</p>
-        </div>
-        <noscript><p class="noscript-note">前往 <a href="./updates.html">动态页</a> 查看已经同步的工作记录。</p></noscript>
-      </section>
-
       <section class="about" id="about" aria-labelledby="about-title">
         <div class="about-heading" data-reveal>
           <p class="section-label"><span>05</span> Working profile</p>
-          <h2 id="about-title">从业务状态，<br />一直做到部署现场。</h2>
+          <h2 id="about-title">关于我</h2>
         </div>
         <div class="about-body" data-reveal>
-          <p>我的工作通常落在业务系统与基础设施之间：向上理解流程和验收标准，向下处理存储、队列、模型服务、工具协议和容器环境。</p>
-          <p>带组时，我负责把问题拆到可以独立负责、独立验收；出故障时先补证据和复现，再决定是修主流程、补恢复入口，还是减少不必要的复杂度。</p>
-          <div class="about-facts" aria-label="作品集概览">
-            <div><strong>07</strong><span>Owned cases</span></div>
-            <div><strong>3×</strong><span>Backend / AI / Delivery</span></div>
-            <div><strong>∞</strong><span>Iteration</span></div>
-          </div>
-          <a class="section-more" href="./about.html">关于我与技术偏好 →</a>
+          <p>我做过业务系统、AI 应用和部署交付，也会参与前端联调，跟进一个功能从实现到上线的过程。</p>
+          <p>我曾担任开发组长，负责需求拆解、方案评审、代码评审和团队协作。这段经历让我更关注问题怎样被理解，以及团队如何一起完成交付。</p>
+          <a class="section-more" href="./about.html">了解更多 →</a>
         </div>
       </section>
     </main>
@@ -159,7 +153,7 @@
     <footer class="site-footer">
       <div>
         <p class="section-label">Keep building</p>
-        <h2>先把东西做出来，<br />剩下的边做边写。</h2>
+        <h2>继续写代码，<br />也继续记录。</h2>
       </div>
       <div class="footer-links">
         <a href="./projects.html">Projects ↗</a>
@@ -171,7 +165,7 @@
       </div>
       <div class="footer-bottom">
         <span>© <span id="currentYear"></span> WUDE</span>
-        <span>Made as a static, inspectable site.</span>
+        <span>记录项目，也记录思考。</span>
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>

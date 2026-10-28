@@ -9,7 +9,6 @@ export const setMenuState = (
   mainNav?.classList.toggle("is-open", isOpen);
   menuToggle?.setAttribute("aria-expanded", String(isOpen));
   menuToggle?.setAttribute("aria-label", isOpen ? "关闭菜单" : "打开菜单");
-  root.body?.classList.toggle("site-menu-open", isOpen);
   if (restoreFocus) menuToggle?.focus();
 };
 
@@ -63,6 +62,14 @@ export const initSiteShell = (
   mainNav?.addEventListener("click", (event) => {
     if (event.target.closest("a")) setMenuState(false, { root });
   });
+
+  const dismissOutsideMenu = (event) => {
+    if (!mainNav?.classList.contains("is-open")) return;
+    if (mainNav.contains(event.target) || menuToggle?.contains(event.target)) return;
+    setMenuState(false, { root });
+  };
+  root.addEventListener("pointerdown", dismissOutsideMenu);
+  root.addEventListener("focusin", dismissOutsideMenu);
 
   root.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && mainNav?.classList.contains("is-open")) {

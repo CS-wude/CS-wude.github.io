@@ -21,6 +21,7 @@ const createElement = () => {
   const listeners = new Map();
   const element = {
     classList: createClassList(),
+    contains: (target) => target === element,
     focused: false,
     textContent: "",
     addEventListener: (type, listener) => listeners.set(type, listener),
@@ -168,7 +169,7 @@ test("shared progressive enhancement module is safe outside a browser", async ()
   assert.equal(typeof module.initRevealAnimations, "function");
 });
 
-test("global menu owns its scroll lock and closes at the CSS desktop breakpoint", async () => {
+test("compact global menu preserves reading scroll and closes at the desktop breakpoint", async () => {
   const { initSiteShell, setMenuState } = await import("../site.js");
   const menuToggle = createElement();
   const mainNav = createElement();
@@ -191,13 +192,52 @@ test("global menu owns its scroll lock and closes at the CSS desktop breakpoint"
   setMenuState(true, { root });
 
   assert.equal(mediaQuery, "(min-width: 881px)");
-  assert.equal(root.body.classList.contains("site-menu-open"), true);
+  assert.equal(root.body.classList.contains("site-menu-open"), false);
   assert.equal(root.body.classList.contains("docs-menu-open"), false);
 
   mediaChange({ matches: true });
 
   assert.equal(mainNav.classList.contains("is-open"), false);
   assert.equal(root.body.classList.contains("site-menu-open"), false);
+});
+
+test("global menu dismisses outside interaction while keeping inside interaction open", async () => {
+  const { initSiteShell, setMenuState } = await import("../site.js");
+  const menuToggle = createElement();
+  const mainNav = createElement();
+  const root = createRoot({ ".menu-toggle": menuToggle, ".main-nav": mainNav });
+  initSiteShell(root, { matchMedia: () => ({ addEventListener: () => {} }) });
+
+  for (const type of ["pointerdown", "focusin"]) {
+    setMenuState(true, { root });
+    root.dispatch(type, { target: mainNav });
+    assert.equal(mainNav.classList.contains("is-open"), true, type);
+    root.dispatch(type, { target: menuToggle });
+    assert.equal(mainNav.classList.contains("is-open"), true, type);
+    root.dispatch(type, { target: createElement() });
+    assert.equal(mainNav.classList.contains("is-open"), false, type);
+    assert.equal(menuToggle.getAttribute("aria-expanded"), "false", type);
+    assert.equal(menuToggle.focused, false, "outside interaction keeps its chosen focus");
+  }
+});
+
+test("global menu supports the trigger, Escape focus return and link dismissal", async () => {
+  const { initSiteShell } = await import("../site.js");
+  const menuToggle = createElement();
+  const mainNav = createElement();
+  const root = createRoot({ ".menu-toggle": menuToggle, ".main-nav": mainNav });
+  initSiteShell(root, { matchMedia: () => ({ addEventListener: () => {} }) });
+
+  menuToggle.dispatch("click");
+  assert.equal(menuToggle.getAttribute("aria-expanded"), "true");
+  assert.equal(menuToggle.getAttribute("aria-label"), "关闭菜单");
+  root.dispatch("keydown", { key: "Escape" });
+  assert.equal(mainNav.classList.contains("is-open"), false);
+  assert.equal(menuToggle.focused, true);
+  menuToggle.dispatch("click");
+  mainNav.dispatch("click", { target: { closest: () => ({}) } });
+  assert.equal(mainNav.classList.contains("is-open"), false);
+  assert.equal(menuToggle.getAttribute("aria-label"), "打开菜单");
 });
 
 test("docs drawer exposes a visible close state and resets at the desktop breakpoint", async () => {

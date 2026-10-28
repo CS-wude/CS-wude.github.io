@@ -154,7 +154,7 @@ test("homepage Vault layer keeps the ticker readable and project previews compac
 
   assert.match(
     css,
-    /\.capability-ticker\s*{[^}]*background:\s*var\(--vault-ink\)[^}]*color:\s*var\(--vault-card\)/s,
+    /\.capability-ticker\s*{[^}]*background:\s*var\(--vault-paper\)[^}]*color:\s*var\(--vault-muted\)/s,
   );
   assert.match(
     css,
@@ -194,11 +194,11 @@ test("homepage empty update heading avoids a desktop orphan line", async () => {
 
   assert.match(
     css,
-    /\.updates-preview:has\(\.updates-preview__empty-card\) h2\s*{[^}]*font-size:\s*clamp\(2\.6rem,\s*4\.2vw,\s*4\.4rem\)/s,
+    /\.updates-preview:has\(\.updates-preview__empty-card\) h2\s*{[^}]*font-size:\s*clamp\(2rem,\s*3vw,\s*3rem\)/s,
   );
 });
 
-test("homepage engineering principles read as one dark editorial system", async () => {
+test("homepage engineering principles keep a readable editorial grid", async () => {
   const css = await read("vault.css");
   const phone = css.slice(
     css.indexOf("@media (max-width: 760px)"),
@@ -207,20 +207,20 @@ test("homepage engineering principles read as one dark editorial system", async 
 
   assert.match(
     css,
-    /\.principles h2\s*{[^}]*font-size:\s*clamp\(3\.8rem,\s*4\.4vw,\s*5\.4rem\)[^}]*text-wrap:\s*balance/s,
+    /\.principles h2\s*{[^}]*font-size:\s*clamp\(2rem,\s*3vw,\s*3rem\)[^}]*text-wrap:\s*balance/s,
   );
   assert.match(
     css,
-    /\.principle-grid\s*{[^}]*gap:\s*0[^}]*border-top:\s*2px solid var\(--vault-muted-line\)/s,
+    /\.principle-grid\s*{[^}]*gap:\s*0[^}]*border-top:\s*1px solid var\(--vault-muted-line\)/s,
   );
   assert.match(
     css,
-    /\.principle-grid li,\s*\.principle-grid li:nth-child\(2n\)\s*{[^}]*grid-template-columns:\s*36px minmax\(0,\s*1fr\)[^}]*background:\s*transparent[^}]*color:\s*var\(--vault-card\)/s,
+    /\.principle-grid li,\s*\.principle-grid li:nth-child\(2n\)\s*{[^}]*grid-template-columns:\s*36px minmax\(0,\s*1fr\)[^}]*background:\s*transparent[^}]*color:\s*var\(--vault-ink\)/s,
   );
   assert.match(
     css,
-    /\.principle-grid p\s*{[^}]*color:\s*var\(--vault-dark-muted\)/s,
-    "body copy must keep readable contrast on the dark surface",
+    /\.principle-grid p\s*{[^}]*color:\s*var\(--vault-muted\)/s,
+    "body copy must keep the shared readable text color",
   );
   assert.match(
     phone,

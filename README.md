@@ -38,6 +38,13 @@
 - [`notes.html`](./notes.html)：编程、带组和系统设计手记
 - [`updates.html`](./updates.html)：短记录与阶段性思考
 - [`about.html`](./about.html)：个人介绍与技术偏好
+- [`skills.html`](./skills.html)：公开 Agent Skills 目录与来源入口
+
+## 维护 Skill Hub
+
+在 `data/skills.js` 添加或修改技能的名称、描述、分类、作者、来源 URL 和标签。分类选项与页面卡片由同一份数据构建；搜索和筛选在浏览器本地完成，不读取 Issues 或远程 API。
+
+外部技能链接到原作者页面，不复制第三方全文。本人维护的公开技能放在 [CS-wude/skillhub](https://github.com/CS-wude/skillhub)，准备好后再加入目录，并将 `source` 设为 `wude`。目前该仓库包含收录说明和模板，尚无可安装的原创技能。
 
 ## 技术实现
 
@@ -66,13 +73,14 @@
 
 ## 本地预览
 
-直接打开 `index.html` 即可浏览。需要通过本地 HTTP 服务查看时，可以在仓库根目录运行：
+运行构建并启动预览，Skill Hub 的静态卡片会在构建时生成：
 
 ```powershell
-python -m http.server 8000
+npm run build
+npm run preview
 ```
 
-然后访问 `http://localhost:8000/`。
+然后打开终端输出的本地地址。
 
 ## 本地检查
 

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f7f2" />
+  <meta name="description" content="WUDE 的 Skill Hub：整理公开 Agent Skills 的用途、分类和来源，连接原作者与自己的技能仓库。" />
+  <link rel="canonical" href="https://cs-wude.github.io/skills.html" />
+  <meta property="og:title" content="Skill Hub — WUDE" /><meta property="og:type" content="website" />
+  <title>Skill Hub — WUDE</title>
+  <link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./skills.css" /><link rel="stylesheet" href="./vault.css?v=20261107-1" />
+</head>
+<body data-page="skills">
+<a class="skip-link" href="#mainContent">跳到主要内容</a>
+<header class="site-header">
+  <a class="brand" href="./index.html" aria-label="返回首页"><span class="brand-mark">W</span><span>WUDE</span></a>
+  <button class="menu-toggle" type="button" aria-label="打开菜单" aria-controls="mainNav" aria-expanded="false"><span></span><span></span></button>
+  <nav class="main-nav" id="mainNav" aria-label="主导航"><a href="./index.html">首页</a><a href="./projects.html">项目</a><a href="./notes.html">手记</a><a class="is-current" aria-current="page" href="./skills.html">Skill Hub</a><a href="./updates.html">动态</a><a href="./about.html">关于</a></nav>
+</header>
+<main class="skill-hub" id="mainContent">
+  <div class="hub-topline"><a href="./index.html">WUDE / 知识与工具</a><span>PUBLIC COLLECTION · 01</span></div>
+  <header class="hub-hero">
+    <div><p class="hub-eyebrow"><span></span> CURATED SKILLS / OPEN WORKFLOWS</p><h1>Skill Hub<span>把方法，变成工具。</span></h1><p class="hub-lead">一些值得留下的 Agent Skills。按用途寻找，沿来源深入，让好用的工作方式可以复用。</p><a class="hub-text-link" href="#skillCatalog">浏览技能目录 <span aria-hidden="true">↓</span></a></div>
+    <aside class="hub-repo"><div class="repo-heading"><span class="repo-symbol" aria-hidden="true">↗</span><span>WUDE / OPEN REPOSITORY</span></div><h2>我的技能收录仓库</h2><p>公开维护收录清单、编写规范和模板。自己的 Skills 会在准备好后逐项加入。</p><a href="https://github.com/CS-wude/skillhub" target="_blank" rel="noopener noreferrer">CS-wude / skillhub <span aria-hidden="true">↗</span></a><span class="repo-note">目录已建立 · 原创技能待加入</span></aside>
+  </header>
+  <section id="skillCatalog" aria-labelledby="catalogTitle">
+    <div class="catalog-heading"><div><p class="hub-eyebrow">THE COLLECTION</p><h2 id="catalogTitle">从你要做的事开始。</h2></div><p id="skillCount" role="status" aria-live="polite"><!-- SKILL_COUNT --></p></div>
+    <form id="skillFilters" class="skill-filters" role="search" aria-label="筛选技能" hidden>
+      <label class="skill-search"><span>搜索技能</span><input name="q" type="search" placeholder="搜索名称、用途、标签…" autocomplete="off" /></label>
+      <label><span>用途分类</span><select name="category"><option value="all">全部分类</option><!-- SKILL_CATEGORIES --></select></label>
+      <label><span>技能来源</span><select name="source"><option value="all">全部来源</option><option value="external">外部来源</option><option value="wude">WUDE 维护</option></select></label>
+      <button type="button" id="skillReset" hidden>清除筛选 ↺</button>
+    </form>
+    <noscript><p>下方展示全部技能，可直接打开原作者来源。</p></noscript>
+    <div class="skill-grid"><!-- SKILL_CARDS --></div>
+    <div class="skill-empty" id="skillEmpty" hidden><span aria-hidden="true">[ ∅ ]</span><h3>还没有匹配的技能</h3><p>试试其他关键词或分类。WUDE 的原创技能还在整理，当前可先浏览外部来源。</p><button type="button" id="skillEmptyReset">查看全部技能</button></div>
+  </section>
+  <footer class="hub-footer"><p>好的工具，始于清楚的边界。</p><span>外部 Skills 由原作者维护，使用方式与许可请以来源页为准。</span><a href="https://github.com/CS-wude/skillhub/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">收录说明 ↗</a></footer>
+  <nav class="page-route" data-page-route aria-label="页面间导航"></nav>
+</main>
+<script type="module" src="./site.js"></script><script type="module" src="./skills.js"></script><script type="module" src="./page-route.js"></script>
+</body></html>

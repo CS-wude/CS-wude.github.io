@@ -20,6 +20,7 @@ const renderLink = ({ href, text, page, attributes = "" }) =>
 
 export const renderDocsNavigation = ({ currentPage = "", headings = [] } = {}) => {
   const contentLinks = [
+    { href: "./skills.html", text: "Skill Hub", page: "skills" },
     { href: "./projects.html", text: "项目索引", page: "overview" },
     { href: "./agent-tooling.html", text: "Agent 工具链复盘", page: "case-study" },
     { href: "./notes.html", text: "全部手记", page: "notes" },

@@ -1,4 +1,8 @@
 const PAGE_ROUTES = {
+  skills: [
+    { href: "./index.html", eyebrow: "返回", label: "首页" },
+    { href: "./notes.html", eyebrow: "继续阅读", label: "技术手记" },
+  ],
   overview: [
     { href: "./index.html", eyebrow: "返回", label: "首页" },
     { href: "./agent-tooling.html", eyebrow: "下一页", label: "Agent 工具链复盘" },

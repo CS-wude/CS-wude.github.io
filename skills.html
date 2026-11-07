@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://cs-wude.github.io/skills.html" />
   <meta property="og:title" content="Skill Hub — WUDE" /><meta property="og:type" content="website" />
   <title>Skill Hub — WUDE</title>
-  <link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./skills.css" /><link rel="stylesheet" href="./vault.css?v=20261107-1" />
+  <link rel="stylesheet" href="./styles.css" /><link rel="stylesheet" href="./skills.css?v=20261107-2" /><link rel="stylesheet" href="./vault.css?v=20261107-1" />
 </head>
 <body data-page="skills">
 <a class="skip-link" href="#mainContent">跳到主要内容</a>
@@ -26,8 +26,8 @@
     <div class="catalog-heading"><div><p class="hub-eyebrow">THE COLLECTION</p><h2 id="catalogTitle">从你要做的事开始。</h2></div><p id="skillCount" role="status" aria-live="polite"><!-- SKILL_COUNT --></p></div>
     <form id="skillFilters" class="skill-filters" role="search" aria-label="筛选技能" hidden>
       <label class="skill-search"><span>搜索技能</span><input name="q" type="search" placeholder="搜索名称、用途、标签…" autocomplete="off" /></label>
-      <label><span>用途分类</span><select name="category"><option value="all">全部分类</option><!-- SKILL_CATEGORIES --></select></label>
-      <label><span>技能来源</span><select name="source"><option value="all">全部来源</option><option value="external">外部来源</option><option value="wude">WUDE 维护</option></select></label>
+      <div class="skill-filter-field"><label id="skillCategoryLabel" for="skillCategory">用途分类</label><select id="skillCategory" name="category" data-skill-select><option value="all">全部分类</option><!-- SKILL_CATEGORIES --></select></div>
+      <div class="skill-filter-field"><label id="skillSourceLabel" for="skillSource">技能来源</label><select id="skillSource" name="source" data-skill-select><option value="all">全部来源</option><option value="external">外部来源</option><option value="wude">WUDE 维护</option></select></div>
       <button type="button" id="skillReset" hidden>清除筛选 ↺</button>
     </form>
     <noscript><p>下方展示全部技能，可直接打开原作者来源。</p></noscript>
@@ -37,5 +37,5 @@
   <footer class="hub-footer"><p>好的工具，始于清楚的边界。</p><span>外部 Skills 由原作者维护，使用方式与许可请以来源页为准。</span><a href="https://github.com/CS-wude/skillhub/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">收录说明 ↗</a></footer>
   <nav class="page-route" data-page-route aria-label="页面间导航"></nav>
 </main>
-<script type="module" src="./site.js"></script><script type="module" src="./skills.js"></script><script type="module" src="./page-route.js"></script>
+<script type="module" src="./site.js"></script><script type="module" src="./skills.js?v=20261107-2"></script><script type="module" src="./page-route.js"></script>
 </body></html>

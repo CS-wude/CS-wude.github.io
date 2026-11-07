@@ -52,7 +52,7 @@ test('typing all remains a search term and matches the same URL deep link', asyn
   const reset = control('reset');
   const empty = {};
   const fields = {'[name="q"]': search, '[name="category"]': category, '[name="source"]': source};
-  const form = {querySelector: selector => fields[selector], addEventListener() {}};
+  const form = {querySelector: selector => fields[selector], querySelectorAll: () => [], addEventListener() {}};
   const elements = {'#skillFilters': form, '#skillCount': count, '#skillEmpty': empty, '#skillReset': reset, '#skillEmptyReset': control('empty')};
   const saved = new Map(['document', 'window', 'location', 'history'].map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]));
   const location = new URL('https://example.com/skills.html');

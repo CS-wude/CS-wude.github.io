@@ -1,7 +1,9 @@
 import { SKILLS } from './data/skills.js';
 import { filterSkills, normalizeFilters } from './skills-render.js';
+import { enhanceSelects } from './select-menu.js?v=20261107-2';
 const form = document.querySelector('#skillFilters');
 if (form) {
+  const selectMenus = enhanceSelects(form);
   const search = form.querySelector('[name="q"]');
   const category = form.querySelector('[name="category"]');
   const source = form.querySelector('[name="source"]');
@@ -21,6 +23,7 @@ if (form) {
     count.textContent = `显示 ${matches.size} / ${SKILLS.length} 个技能`;
     empty.hidden = matches.size > 0;
     reset.hidden = !state.q && state.category === 'all' && state.source === 'all';
+    selectMenus.forEach(menu => menu.sync());
   };
   const update = (push=false) => {
     const url = new URL(location.href);

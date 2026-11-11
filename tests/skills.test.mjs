@@ -66,7 +66,7 @@ test('typing all remains a search term and matches the same URL deep link', asyn
     search.value = 'all';
     listeners.get('input')();
     assert.equal(location.searchParams.get('q'), 'all');
-    assert.equal(count.textContent, '显示 0 / 4 个技能');
+    assert.equal(count.textContent, `显示 0 / ${SKILLS.length} 个技能`);
     assert.equal(reset.hidden, false);
   } finally {
     for (const [key, descriptor] of saved) {

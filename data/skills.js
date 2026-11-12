@@ -1,5 +1,6 @@
 // Public metadata only. Update this file, then run npm test && npm run build.
 export const SKILLS = [
+  { id: 'wude-story-video', name: 'Wude Story Video V2', description: '把主题、脑洞或故事制作成原创三维剧情短片，覆盖叙事分镜、角色表演、场景互动、镜头调度、音画同步与可编辑交付。附字幕对齐和交付检查工具。', category: '视频制作', author: 'WUDE', source: 'wude', url: 'https://github.com/CS-wude/skillhub/tree/main/skills/wude-story-video', tags: ['wude-story-video', 'V2', '三维动画', '剧情短片', '免费工作流'] },
   { id: 'wude-video-studio', name: 'Wude Video Studio', description: '把主题与学习资料制作成免费知识视频，串联课程设计、口播分镜、动画、配音字幕、质检交付与归档。附交付文件检查脚本。', category: '视频制作', author: 'WUDE', source: 'wude', url: 'https://github.com/CS-wude/skillhub/tree/main/skills/wude-video-studio', tags: ['wude-video-studio', '知识视频', '分镜', '免费工作流'] },
   { id: 'skill-creator', name: 'Skill Creator', description: '把一段工作方法整理成可复用的 Skill，并用评测、对比和迭代改进触发条件与效果。', category: '技能创作', author: 'Anthropic', source: 'external', url: 'https://github.com/anthropics/skills/tree/main/skills/skill-creator', tags: ['SKILL.md', '评测', '工作流'] },
   { id: 'frontend-design', name: 'Frontend Design', description: '围绕明确的视觉方向设计前端界面，兼顾排版、配色与页面表现，适合从想法走向可用页面。', category: '设计与前端', author: 'Anthropic', source: 'external', url: 'https://github.com/anthropics/skills/tree/main/skills/frontend-design', tags: ['UI', 'Web', '设计'] },
